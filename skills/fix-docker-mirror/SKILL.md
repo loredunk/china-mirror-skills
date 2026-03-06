@@ -112,6 +112,53 @@ apt-cache policy docker-ce
 | USTC | https://mirrors.ustc.edu.cn/docker-ce | 2 |
 | Alibaba Cloud | https://mirrors.aliyun.com/docker-ce | 3 |
 
+## Docker Hub 镜像加速（配置 daemon.json）
+
+Docker Hub 镜像加速通过配置 `/etc/docker/daemon.json` 实现，与 Docker CE 安装源完全独立。
+
+**推荐配置（经验证可用）**：
+
+```json
+{
+  "registry-mirrors": [
+    "https://docker.hlmirror.com"
+  ],
+  "dns": ["1.1.1.1", "8.8.8.8"]
+}
+```
+
+**配置步骤**：
+
+```bash
+# 创建或编辑 /etc/docker/daemon.json
+sudo tee /etc/docker/daemon.json > /dev/null <<'EOF'
+{
+  "registry-mirrors": [
+    "https://docker.hlmirror.com"
+  ],
+  "dns": ["1.1.1.1", "8.8.8.8"]
+}
+EOF
+
+# 重启 Docker 使配置生效
+sudo systemctl restart docker
+
+# 验证配置已生效
+docker info | grep -A 2 "Registry Mirrors"
+```
+
+**验证镜像加速是否生效**：
+
+```bash
+# 拉取测试镜像，观察速度
+docker pull hello-world
+```
+
+> ⚠️ **注意**：配置前先备份原有 daemon.json：
+> ```bash
+> sudo cp /etc/docker/daemon.json /etc/docker/daemon.json.bak 2>/dev/null || true
+> ```
+
 ## Docker Hub Image Pulls (Important Notice)
 
 ⚠️ Docker Hub image registry mirrors in China are largely **deprecated** due to Docker policy changes:

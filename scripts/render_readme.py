@@ -18,97 +18,92 @@ import yaml
 README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 <p align="center">
-  <strong>Claude Code skills for optimizing development tools in China's network environment</strong>
+  <strong>专为中国网络环境优化的 Claude Code 开发工具镜像配置集合</strong>
 </p>
 
 <p align="center">
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#supported-tools">Supported Tools</a> •
-  <a href="#how-to-use">How to Use</a> •
-  <a href="#mirror-sources">Mirror Sources</a> •
-  <a href="#contributing">Contributing</a>
+  <a href="#快速开始">快速开始</a> •
+  <a href="#支持的工具">支持的工具</a> •
+  <a href="#镜像源">镜像源</a>
 </p>
 
 ---
 
-## 📋 Table of Contents
+## 目录
 
-- [Why This Project?](#why-this-project)
-- [Supported Tools & Scenarios](#supported-tools--scenarios)
-- [Repository Structure](#repository-structure)
-- [Quick Start](#quick-start)
-- [Using with Claude Code](#using-with-claude-code)
-- [Standalone Scripts](#standalone-scripts)
+- [为什么需要这个项目？](#为什么需要这个项目)
+- [支持的工具](#支持的工具)
+- [项目结构](#项目结构)
+- [快速开始](#快速开始)
+- [Claude Code 使用方式](#claude-code-使用方式)
+- [独立脚本](#独立脚本)
 - [GitHub Actions](#github-actions)
-- [Mirror Sources Policy](#mirror-sources-policy)
-- [Security & Risks](#security--risks)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
+- [镜像源](#镜像源)
+- [安全与风险](#安全与风险)
 
 ---
 
-## 🤔 Why This Project?
+## 为什么需要这个项目？
 
-Developers in China often face slow or unreliable access to official package registries and development tools:
+国内开发者访问官方软件包仓库和开发工具时，常常遇到速度慢或无法访问的问题：
 
-- **PyPI** downloads timeout or crawl at 10KB/s
-- **npm** packages take forever to install
-- **Docker Hub** pulls fail or are extremely slow
-- **Rust crates** download at snail's pace
-- **GitHub Releases** downloads frequently stall
+- **PyPI** 下载超时或速度低至 10KB/s
+- **npm** 安装包需要等待很长时间
+- **Docker Hub** 镜像拉取失败或极慢
+- **Rust crates** 下载缓慢
+- **GitHub Releases** 下载经常卡住
 
-This repository provides:
+本项目提供：
 
-1. **Verified mirror configurations** from official university mirrors (TUNA, USTC)
-2. **Automated setup scripts** with backup and rollback support
-3. **Claude Code skills** for AI-assisted configuration
-4. **Daily health checks** to ensure mirror availability
-5. **Idempotent operations** - safe to run multiple times
+1. **经过验证的镜像配置** - 来自高校官方镜像站（清华 TUNA、中科大 USTC）
+2. **自动化配置脚本** - 支持备份和回滚
+3. **Claude Code skills** - 借助 AI 完成配置
+4. **每日健康检查** - 确保镜像源可用性
+5. **幂等操作** - 重复执行安全无副作用
 
-> ⚠️ **Important Distinctions**
-> - Docker **CE installation** repo ≠ Docker **Hub** image mirror
-> - Kubernetes **k8s.gcr.io** has been **deprecated** (migrated to registry.k8s.io)
-> - We prioritize **official help pages** over third-party blog posts
+> ⚠️ **重要区分**
+> - Docker **CE 安装**源 ≠ Docker **Hub** 镜像加速
+> - Kubernetes **k8s.gcr.io** 已**废弃**（已迁移至 registry.k8s.io）
+> - 优先采用**官方帮助页面**中的配置，而非第三方博客
 
 ---
 
-## 🛠️ Supported Tools & Scenarios
+## 支持的工具
 
-| Category | Tool | Status | Mirror Type |
-|----------|------|--------|-------------|
-{% for cat_id, cat_info in categories.items() %}
-| {{ cat_info.icon }} {{ cat_info.name }} | {% if cat_id == 'pip' %}pip, uv, poetry{% elif cat_id == 'npm' %}npm, pnpm, yarn{% elif cat_id == 'docker-ce' %}Docker CE install{% elif cat_id == 'docker-hub' %}Docker Hub (docs only){% elif cat_id == 'cargo' %}Cargo{% elif cat_id == 'homebrew' %}Homebrew{% elif cat_id == 'conda' %}Conda/Anaconda{% elif cat_id == 'go' %}Go modules{% elif cat_id == 'flutter' %}Flutter SDK{% elif cat_id == 'kubernetes-notes' %}K8s registry{% else %}{{ cat_id }}{% endif %} | {% if cat_id == 'docker-hub' %}⚠️ Deprecated{% else %}✅ Active{% endif %} | {% if cat_id == 'docker-hub' %}Registry Mirror{% elif cat_id in ['pip', 'npm', 'cargo', 'conda'] %}Package Index{% elif cat_id in ['ubuntu', 'alpine'] %}APT Repository{% elif cat_id == 'docker-ce' %}Install Repo{% elif cat_id == 'homebrew' %}Git Repository{% elif cat_id == 'go' %}Module Proxy{% elif cat_id == 'flutter' %}SDK Mirror{% else %}Notes{% endif %} |
+| 分类 | 工具 | 状态 | 镜像类型 |
+|------|------|------|----------|
+{% for cat_id, cat_info in categories.items() %}| {{ cat_info.icon }} {{ cat_info.name }} | {% if cat_id == 'pip' %}pip, uv, poetry{% elif cat_id == 'npm' %}npm, pnpm, yarn{% elif cat_id == 'docker-ce' %}Docker CE install{% elif cat_id == 'docker-hub' %}Docker Hub（镜像加速）{% elif cat_id == 'cargo' %}Cargo{% elif cat_id == 'homebrew' %}Homebrew{% elif cat_id == 'conda' %}Conda/Anaconda{% elif cat_id == 'go' %}Go modules{% elif cat_id == 'flutter' %}Flutter SDK{% elif cat_id == 'kubernetes-notes' %}K8s registry{% else %}{{ cat_id }}{% endif %} | ✅ 可用 | {% if cat_id in ['pip', 'npm', 'cargo', 'conda'] %}Package Index{% elif cat_id in ['ubuntu', 'alpine'] %}APT Repository{% elif cat_id == 'docker-ce' %}安装源{% elif cat_id == 'docker-hub' %}Registry Mirror{% elif cat_id == 'homebrew' %}Git Repository{% elif cat_id == 'go' %}Module Proxy{% elif cat_id == 'flutter' %}SDK Mirror{% else %}说明{% endif %} |
 {% endfor %}
 
-### Key Features
+### 核心特性
 
-- ✅ **Backup & Rollback** - Always backup before modification
-- ✅ **Proxy Conflict Detection** - Warns if proxy env vars are set
-- ✅ **Idempotent** - Safe to run multiple times
-- ✅ **Multi-platform** - Linux primary, macOS compatible where applicable
-- ✅ **Official Sources** - Prioritizes TUNA, USTC, and vendor mirrors
+- ✅ **备份与回滚** - 修改前自动备份配置
+- ✅ **代理冲突检测** - 检测代理环境变量冲突
+- ✅ **幂等操作** - 重复执行安全
+- ✅ **多平台支持** - Linux 为主，macOS 部分支持
+- ✅ **官方来源** - 优先使用 TUNA、USTC 及厂商官方镜像
 
 ---
 
-## 📁 Repository Structure
+## 项目结构
 
 ```
 china-mirror-skills/
-├── README.md              # This file (auto-generated)
-├── LICENSE                # MIT License
+├── README.md              # 本文件（自动生成）
+├── LICENSE                # MIT 协议
 ├── data/
-│   └── mirrors.yml        # Mirror source definitions
-├── scripts/               # Setup and utility scripts
-│   ├── common.sh          # Shared functions
-│   ├── check_mirrors.py   # Mirror health checker
-│   ├── render_readme.py   # README generator
-│   ├── backup_config.sh   # Backup utility
-│   ├── restore_config.sh  # Restore utility
-│   └── setup_*.sh         # Tool-specific setup scripts
+│   └── mirrors.yml        # 镜像源配置数据
+├── scripts/               # 配置和工具脚本
+│   ├── common.sh          # 公共函数
+│   ├── check_mirrors.py   # 镜像健康检查
+│   ├── render_readme.py   # README 生成器
+│   ├── backup_config.sh   # 备份工具
+│   ├── restore_config.sh  # 还原工具
+│   └── setup_*.sh         # 各工具的配置脚本
 ├── skills/                # Claude Code skills
-│   ├── bootstrap-china-network/   # Main entry point
-│   ├── fix-python-mirror/         # Python tools
-│   ├── fix-node-mirror/           # Node.js tools
+│   ├── bootstrap-china-network/   # 主入口
+│   ├── fix-python-mirror/         # Python 工具
+│   ├── fix-node-mirror/           # Node.js 工具
 │   ├── fix-docker-mirror/         # Docker
 │   ├── fix-apt-mirror/            # Ubuntu/Debian
 │   ├── fix-homebrew-mirror/       # Homebrew
@@ -116,415 +111,305 @@ china-mirror-skills/
 │   ├── fix-rust-mirror/           # Rust/Cargo
 │   ├── fix-go-proxy/              # Go
 │   ├── fix-flutter-mirror/        # Flutter
-│   └── diagnose-network-environment/  # Network diagnostics
-├── docs/                  # Documentation
-│   ├── architecture.md    # Technical architecture
-│   ├── mirrors-policy.md  # Mirror selection criteria
-│   ├── troubleshooting.md # Common issues & fixes
-│   └── examples.md        # Usage examples
-└── .github/workflows/     # CI/CD automation
-    ├── mirror-health.yml  # Daily health checks
-    └── readme-refresh.yml # Auto-update README
+│   └── diagnose-network-environment/  # 网络诊断
+├── docs/                  # 文档
+│   ├── architecture.md    # 技术架构
+│   ├── mirrors-policy.md  # 镜像选择标准
+│   ├── troubleshooting.md # 常见问题
+│   └── examples.md        # 使用示例
+└── .github/workflows/     # CI/CD 自动化
+    ├── mirror-health.yml  # 每日健康检查
+    └── readme-refresh.yml # 自动更新 README
 ```
 
 ---
 
-## 🚀 Quick Start
+## 快速开始
 
-### Prerequisites
+### 前置要求
 
 - Python 3.11+
 - Bash 4.0+
-- Linux (primary) or macOS (limited support)
+- Linux（推荐）或 macOS（部分支持）
 
-### Installation
+### 安装
 
 ```bash
-# Clone the repository
+# 克隆项目
 git clone https://github.com/yourusername/china-mirror-skills.git
 cd china-mirror-skills
 
-# Install Python dependencies
+# 安装 Python 依赖
 pip install -r requirements.txt
 
-# Or use uv
+# 或使用 uv
 uv pip install -r requirements.txt
 ```
 
-### Quick Health Check
+### 快速检查
 
 ```bash
-# Check all mirror sources
+# 检查所有镜像源状态
 python scripts/check_mirrors.py
 ```
 
-### Quick Setup (Individual Tools)
+### 快速配置
 
 ```bash
-# Setup Python pip mirror
+# 配置 Python pip 镜像
 ./scripts/setup_pip.sh
 
-# Setup npm mirror
+# 配置 npm 镜像
 ./scripts/setup_npm.sh
 
-# Setup Ubuntu APT mirror
+# 配置 Ubuntu APT 镜像
 ./scripts/setup_apt.sh --mirror tuna
 
-# Setup Docker CE (NOT Docker Hub)
+# 配置 Docker CE 安装源（非 Docker Hub）
 ./scripts/setup_docker.sh
 ```
 
 ---
 
-## 🤖 Using with Claude Code
+## Claude Code 使用方式
 
-### Loading Skills
+### 加载 Skills
 
-Add this repository to your Claude Code skills:
+在 Claude Code 设置或 CLAUDE.md 中添加本项目的 skills 目录路径。
 
-```bash
-# In Claude Code settings or CLAUDE.md
-# Add the skills directory to your skills path
-```
-
-### Available Skills
+### 可用 Skills
 
 #### 1. bootstrap-china-network
 
-Main entry point - diagnoses environment and applies appropriate fixes.
+主入口 - 诊断环境并自动应用适合的配置。
 
 ```
-"Setup my development environment for China's network"
-"Configure pip, npm, and Docker to use China mirrors"
+"帮我配置适合中国网络的开发环境"
+"把 pip、npm 和 Docker 配置成国内镜像"
 ```
 
 #### 2. fix-python-mirror
 
-Configures pip, uv, poetry to use China mirrors.
+配置 pip、uv、poetry 使用国内镜像。
 
 ```
-"Fix my Python package downloads - they're too slow"
-"Configure pip to use Tsinghua mirror"
+"Python 包下载太慢了，帮我配置"
+"把 pip 切换到清华镜像"
 ```
 
 #### 3. fix-node-mirror
 
-Configures npm, pnpm, yarn to use China mirrors.
+配置 npm、pnpm、yarn 使用国内镜像。
 
 ```
-"npm install is taking forever, help"
-"Setup npm to use npmmirror"
+"npm install 太慢了，帮我搞定"
+"配置 npm 使用 npmmirror"
 ```
 
 #### 4. fix-docker-mirror
 
-Configures Docker CE installation source.
+配置 Docker CE 安装源和 Docker Hub 镜像加速（daemon.json）。
 
 ```
-"Install Docker CE from China mirror"
+"从国内镜像安装 Docker CE"
+"配置 Docker Hub 镜像加速"
 ```
-
-> ⚠️ **Note**: This configures Docker CE **installation packages**, NOT Docker Hub image pulls.
 
 #### 5. fix-apt-mirror
 
-Configures Ubuntu/Debian APT sources.
+配置 Ubuntu/Debian APT 镜像源。
 
 ```
-"Make apt update faster"
-"Switch to TUNA Ubuntu mirror"
+"让 apt update 快一些"
+"切换到清华的 Ubuntu 镜像"
 ```
 
 #### 6. fix-homebrew-mirror
 
-Configures Homebrew taps and bottles.
+配置 Homebrew 镜像。
 
 ```
-"Homebrew is so slow, fix it"
+"Homebrew 太慢了，帮我配置"
 ```
 
 #### 7. fix-conda-mirror
 
-Configures Conda/Anaconda channels.
+配置 Conda/Anaconda 镜像频道。
 
 ```
-"Configure conda to use China mirror"
+"配置 conda 使用国内镜像"
 ```
 
 #### 8. fix-rust-mirror
 
-Configures Cargo to use China crates mirrors.
+配置 Cargo 使用国内 crates 镜像。
 
 ```
-"Cargo build is downloading too slowly"
+"cargo build 下载包太慢了"
 ```
 
 #### 9. fix-go-proxy
 
-Configures Go module proxy.
+配置 Go 模块代理。
 
 ```
-"Go mod download is slow from China"
+"国内 go mod download 很慢"
 ```
 
 #### 10. fix-flutter-mirror
 
-Configures Flutter SDK and dependency mirrors.
+配置 Flutter SDK 及依赖镜像。
 
 ```
-"Setup Flutter in China"
+"帮我在国内配置 Flutter 环境"
 ```
 
 #### 11. diagnose-network-environment
 
-Analyzes network environment and detects issues.
+分析网络环境，诊断常见问题。
 
 ```
-"Diagnose my network setup for development"
-"Why are my downloads so slow?"
+"帮我诊断开发环境的网络配置"
+"为什么下载这么慢？"
 ```
 
 ---
 
-## 🔧 Standalone Scripts
+## 独立脚本
 
-### Backup Your Configuration
+### 备份配置
 
 ```bash
-# Backup all supported configurations
+# 备份所有支持的配置
 ./scripts/backup_config.sh --all
 
-# Backup specific tool
+# 备份指定工具的配置
 ./scripts/backup_config.sh --tool pip
 ```
 
-### Restore Configuration
+### 还原配置
 
 ```bash
-# List available backups
+# 列出可用备份
 ./scripts/restore_config.sh --list
 
-# Restore from specific backup
+# 从指定备份还原
 ./scripts/restore_config.sh --tool pip --backup-id 20250306_120000
 
-# Restore latest backup for a tool
+# 还原最新备份
 ./scripts/restore_config.sh --tool pip --latest
 ```
 
-### Setup Scripts
+### 脚本参数
 
-All setup scripts support these options:
+所有配置脚本支持以下参数：
 
 ```bash
 ./scripts/setup_<tool>.sh [OPTIONS]
 
-Options:
-  -m, --mirror MIRROR    Choose specific mirror (tuna|ustc|aliyun|...)
-  -f, --force            Force overwrite existing config
-  -d, --dry-run          Show what would be changed without applying
-  -y, --yes              Skip confirmation prompts
-  -h, --help             Show help
+参数说明：
+  -m, --mirror MIRROR    指定镜像源 (tuna|ustc|aliyun|...)
+  -f, --force            强制覆盖已有配置
+  -d, --dry-run          仅显示将要做的修改，不实际执行
+  -y, --yes              跳过确认提示
+  -h, --help             显示帮助信息
 ```
 
 ---
 
-## ⚙️ GitHub Actions
+## GitHub Actions
 
-### Mirror Health Check
+### 镜像健康检查
 
-**Workflow**: `.github/workflows/mirror-health.yml`
+**工作流**: `.github/workflows/mirror-health.yml`
 
-- **Schedule**: Daily at 08:00 UTC
-- **Manual trigger**: `workflow_dispatch`
-- **Function**: Tests HTTP connectivity to all mirrors in `data/mirrors.yml`
-- **Output**: `reports/report.json`
+- **定时执行**: 每天北京时间 08:00（UTC 00:00），推送到 main 分支时也会触发
+- **手动触发**: `workflow_dispatch`
+- **功能**: 测试 `data/mirrors.yml` 中所有镜像的 HTTP 连通性
+- **输出**: `reports/report.json`
 
-To view latest results:
+### README 自动更新
 
-```bash
-# Check the Actions tab in GitHub
-# Or download the latest artifact
-```
+**工作流**: `.github/workflows/readme-refresh.yml`
 
-### README Auto-Refresh
-
-**Workflow**: `.github/workflows/readme-refresh.yml`
-
-- **Trigger**: Push to main affecting `data/mirrors.yml` or `scripts/`
-- **Function**: Regenerates README.md from template
-- **Commit**: Automatically commits changes if README differs
+- **触发条件**: 推送到 main 且修改了 `data/mirrors.yml` 或 `scripts/`
+- **功能**: 从模板重新生成 README.md
+- **自动提交**: 如果 README 有变化则自动提交
 
 ---
 
-## 🪞 Mirror Sources
+## 镜像源
 
-### Current Mirror Status
+### 当前镜像状态
 
-_Mirror data last updated: {{ updated_at }}_
+_镜像数据最后更新: {{ updated_at }}_
 {% if has_report %}
-_Health check run: {{ health_checked_at }}_
+_健康检查时间: {{ health_checked_at }}_
 
-**Summary**: {{ report_summary.healthy }}/{{ report_summary.total_mirrors }} mirrors healthy ({{ report_summary.health_rate }}%)
+**汇总**: {{ report_summary.healthy }}/{{ report_summary.total_mirrors }} 个镜像可用（{{ report_summary.health_rate }}%）
 {% else %}
-
-_Health check data not yet available. See [GitHub Actions](../../actions) for latest results._
+_暂无健康检查数据，请查看 [GitHub Actions](../../actions) 获取最新结果。_
 {% endif %}
 
 {% for cat_id, cat_info in categories.items() %}
 #### {{ cat_info.icon }} {{ cat_info.name }}
 
-| Mirror | URL | Status | Priority |
-|--------|-----|--------|----------|
-{% for mirror in mirrors_by_category[cat_id] %}
-| {{ mirror.name }} | [{{ mirror.url }}]({{ mirror.url }}) | {% if mirror.live_status == 'ok' %}✅ OK{% elif mirror.live_status == 'timeout' %}⏱️ Timeout{% elif mirror.live_status is not none %}❌ {{ mirror.live_status }}{% elif mirror.status == 'active' %}✅ Active{% elif mirror.status == 'deprecated' %}⚠️ Deprecated{% else %}🧪 Testing{% endif %}{% if mirror.response_time_ms is not none %} ({{ mirror.response_time_ms }}ms){% endif %} | {{ mirror.priority }} |
+| 镜像名称 | 地址 | 状态 | 优先级 |
+|---------|------|------|--------|
+{% for mirror in mirrors_by_category[cat_id] %}| {{ mirror.name }} | [{{ mirror.url }}]({{ mirror.url }}) | {% if mirror.live_status == 'ok' %}✅ 正常{% elif mirror.live_status == 'timeout' %}⏱️ 超时{% elif mirror.live_status is not none %}❌ {{ mirror.live_status }}{% elif mirror.status == 'active' %}✅ 可用{% elif mirror.status == 'deprecated' %}⚠️ 已废弃{% else %}🧪 测试中{% endif %}{% if mirror.response_time_ms is not none %} ({{ mirror.response_time_ms }}ms){% endif %} | {{ mirror.priority }} |
 {% endfor %}
 
 {% endfor %}
 
-### Mirror Selection Criteria
+### 镜像选择标准
 
-We prioritize mirrors based on:
+优先采用以下标准选择镜像：
 
-1. **Official Status** - University mirrors (TUNA, USTC) with official documentation
-2. **Reliability** - Uptime history and maintenance commitment
-3. **Sync Frequency** - How often they sync with upstream
-4. **Help Documentation** - Quality of official help pages
-
-See [docs/mirrors-policy.md](docs/mirrors-policy.md) for detailed policy.
+1. **官方背书** - 拥有官方文档的高校镜像（清华 TUNA、中科大 USTC）
+2. **可靠性** - 历史在线率和维护承诺
+3. **同步频率** - 与上游的同步频率
+4. **帮助文档** - 官方帮助页面质量
 
 ---
 
-## ⚠️ Security & Risks
+## 安全与风险
 
-### Understanding the Risks
+### 风险说明
 
-Using third-party mirrors involves trust:
+使用第三方镜像需要信任该镜像服务：
 
-1. **Package Integrity** - Mirrors should not modify packages
-2. **TLS Interception** - Some networks may intercept HTTPS
-3. **Outdated Packages** - Mirrors may lag behind upstream
+1. **包完整性** - 镜像站不应修改软件包内容
+2. **TLS 拦截** - 部分网络环境可能拦截 HTTPS 流量
+3. **软件包滞后** - 镜像可能落后于上游
 
-### Mitigations in This Project
+### 本项目的风险缓解措施
 
-- ✅ **HTTPS Only** - All mirrors use TLS encryption
-- ✅ **Checksum Verification** - Scripts preserve original package signatures
-- ✅ **Official Sources** - Prioritize mirrors with official backing
-- ✅ **Health Monitoring** - Daily automated checks
-- ✅ **Backup & Rollback** - Always can revert to original
+- ✅ **仅使用 HTTPS** - 所有镜像均使用 TLS 加密
+- ✅ **校验和验证** - 脚本保留原始包签名验证
+- ✅ **官方来源** - 优先选择有官方背书的镜像
+- ✅ **健康监控** - 每日自动检查
+- ✅ **备份与回滚** - 随时可以还原原始配置
 
-### What We Don't Do
+### 我们不做的事
 
-- ❌ Bypass security certificates
-- ❌ Use unverified third-party binaries
-- ❌ Recommend deprecated or known-bad mirrors
-- ❌ Modify package contents
-
----
-
-## 🗺️ Roadmap
-
-### v0.1.0 (Current)
-- ✅ Basic mirror configurations for 10+ tools
-- ✅ Health checking infrastructure
-- ✅ Claude Code skills framework
-- ✅ Backup and rollback system
-
-### v0.2.0 (Planned)
-- Maven/Gradle support
-- Ruby Gems support
-- Alpine Linux APK support
-- Windows WSL support improvements
-
-### v0.3.0 (Planned)
-- TUI/GUI configuration wizard
-- Mirror speed testing and auto-selection
-- Per-project configuration profiles
-
-### v0.4.0 (Planned)
-- Codex skill format support
-- Cursor editor integration
-- OpenCode compatibility
-
-### v0.5.0 (Planned)
-- Community mirror submission workflow
-- Mirror quality scoring
-- Regional mirror recommendations
-
-### v1.0.0 (Planned)
-- Stable API
-- Comprehensive test coverage
-- Multi-language documentation
+- ❌ 绕过安全证书
+- ❌ 使用未验证的第三方二进制文件
+- ❌ 推荐已废弃或已知有问题的镜像
+- ❌ 修改软件包内容
 
 ---
 
-## 🤝 Contributing
+## 致谢
 
-We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.md).
-
-### Quick Contribution Guide
-
-1. **Report Issues** - Mirror failures, documentation errors
-2. **Suggest Mirrors** - Must meet our [mirror policy](docs/mirrors-policy.md)
-3. **Improve Scripts** - Bug fixes, new platform support
-4. **Add Skills** - New tool support
-
-### Development Setup
-
-```bash
-# Fork and clone
-git clone https://github.com/yourusername/china-mirror-skills.git
-cd china-mirror-skills
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate
-
-# Install dev dependencies
-pip install -r requirements.txt
-
-# Run health check locally
-python scripts/check_mirrors.py
-
-# Generate README
-python scripts/render_readme.py
-```
-
-### Adding a New Mirror
-
-1. Add entry to `data/mirrors.yml`
-2. Include `official_help` URL
-3. Add `verify` configuration
-4. Run health check to verify
-5. Submit PR with rationale
-
----
-
-## 📚 Documentation
-
-- [Architecture](docs/architecture.md) - Technical design
-- [Mirror Policy](docs/mirrors-policy.md) - Selection criteria
-- [Troubleshooting](docs/troubleshooting.md) - Common issues
-- [Examples](docs/examples.md) - Usage examples
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
-
----
-
-## 🙏 Acknowledgments
-
-- [Tsinghua TUNA](https://mirrors.tuna.tsinghua.edu.cn/) - Primary mirror source
-- [USTC LUG](https://mirrors.ustc.edu.cn/) - Secondary mirror source
-- [npmmirror](https://npmmirror.com/) - Official npm mirror
-- All contributors and maintainers of open-source mirrors
+- [清华大学 TUNA](https://mirrors.tuna.tsinghua.edu.cn/) - 主要镜像源
+- [中科大 USTC LUG](https://mirrors.ustc.edu.cn/) - 备用镜像源
+- [npmmirror](https://npmmirror.com/) - 官方 npm 镜像
+- 所有开源镜像的贡献者和维护者
 
 ---
 
 <p align="center">
-  <sub>Built with ❤️ for developers in China</sub>
+  <sub>为中国开发者用心打造 ❤️</sub>
 </p>
 '''
 
@@ -590,7 +475,7 @@ def generate_readme(mirrors_data: dict, report: dict = None) -> str:
     updated_at = mirrors_data.get('updated_at', 'unknown')
     health_checked_at = report_meta.get('generated_at', None)
 
-    env = Environment(keep_trailing_newline=True)
+    env = Environment(keep_trailing_newline=True, trim_blocks=True, lstrip_blocks=True)
     template = env.from_string(README_TEMPLATE)
 
     return template.render(

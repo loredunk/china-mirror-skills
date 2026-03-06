@@ -168,24 +168,26 @@ mirrors:
 
   # ==================== Docker Hub (Registry) ====================
   # IMPORTANT: These are Docker Hub image pull mirrors, NOT Docker CE install repos
-  # Note: Docker Hub mirrors are increasingly unreliable due to policy changes
-  # We only list for documentation purposes, with warnings
-  - id: docker-hub-tuna
-    name: "Tsinghua TUNA Docker Hub Mirror"
+  # Configure via /etc/docker/daemon.json registry-mirrors
+  - id: docker-hub-hlmirror
+    name: "HLMirror Docker Hub Mirror"
     category: docker-hub
-    url: "https://docker.mirrors.tuna.tsinghua.edu.cn"
-    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/docker-registry/"
-    status: deprecated
-    priority: 0
-    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/docker-registry/"
+    url: "https://docker.hlmirror.com"
+    homepage: "https://docker.hlmirror.com"
+    status: active
+    priority: 1
+    official_help: "https://docker.hlmirror.com"
     verify:
       type: http
-      url: "https://docker.mirrors.tuna.tsinghua.edu.cn/v2/"
+      url: "https://docker.hlmirror.com/v2/"
       expect_status: 403
     notes: |
-      WARNING: Docker Hub mirrors are largely deprecated due to Docker policy changes.
-      Consider using alternative registries or proxy instead.
-      This mirror may require authentication or be unavailable.
+      配置方式：写入 /etc/docker/daemon.json
+      {
+        "registry-mirrors": ["https://docker.hlmirror.com"],
+        "dns": ["1.1.1.1", "8.8.8.8"]
+      }
+      然后执行 sudo systemctl restart docker
 
   # ==================== Rust (Cargo) ====================
   - id: cargo-ustc
@@ -455,7 +457,7 @@ categories:
     icon: "🐳"
   docker-hub:
     name: "Docker Hub"
-    description: "Docker Hub image registry mirrors (deprecated)"
+    description: "Docker Hub 镜像加速（配置 daemon.json）"
     icon: "🐳"
   cargo:
     name: "Rust (Cargo)"

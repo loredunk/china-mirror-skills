@@ -2,7 +2,10 @@ name: Mirror Health Check
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Daily at 08:00 UTC
+    - cron: '0 0 * * *'  # 每天北京时间 08:00（UTC 00:00）
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
