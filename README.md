@@ -121,34 +121,16 @@ china-mirror-skills/
 
 ### 前置要求
 
-- Python 3.11+
 - Bash 4.0+
 - Linux（推荐）或 macOS（部分支持）
 
-### 安装
+### 快速配置（直接使用脚本）
 
 ```bash
 # 克隆项目
 git clone https://github.com/yourusername/china-mirror-skills.git
 cd china-mirror-skills
 
-# 安装 Python 依赖
-pip install -r requirements.txt
-
-# 或使用 uv
-uv pip install -r requirements.txt
-```
-
-### 快速检查
-
-```bash
-# 检查所有镜像源状态
-python scripts/check_mirrors.py
-```
-
-### 快速配置
-
-```bash
 # 配置 Python pip 镜像
 ./scripts/setup_pip.sh
 
@@ -164,107 +146,55 @@ python scripts/check_mirrors.py
 
 ---
 
-## Claude Code 使用方式
+## AI 编程助手使用方式
 
-### 加载 Skills
+本项目提供的 skills 可在主流 AI 编程助手中使用，让 AI 直接帮你完成镜像配置。
 
-在 Claude Code 设置或 CLAUDE.md 中添加本项目的 skills 目录路径。
+### Claude Code
 
-### 可用 Skills
+将 skills 复制到 Claude Code 全局 skills 目录：
 
-#### 1. bootstrap-china-network
+```bash
+# 克隆项目
+git clone https://github.com/yourusername/china-mirror-skills.git
 
-主入口 - 诊断环境并自动应用适合的配置。
+# 将所有 skills 安装到 Claude Code 全局目录
+cp -r china-mirror-skills/skills/* ~/.claude/skills/
+```
+
+然后直接向 Claude Code 提问：
 
 ```
 "帮我配置适合中国网络的开发环境"
-"把 pip、npm 和 Docker 配置成国内镜像"
+"pip install 太慢了，帮我配置国内镜像"
+"诊断我的开发环境网络问题"
 ```
 
-#### 2. fix-python-mirror
+### OpenCode
 
-配置 pip、uv、poetry 使用国内镜像。
+将本项目目录加入 OpenCode 的 skills 路径配置（参考 OpenCode 文档），
+或将 `skills/` 中的各目录复制到 OpenCode 对应的 skills 存储路径。
 
-```
-"Python 包下载太慢了，帮我配置"
-"把 pip 切换到清华镜像"
-```
+### Codex / 其他兼容工具
 
-#### 3. fix-node-mirror
+对于支持自定义 skills/instructions 目录的工具，将 `skills/` 下各子目录
+（每个包含一个 `SKILL.md`）放入工具对应的 skills 目录即可。
 
-配置 npm、pnpm、yarn 使用国内镜像。
+### 可用 Skills
 
-```
-"npm install 太慢了，帮我搞定"
-"配置 npm 使用 npmmirror"
-```
-
-#### 4. fix-docker-mirror
-
-配置 Docker CE 安装源和 Docker Hub 镜像加速（daemon.json）。
-
-```
-"从国内镜像安装 Docker CE"
-"配置 Docker Hub 镜像加速"
-```
-
-#### 5. fix-apt-mirror
-
-配置 Ubuntu/Debian APT 镜像源。
-
-```
-"让 apt update 快一些"
-"切换到清华的 Ubuntu 镜像"
-```
-
-#### 6. fix-homebrew-mirror
-
-配置 Homebrew 镜像。
-
-```
-"Homebrew 太慢了，帮我配置"
-```
-
-#### 7. fix-conda-mirror
-
-配置 Conda/Anaconda 镜像频道。
-
-```
-"配置 conda 使用国内镜像"
-```
-
-#### 8. fix-rust-mirror
-
-配置 Cargo 使用国内 crates 镜像。
-
-```
-"cargo build 下载包太慢了"
-```
-
-#### 9. fix-go-proxy
-
-配置 Go 模块代理。
-
-```
-"国内 go mod download 很慢"
-```
-
-#### 10. fix-flutter-mirror
-
-配置 Flutter SDK 及依赖镜像。
-
-```
-"帮我在国内配置 Flutter 环境"
-```
-
-#### 11. diagnose-network-environment
-
-分析网络环境，诊断常见问题。
-
-```
-"帮我诊断开发环境的网络配置"
-"为什么下载这么慢？"
-```
+| Skill | 触发场景 |
+|-------|---------|
+| `bootstrap-china-network` | 全部工具一次性配置，新机器初始化 |
+| `diagnose-network-environment` | 诊断网络问题，不做修改 |
+| `fix-python-mirror` | pip / uv / poetry 慢或超时 |
+| `fix-node-mirror` | npm / yarn / pnpm 慢或超时 |
+| `fix-docker-mirror` | Docker CE 安装慢 / docker pull 慢 |
+| `fix-apt-mirror` | apt update / install 慢 |
+| `fix-homebrew-mirror` | brew update / install 慢 |
+| `fix-conda-mirror` | conda install / create 慢 |
+| `fix-rust-mirror` | cargo build 下载依赖慢 |
+| `fix-go-proxy` | go mod download / go get 慢 |
+| `fix-flutter-mirror` | flutter packages get / pub get 慢 |
 
 ---
 

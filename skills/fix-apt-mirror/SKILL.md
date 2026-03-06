@@ -1,50 +1,56 @@
-# fix-apt-mirror
+---
+name: fix-apt-mirror
+description: |
+  Configure Ubuntu or Debian APT package sources to use China-based mirrors (TUNA, USTC, Alibaba Cloud,
+  Tencent Cloud) for faster system updates and package installations. Use this skill whenever apt update
+  is slow, apt install downloads packages slowly, system updates time out, or "Failed to fetch" errors
+  appear from archive.ubuntu.com or deb.debian.org. Also use when setting up a new Linux server/container
+  in China. If the user says "apt 太慢", "apt update 超时", or similar, always use this skill.
+---
 
-## Name
+# Configure Ubuntu/Debian APT Mirror
 
-Fix APT Package Mirror
-
-## Description
-
-Configures Ubuntu or Debian APT to use China-based package mirrors for faster system updates and package installations. Supports Tsinghua (TUNA), USTC, Alibaba Cloud, and Tencent Cloud mirrors.
-
-## When to Use
-
-Use this skill when:
-- `apt update` is very slow
-- `apt install` downloads packages slowly
-- System updates time out
-- You see "Failed to fetch" errors from archive.ubuntu.com
-
-## Inputs
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| mirror | string | No | Mirror preference: tuna, ustc, aliyun, tencent (default: tuna) |
-| codename | string | No | Ubuntu/Debian codename (auto-detected) |
-| dry_run | boolean | No | Show what would change without applying (default: false) |
+Replace official APT sources with a China mirror for faster system package downloads.
 
 ## Steps
 
-### Step 1: Detect Distribution
-
-Check Linux distribution:
+**1. Detect Linux distribution and codename**
 ```bash
 source /etc/os-release
-echo $ID      # ubuntu or debian
-echo $VERSION_CODENAME  # jammy, focal, noble, etc.
+echo "ID=$ID VERSION_CODENAME=$VERSION_CODENAME"
+# or: lsb_release -is && lsb_release -cs
 ```
+This is critical — the wrong codename causes 404 errors. Auto-detect if not specified.
 
-### Step 2: Backup sources.list
+**2. Run the setup script**
 
-Backup the original APT configuration:
+Default mirror: **tuna**. Requires sudo.
+
 ```bash
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup.<date>
+sudo ./scripts/setup_apt.sh --mirror <tuna|ustc|aliyun|tencent>
 ```
 
-### Step 3: Generate New sources.list
+The script backs up `/etc/apt/sources.list` before modification.
 
-**For Ubuntu:**
+**3. Verify**
+```bash
+cat /etc/apt/sources.list        # Confirm mirror URLs
+sudo apt-get update              # Should be fast now
+apt-cache policy docker-ce       # Check which source packages come from
+```
+
+## Available Mirrors
+
+| Mirror | Base URL | Priority |
+|--------|----------|----------|
+| Tsinghua TUNA | https://mirrors.tuna.tsinghua.edu.cn | 1 (default) |
+| USTC | https://mirrors.ustc.edu.cn | 2 |
+| Alibaba Cloud | https://mirrors.aliyun.com | 3 |
+| Tencent Cloud | https://mirrors.cloud.tencent.com | 4 |
+
+## Config Reference
+
+**Ubuntu sources.list** (replace `jammy` with actual codename):
 ```
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse
@@ -52,127 +58,21 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-backports main restricted
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-security main restricted universe multiverse
 ```
 
-**For Debian:**
+**Debian sources.list** (replace `bookworm` with actual codename):
 ```
 deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free
 deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free
 deb https://mirrors.tuna.tsinghua.edu.cn/debian-security/ bookworm-security main contrib non-free
 ```
 
-### Step 4: Apply and Update
-
-1. Write new sources.list
-2. Run `apt-get update` to refresh package lists
-
-## Safety Notes
-
-⚠️ **CRITICAL**: This modifies system package sources. Incorrect configuration can break package management.
-
-⚠️ **Backup**: Original `/etc/apt/sources.list` is backed up automatically
-
-⚠️ **Root Required**: Requires sudo privileges
-
-⚠️ **Codename**: Wrong codename can cause 404 errors
-
-## Verification
-
-```bash
-# Check current sources
-cat /etc/apt/sources.list
-
-# Verify update works
-sudo apt-get update
-
-# Check package source
-apt-cache policy ubuntu-server  # Should show mirror URL
-```
-
-## Available Mirrors
-
-| Mirror | URL | Priority |
-|--------|-----|----------|
-| Tsinghua (TUNA) | https://mirrors.tuna.tsinghua.edu.cn | 1 (default) |
-| USTC | https://mirrors.ustc.edu.cn | 2 |
-| Alibaba Cloud | https://mirrors.aliyun.com | 3 |
-| Tencent Cloud | https://mirrors.cloud.tencent.com | 4 |
-
 ## Supported Codenames
 
-**Ubuntu:**
-- `noble` - 24.04 LTS
-- `jammy` - 22.04 LTS
-- `focal` - 20.04 LTS
-
-**Debian:**
-- `bookworm` - 12
-- `bullseye` - 11
-
-## Examples
-
-### Example 1: Quick Fix
-
-```
-"Make apt update faster"
-"Switch Ubuntu to Tsinghua mirror"
-```
-
-### Example 2: Specific Mirror
-
-```
-"Use USTC mirror for apt"
-"Configure Ubuntu with Alibaba Cloud mirror"
-```
-
-## Troubleshooting
-
-### Issue: 404 Not Found errors
-
-**Cause**: Wrong codename or mirror doesn't have your release
-
-**Fix**:
-```bash
-# Check your actual codename
-lsb_release -cs
-
-# Edit sources.list with correct codename
-sudo nano /etc/apt/sources.list
-```
-
-### Issue: GPG errors
-
-**Cause**: Outdated GPG keys
-
-**Fix**:
-```bash
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <KEY_ID>
-# or
-sudo apt-get install --reinstall ca-certificates
-```
-
-### Issue: apt update still slow
-
-**Check**: DNS resolution issues
-```bash
-# Test mirror connectivity
-curl -I https://mirrors.tuna.tsinghua.edu.cn
-
-# Check DNS
-cat /etc/resolv.conf
-```
+- Ubuntu: `noble` (24.04), `jammy` (22.04), `focal` (20.04)
+- Debian: `bookworm` (12), `bullseye` (11)
 
 ## Rollback
 
 ```bash
-# Using restore script
 sudo ./scripts/restore_config.sh --tool apt --latest
-
-# Or manually
-sudo cp /etc/apt/sources.list.backup.* /etc/apt/sources.list
-sudo apt-get update
-```
-
-## Implementation
-
-```bash
-sudo ./scripts/setup_apt.sh --mirror <mirror> --codename <codename>
+# Or: sudo cp /etc/apt/sources.list.backup.* /etc/apt/sources.list && sudo apt-get update
 ```
