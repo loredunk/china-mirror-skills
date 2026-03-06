@@ -121,7 +121,6 @@ china-mirror-skills/
 
 ### 前置要求
 
-- Bash 4.0+
 - Linux（推荐）或 macOS（部分支持）
 
 ### 快速配置（直接使用脚本）
@@ -237,27 +236,6 @@ cp -r china-mirror-skills/skills/* ~/.claude/skills/
   -y, --yes              跳过确认提示
   -h, --help             显示帮助信息
 ```
-
----
-
-## GitHub Actions
-
-### 镜像健康检查
-
-**工作流**: `.github/workflows/mirror-health.yml`
-
-- **定时执行**: 每天北京时间 08:00（UTC 00:00），推送到 main 分支时也会触发
-- **手动触发**: `workflow_dispatch`
-- **功能**: 测试 `data/mirrors.yml` 中所有镜像的 HTTP 连通性
-- **输出**: `reports/report.json`
-
-### README 自动更新
-
-**工作流**: `.github/workflows/readme-refresh.yml`
-
-- **触发条件**: 推送到 main 且修改了 `data/mirrors.yml` 或 `scripts/`
-- **功能**: 从模板重新生成 README.md
-- **自动提交**: 如果 README 有变化则自动提交
 
 ---
 
