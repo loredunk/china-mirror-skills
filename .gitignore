@@ -40,7 +40,8 @@ env/
 .backup/
 config_backup/
 PLAN.md
-
+CLAUDE.md
+AGENTS.md
 
 
 # Temporary files
