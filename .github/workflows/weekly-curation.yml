@@ -1,0 +1,41 @@
+name: Weekly Curation
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Weekly Monday at 08:00 UTC (before deprecation-watch)
+  workflow_dispatch:
+
+jobs:
+  weekly-curation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      actions: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download latest mirror-health artifact
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          workflow: mirror-health.yml
+          name: mirror-health-report
+          path: reports/
+        continue-on-error: true
+
+      - name: Run weekly curation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/weekly_curation.py

@@ -1,0 +1,495 @@
+# China Mirror Sources for Development Tools
+# This file contains verified mirror sources for development tools in China
+#
+# Policy:
+# - Prioritize official university mirrors (TUNA, USTC)
+# - Prioritize official vendor mirrors (npmmirror, Tencent Cloud)
+# - Require official documentation/help page for each mirror
+# - Mark mirrors as deprecated if official announcement says so
+#
+# Status values:
+# - active: Verified working, recommended
+# - testing: Under evaluation
+# - deprecated: Officially discontinued or unreliable
+# - community: Community maintained, use with caution
+
+version: "0.1.0"
+updated_at: "2025-03-06"
+
+mirrors:
+  # ==================== Python (pip) ====================
+  - id: pip-tuna
+    name: "Tsinghua TUNA PyPI Mirror"
+    category: pip
+    url: "https://pypi.tuna.tsinghua.edu.cn/simple"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/pypi/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/pypi/"
+    verify:
+      type: http
+      url: "https://pypi.tuna.tsinghua.edu.cn/simple/pip/"
+      expect_status: 200
+    notes: "Official Tsinghua University mirror, highly reliable"
+
+  - id: pip-ustc
+    name: "USTC PyPI Mirror"
+    category: pip
+    url: "https://pypi.mirrors.ustc.edu.cn/simple"
+    homepage: "https://mirrors.ustc.edu.cn/help/pypi.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/pypi.html"
+    verify:
+      type: http
+      url: "https://pypi.mirrors.ustc.edu.cn/simple/pip/"
+      expect_status: 200
+    notes: "Official USTC mirror, synchronized every 5 minutes"
+
+  - id: pip-aliyun
+    name: "Alibaba Cloud PyPI Mirror"
+    category: pip
+    url: "https://mirrors.aliyun.com/pypi/simple"
+    homepage: "https://developer.aliyun.com/mirror/pypi"
+    status: active
+    priority: 3
+    official_help: "https://developer.aliyun.com/mirror/pypi"
+    verify:
+      type: http
+      url: "https://mirrors.aliyun.com/pypi/simple/pip/"
+      expect_status: 200
+    notes: "Alibaba Cloud mirror, good availability"
+
+  # ==================== Node.js (npm) ====================
+  - id: npm-npmmirror
+    name: "npmmirror (Taobao)"
+    category: npm
+    url: "https://registry.npmmirror.com"
+    homepage: "https://npmmirror.com"
+    status: active
+    priority: 1
+    official_help: "https://npmmirror.com"
+    verify:
+      type: http
+      url: "https://registry.npmmirror.com/npm"
+      expect_status: 200
+    notes: "Official npm mirror by Taobao, most reliable in China"
+
+  - id: npm-tencent
+    name: "Tencent Cloud NPM Mirror"
+    category: npm
+    url: "https://mirrors.cloud.tencent.com/npm/"
+    homepage: "https://mirrors.cloud.tencent.com/help/npm.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.cloud.tencent.com/help/npm.html"
+    verify:
+      type: http
+      url: "https://mirrors.cloud.tencent.com/npm/npm"
+      expect_status: 200
+    notes: "Tencent Cloud official mirror"
+
+  # ==================== Ubuntu (apt) ====================
+  - id: ubuntu-tuna
+    name: "Tsinghua TUNA Ubuntu Mirror"
+    category: ubuntu
+    url: "https://mirrors.tuna.tsinghua.edu.cn/ubuntu/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/ubuntu/dists/"
+      expect_status: 200
+    notes: "Official TUNA Ubuntu mirror"
+    codenames:
+      - jammy    # 22.04 LTS
+      - noble    # 24.04 LTS
+      - focal    # 20.04 LTS
+
+  - id: ubuntu-ustc
+    name: "USTC Ubuntu Mirror"
+    category: ubuntu
+    url: "https://mirrors.ustc.edu.cn/ubuntu/"
+    homepage: "https://mirrors.ustc.edu.cn/help/ubuntu.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/ubuntu.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/ubuntu/dists/"
+      expect_status: 200
+    notes: "Official USTC Ubuntu mirror"
+    codenames:
+      - jammy
+      - noble
+      - focal
+
+  # ==================== Docker CE ====================
+  # IMPORTANT: Docker CE install repo is DIFFERENT from Docker Hub mirror
+  - id: docker-ce-tuna
+    name: "Tsinghua TUNA Docker CE Mirror"
+    category: docker-ce
+    url: "https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/"
+      expect_status: 200
+    notes: "Docker CE installation packages, NOT Docker Hub image mirror"
+    supported_distros:
+      - ubuntu
+      - debian
+      - centos
+      - fedora
+
+  - id: docker-ce-ustc
+    name: "USTC Docker CE Mirror"
+    category: docker-ce
+    url: "https://mirrors.ustc.edu.cn/docker-ce/linux/"
+    homepage: "https://mirrors.ustc.edu.cn/help/docker-ce.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/docker-ce.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/"
+      expect_status: 200
+    notes: "Docker CE installation packages"
+    supported_distros:
+      - ubuntu
+      - debian
+      - centos
+      - fedora
+
+  # ==================== Docker Hub (Registry) ====================
+  # IMPORTANT: These are Docker Hub image pull mirrors, NOT Docker CE install repos
+  # Note: Docker Hub mirrors are increasingly unreliable due to policy changes
+  # We only list for documentation purposes, with warnings
+  - id: docker-hub-tuna
+    name: "Tsinghua TUNA Docker Hub Mirror"
+    category: docker-hub
+    url: "https://docker.mirrors.tuna.tsinghua.edu.cn"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/docker-registry/"
+    status: deprecated
+    priority: 0
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/docker-registry/"
+    verify:
+      type: http
+      url: "https://docker.mirrors.tuna.tsinghua.edu.cn/v2/"
+      expect_status: 403
+    notes: |
+      WARNING: Docker Hub mirrors are largely deprecated due to Docker policy changes.
+      Consider using alternative registries or proxy instead.
+      This mirror may require authentication or be unavailable.
+
+  # ==================== Rust (Cargo) ====================
+  - id: cargo-ustc
+    name: "USTC Rust Crates Mirror"
+    category: cargo
+    url: "https://mirrors.ustc.edu.cn/crates.io-index/"
+    homepage: "https://mirrors.ustc.edu.cn/help/crates.io-index.html"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.ustc.edu.cn/help/crates.io-index.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/crates.io-index/"
+      expect_status: 200
+    notes: "Official USTC Rust crates mirror, sparse index supported"
+    config:
+      sparse_index: "https://mirrors.ustc.edu.cn/crates.io-index/"
+
+  - id: cargo-tuna
+    name: "Tsinghua TUNA Rust Crates Mirror"
+    category: cargo
+    url: "https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+      expect_status: 200
+    notes: "Official TUNA Rust crates mirror"
+    config:
+      sparse_index: "https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+
+  - id: cargo-rsproxy
+    name: "Rust China Community Mirror"
+    category: cargo
+    url: "https://rsproxy.cn/crates.io-index/"
+    homepage: "https://rsproxy.cn/"
+    status: testing
+    priority: 3
+    official_help: "https://rsproxy.cn/"
+    verify:
+      type: http
+      url: "https://rsproxy.cn/crates.io-index/"
+      expect_status: 200
+    notes: "Community maintained Rust mirror, rsproxy also provides rustup mirror"
+
+  # ==================== Homebrew ====================
+  - id: brew-tuna
+    name: "Tsinghua TUNA Homebrew Mirror"
+    category: homebrew
+    url: "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.sh"
+      expect_status: 200
+    notes: "TUNA Homebrew git repositories mirror"
+    repos:
+      - brew
+      - core
+      - cask
+      - services
+
+  - id: brew-ustc
+    name: "USTC Homebrew Mirror"
+    category: homebrew
+    url: "https://mirrors.ustc.edu.cn/brew.git"
+    homepage: "https://mirrors.ustc.edu.cn/help/brew.git.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/brew.git.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/brew.git/"
+      expect_status: 200
+    notes: "USTC Homebrew git repositories mirror"
+    repos:
+      - brew
+      - core
+      - cask
+      - services
+
+  # ==================== Conda ====================
+  - id: conda-tuna
+    name: "Tsinghua TUNA Anaconda Mirror"
+    category: conda
+    url: "https://mirrors.tuna.tsinghua.edu.cn/anaconda/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/anaconda/"
+      expect_status: 200
+    notes: "Official TUNA Anaconda mirror"
+    channels:
+      - main
+      - free
+      - r
+      - bioconda
+      - conda-forge
+
+  - id: conda-ustc
+    name: "USTC Anaconda Mirror"
+    category: conda
+    url: "https://mirrors.ustc.edu.cn/anaconda/"
+    homepage: "https://mirrors.ustc.edu.cn/help/anaconda.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/anaconda.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/anaconda/"
+      expect_status: 200
+    notes: "Official USTC Anaconda mirror"
+    channels:
+      - main
+      - free
+      - r
+      - bioconda
+      - conda-forge
+
+  # ==================== Go ====================
+  - id: go-proxy-cn
+    name: "China Go Module Proxy"
+    category: go
+    url: "https://goproxy.cn"
+    homepage: "https://goproxy.cn"
+    status: active
+    priority: 1
+    official_help: "https://goproxy.cn"
+    verify:
+      type: http
+      url: "https://goproxy.cn/github.com/"
+      expect_status: 200
+    notes: "Official China Go module proxy by Qiniu Cloud, highly reliable"
+
+  - id: go-proxy-ustc
+    name: "USTC Go Module Proxy"
+    category: go
+    url: "https://goproxy.ustc.edu.cn"
+    homepage: "https://mirrors.ustc.edu.cn/help/goproxy.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/goproxy.html"
+    verify:
+      type: http
+      url: "https://goproxy.ustc.edu.cn/github.com/"
+      expect_status: 200
+    notes: "USTC Go module proxy"
+
+  - id: go-proxy-aliyun
+    name: "Alibaba Cloud Go Module Proxy"
+    category: go
+    url: "https://mirrors.aliyun.com/goproxy/"
+    homepage: "https://developer.aliyun.com/mirror/goproxy"
+    status: active
+    priority: 3
+    official_help: "https://developer.aliyun.com/mirror/goproxy"
+    verify:
+      type: http
+      url: "https://mirrors.aliyun.com/goproxy/github.com/"
+      expect_status: 200
+    notes: "Alibaba Cloud Go module proxy"
+
+  # ==================== Flutter ====================
+  - id: flutter-tuna
+    name: "Tsinghua TUNA Flutter Mirror"
+    category: flutter
+    url: "https://mirrors.tuna.tsinghua.edu.cn/flutter/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/flutter/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/flutter/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/"
+      expect_status: 200
+    notes: "TUNA Flutter SDK and dependencies mirror"
+
+  - id: flutter-ustc
+    name: "USTC Flutter Mirror"
+    category: flutter
+    url: "https://mirrors.ustc.edu.cn/flutter/"
+    homepage: "https://mirrors.ustc.edu.cn/help/flutter.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/flutter.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/flutter/flutter_infra/"
+      expect_status: 200
+    notes: "USTC Flutter SDK and dependencies mirror"
+
+  # ==================== Kubernetes Notes ====================
+  # Note: k8s.gcr.io has been deprecated and migrated to registry.k8s.io
+  - id: k8s-registry
+    name: "Official Kubernetes Registry"
+    category: kubernetes-notes
+    url: "https://registry.k8s.io"
+    homepage: "https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/"
+    status: active
+    priority: 1
+    official_help: "https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/"
+    verify:
+      type: http
+      url: "https://registry.k8s.io/v2/"
+      expect_status: 401  # Expected 401 without auth
+    notes: |
+      IMPORTANT: k8s.gcr.io was frozen on March 20, 2023 and fully deprecated.
+      New registry is registry.k8s.io.
+      See: https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/
+      If you still have k8s.gcr.io references, update them immediately.
+
+  # ==================== Alpine Linux ====================
+  - id: alpine-tuna
+    name: "Tsinghua TUNA Alpine Mirror"
+    category: alpine
+    url: "https://mirrors.tuna.tsinghua.edu.cn/alpine/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/alpine/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/alpine/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/alpine/MIRRORS.txt"
+      expect_status: 200
+    notes: "TUNA Alpine Linux package mirror"
+
+  - id: alpine-ustc
+    name: "USTC Alpine Mirror"
+    category: alpine
+    url: "https://mirrors.ustc.edu.cn/alpine/"
+    homepage: "https://mirrors.ustc.edu.cn/help/alpine.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/alpine.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/alpine/MIRRORS.txt"
+      expect_status: 200
+    notes: "USTC Alpine Linux package mirror"
+
+# ==================== Categories Metadata ====================
+categories:
+  pip:
+    name: "Python (pip)"
+    description: "PyPI package mirrors for pip"
+    icon: "🐍"
+  npm:
+    name: "Node.js (npm)"
+    description: "npm registry mirrors"
+    icon: "📦"
+  ubuntu:
+    name: "Ubuntu (apt)"
+    description: "Ubuntu APT package mirrors"
+    icon: "🐧"
+  docker-ce:
+    name: "Docker CE"
+    description: "Docker CE installation package mirrors"
+    icon: "🐳"
+  docker-hub:
+    name: "Docker Hub"
+    description: "Docker Hub image registry mirrors (deprecated)"
+    icon: "🐳"
+  cargo:
+    name: "Rust (Cargo)"
+    description: "Crates.io registry mirrors"
+    icon: "🦀"
+  homebrew:
+    name: "Homebrew"
+    description: "Homebrew tap and formula mirrors"
+    icon: "🍺"
+  conda:
+    name: "Conda/Anaconda"
+    description: "Anaconda package mirrors"
+    icon: "🐍"
+  go:
+    name: "Go"
+    description: "Go module proxy mirrors"
+    icon: "🐹"
+  flutter:
+    name: "Flutter"
+    description: "Flutter SDK and dependency mirrors"
+    icon: "📱"
+  kubernetes-notes:
+    name: "Kubernetes"
+    description: "Kubernetes registry migration notes"
+    icon: "☸️"
+  alpine:
+    name: "Alpine Linux"
+    description: "Alpine Linux package mirrors"
+    icon: "🏔️"
+
+# ==================== Health Check Settings ====================
+health_check:
+  timeout: 30
+  retries: 2
+  parallel: true
+  max_workers: 10
+  user_agent: "china-mirror-skills/0.1.0 (Health Check)"

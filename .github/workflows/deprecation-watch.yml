@@ -1,0 +1,44 @@
+name: Deprecation Watch
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Weekly Monday at 09:00 UTC
+  workflow_dispatch:
+
+jobs:
+  watch-deprecation:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run deprecation watch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/watch_deprecation.py
+
+      - name: Commit updated fingerprints
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/page_fingerprints.json
+          if git diff --cached --quiet; then
+            echo "No fingerprint changes"
+          else
+            git commit -m "chore: update page fingerprints [skip ci]"
+            git push
+          fi
