@@ -26,7 +26,7 @@ Options:
   -L, --list            List available backups
   -h, --help            Show this help message
 
-Tools: pip, npm, docker, apt, homebrew, conda, cargo, go, flutter, gem
+Tools: pip, npm, docker, apt, homebrew, conda, cargo, go, flutter, github, gem
 
 Examples:
   $(basename "$0") --list

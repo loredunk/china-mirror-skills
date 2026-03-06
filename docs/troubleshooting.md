@@ -173,6 +173,41 @@ source ~/.zshrc
 
 ---
 
+### GitHub Releases: browser download or `curl` stalls
+
+**Symptom:** Downloads from `https://github.com/<owner>/<repo>/releases/download/...` are slow or repeatedly reset.
+
+**Solution:**
+```bash
+# Convert the GitHub Releases URL to an official mirror URL
+./scripts/setup_github.sh --release-url \
+  https://github.com/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt
+```
+
+Use the printed mirror URL for `curl`, `wget`, or the browser.
+
+**Important:** this only applies to GitHub Releases assets, not arbitrary repository browsing or API access.
+
+---
+
+### Git clone from GitHub is slow, but only for Flutter SDK
+
+**Symptom:**
+```bash
+git clone https://github.com/flutter/flutter.git
+```
+hangs or times out repeatedly in China.
+
+**Solution:**
+```bash
+./scripts/setup_github.sh --project flutter-sdk
+git config --global --get-regexp '^url\..*insteadOf$'
+```
+
+This installs a curated rewrite rule for the official TUNA Flutter SDK mirror.
+
+---
+
 ### Homebrew: git clone fails (macOS)
 
 **Symptom:**

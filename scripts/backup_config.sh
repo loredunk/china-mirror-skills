@@ -25,6 +25,7 @@ declare -A TOOL_CONFIGS=(
     ["cargo"]="${HOME}/.cargo/config.toml,${HOME}/.cargo/config"
     ["go"]="${HOME}/.bash_profile,${HOME}/.zshrc"
     ["flutter"]="${HOME}/.bash_profile,${HOME}/.zshrc"
+    ["github"]="${HOME}/.gitconfig"
     ["gem"]="${HOME}/.gemrc"
 )
 
@@ -42,7 +43,7 @@ Options:
   -l, --list          List available backups
   -h, --help          Show this help message
 
-Tools: pip, npm, docker, apt, homebrew, conda, cargo, go, flutter, gem
+Tools: pip, npm, docker, apt, homebrew, conda, cargo, go, flutter, github, gem
 
 Examples:
   $(basename "$0") --all

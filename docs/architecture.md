@@ -46,7 +46,9 @@ All mirror definitions live in a single YAML file. This is the single source of 
   verify:
     type: http
     url: "https://..."          # URL used for health check (may differ from url)
+    method: get                 # Optional: get | head
     expect_status: 200          # Expected HTTP status code
+    inconclusive_statuses: [403]  # Optional: render as warning instead of hard failure
   notes: "..."                  # Human notes shown in README
 ```
 
@@ -98,7 +100,7 @@ Reads `reports/report.json` and creates a weekly GitHub issue with:
 
 ## Skills Layer
 
-Each skill is a directory under `skills/` containing a `prompt.md` and optional `metadata.json`. Skills are loaded by Claude Code from the repository root.
+Each skill is a directory under `skills/` containing a `SKILL.md`. Skills are loaded by Claude Code from the repository root.
 
 Skills call the bash scripts in `scripts/` rather than duplicating logic.
 

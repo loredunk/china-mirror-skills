@@ -208,6 +208,32 @@ flutter doctor
 
 ---
 
+## GitHub Releases / Curated Mirrors
+
+```bash
+# Convert a GitHub Releases asset URL to a mirror URL
+./scripts/setup_github.sh --release-url \
+  https://github.com/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt
+
+# Use USTC instead of the default TUNA mirror
+./scripts/setup_github.sh --mirror ustc --release-url \
+  https://github.com/sharkdp/bat/releases/download/v0.25.0/bat-v0.25.0-x86_64-unknown-linux-gnu.tar.gz
+
+# Configure the curated flutter/flutter git mirror rewrite
+./scripts/setup_github.sh --project flutter-sdk
+
+# Preview the git config change without applying it
+./scripts/setup_github.sh --project flutter-sdk --dry-run
+```
+
+**Verify:**
+```bash
+git config --global --get-regexp '^url\..*insteadOf$'
+curl -I "$(./scripts/setup_github.sh --release-url https://github.com/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt)"
+```
+
+---
+
 ## Backup and Restore
 
 ### Backup before making changes

@@ -42,6 +42,7 @@ class MirrorCheckResult:
     error_message: Optional[str] = None
     checked_url: Optional[str] = None   # actual probe URL (may differ from mirror URL)
     verify_type: Optional[str] = None   # http | go_proxy | …
+    is_inconclusive: bool = False
     timestamp: str = ""
 
 
@@ -86,6 +87,10 @@ def check_mirror(mirror: dict, timeout: int = DEFAULT_TIMEOUT,
     check_url = verify_config.get('url', mirror['url'])
     acceptable = _acceptable_statuses(verify_config)
     verify_type = verify_config.get('type', 'http')
+    method = verify_config.get('method', 'get').lower()
+    inconclusive_statuses = {
+        f"http_{code}" for code in verify_config.get('inconclusive_statuses', [])
+    }
 
     result = MirrorCheckResult(
         id=mirror['id'],
@@ -103,12 +108,15 @@ def check_mirror(mirror: dict, timeout: int = DEFAULT_TIMEOUT,
 
         try:
             start_time = time.time()
-            response = requests.get(
-                check_url,
-                timeout=timeout,
-                headers={'User-Agent': user_agent},
-                allow_redirects=True,
-            )
+            request_kwargs = {
+                'timeout': timeout,
+                'headers': {'User-Agent': user_agent},
+                'allow_redirects': True,
+            }
+            if method == 'head':
+                response = requests.head(check_url, **request_kwargs)
+            else:
+                response = requests.get(check_url, **request_kwargs)
             elapsed_ms = (time.time() - start_time) * 1000
 
             result.response_time_ms = round(elapsed_ms, 2)
@@ -140,6 +148,7 @@ def check_mirror(mirror: dict, timeout: int = DEFAULT_TIMEOUT,
             else:
                 # Deterministic HTTP error — no retry
                 result.status = f'http_{response.status_code}'
+                result.is_inconclusive = result.status in inconclusive_statuses
                 exp = (acceptable[0] if len(acceptable) == 1 else acceptable)
                 result.error_message = f"Expected {exp}, got {response.status_code}"
 
@@ -262,13 +271,25 @@ def generate_recommendations(results: list[MirrorCheckResult], mirrors_data: dic
     for category, cat_results in category_results.items():
         working = [r for r in cat_results if r.status == 'ok']
         failed = [r for r in cat_results if r.status != 'ok']
+        definitive_failures = [r for r in failed if not r.is_inconclusive]
+        inconclusive_failures = [r for r in failed if r.is_inconclusive]
 
-        if not working and failed:
+        if not working and definitive_failures:
             recommendations.append({
                 'category': category,
                 'severity': 'critical',
                 'message': f'No working mirrors found for {category}. All mirrors failed.',
                 'action': 'Please check your network connection or report this issue.',
+            })
+        elif not working and inconclusive_failures:
+            recommendations.append({
+                'category': category,
+                'severity': 'warning',
+                'message': (
+                    f'No mirror probe returned a definitive success for {category}; '
+                    'current failures are inconclusive.'
+                ),
+                'action': 'Check the official help page or validate manually from a real client.',
             })
         elif failed:
             best = min(working, key=lambda r: r.response_time_ms or float('inf'))
@@ -295,7 +316,7 @@ def count_critical_category_failures(results: list[MirrorCheckResult]) -> int:
 
     critical = 0
     for items in by_cat.values():
-        if not any(r.status == 'ok' for r in items):
+        if not any(r.status == 'ok' for r in items) and any(not r.is_inconclusive for r in items):
             critical += 1
     return critical
 

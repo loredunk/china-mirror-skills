@@ -58,6 +58,21 @@ WATCH_PAGES = [
         "name": "goproxy.cn Homepage",
         "url": "https://goproxy.cn",
     },
+    {
+        "id": "tuna-github-release",
+        "name": "TUNA GitHub Release Help",
+        "url": "https://mirrors.tuna.tsinghua.edu.cn/help/github-release/",
+    },
+    {
+        "id": "ustc-github-release",
+        "name": "USTC GitHub Release Help",
+        "url": "https://mirrors.ustc.edu.cn/help/github-release.html",
+    },
+    {
+        "id": "tuna-flutter-sdk-git",
+        "name": "TUNA Flutter SDK Git Mirror Help",
+        "url": "https://mirrors.tuna.tsinghua.edu.cn/help/flutter-sdk.git/",
+    },
 ]
 
 USER_AGENT = "china-mirror-skills/0.1.0 (Deprecation Watch)"

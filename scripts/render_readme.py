@@ -72,7 +72,7 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 | 分类 | 工具 | 状态 | 镜像类型 |
 |------|------|------|----------|
-{% for cat_id, cat_info in categories.items() %}| {{ cat_info.icon }} {{ cat_info.name }} | {% if cat_id == 'pip' %}pip, uv, poetry{% elif cat_id == 'npm' %}npm, pnpm, yarn{% elif cat_id == 'docker-ce' %}Docker CE install{% elif cat_id == 'docker-hub' %}Docker Hub（镜像加速）{% elif cat_id == 'cargo' %}Cargo{% elif cat_id == 'homebrew' %}Homebrew{% elif cat_id == 'conda' %}Conda/Anaconda{% elif cat_id == 'go' %}Go modules{% elif cat_id == 'flutter' %}Flutter SDK{% elif cat_id == 'kubernetes-notes' %}K8s registry{% else %}{{ cat_id }}{% endif %} | ✅ 可用 | {% if cat_id in ['pip', 'npm', 'cargo', 'conda'] %}Package Index{% elif cat_id in ['ubuntu', 'alpine'] %}APT Repository{% elif cat_id == 'docker-ce' %}安装源{% elif cat_id == 'docker-hub' %}Registry Mirror{% elif cat_id == 'homebrew' %}Git Repository{% elif cat_id == 'go' %}Module Proxy{% elif cat_id == 'flutter' %}SDK Mirror{% else %}说明{% endif %} |
+{% for cat_id, cat_info in categories.items() %}| {{ cat_info.icon }} {{ cat_info.name }} | {% if cat_id == 'pip' %}pip, uv, poetry{% elif cat_id == 'npm' %}npm, pnpm, yarn{% elif cat_id == 'docker-ce' %}Docker CE install{% elif cat_id == 'docker-hub' %}Docker Hub（镜像加速）{% elif cat_id == 'cargo' %}Cargo{% elif cat_id == 'homebrew' %}Homebrew{% elif cat_id == 'conda' %}Conda/Anaconda{% elif cat_id == 'go' %}Go modules{% elif cat_id == 'flutter' %}Flutter SDK{% elif cat_id == 'github-release' %}GitHub Releases{% elif cat_id == 'github-repo' %}部分 GitHub 项目 clone{% elif cat_id == 'kubernetes-notes' %}K8s registry{% else %}{{ cat_id }}{% endif %} | {% if cat_id == 'github-repo' %}⚠️ 部分可用{% elif cat_id == 'kubernetes-notes' %}ℹ️ 说明{% else %}✅ 可用{% endif %} | {% if cat_id in ['pip', 'npm', 'cargo', 'conda'] %}Package Index{% elif cat_id in ['ubuntu', 'alpine'] %}APT Repository{% elif cat_id == 'docker-ce' %}安装源{% elif cat_id == 'docker-hub' %}Registry Mirror{% elif cat_id in ['homebrew', 'github-repo'] %}Git Repository{% elif cat_id == 'go' %}Module Proxy{% elif cat_id == 'flutter' %}SDK Mirror{% elif cat_id == 'github-release' %}Release Asset Mirror{% else %}说明{% endif %} |
 {% endfor %}
 
 ### 核心特性
@@ -111,6 +111,7 @@ china-mirror-skills/
 │   ├── fix-rust-mirror/           # Rust/Cargo
 │   ├── fix-go-proxy/              # Go
 │   ├── fix-flutter-mirror/        # Flutter
+│   ├── fix-github-mirror/         # GitHub Releases / curated clone mirrors
 │   └── diagnose-network-environment/  # 网络诊断
 ├── docs/                  # 文档
 │   ├── architecture.md    # 技术架构
@@ -202,6 +203,7 @@ cp -r china-mirror-skills/skills/* ~/.claude/skills/
 | `fix-rust-mirror` | cargo build 下载依赖慢 |
 | `fix-go-proxy` | go mod download / go get 慢 |
 | `fix-flutter-mirror` | flutter packages get / pub get 慢 |
+| `fix-github-mirror` | GitHub Releases 下载慢 / 少量官方项目 clone 慢 |
 
 ---
 
@@ -286,7 +288,7 @@ _暂无健康检查数据，请查看 [GitHub Actions](../../actions) 获取最�
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-{% for mirror in mirrors_by_category[cat_id] %}| {{ mirror.name }} | [{{ mirror.url }}]({{ mirror.url }}) | {% if mirror.live_status == 'ok' %}✅ 正常{% elif mirror.live_status == 'timeout' %}⏱️ 超时{% elif mirror.live_status is not none %}❌ {{ mirror.live_status }}{% elif mirror.status == 'active' %}✅ 可用{% elif mirror.status == 'deprecated' %}⚠️ 已废弃{% else %}🧪 测试中{% endif %}{% if mirror.response_time_ms is not none %} ({{ mirror.response_time_ms }}ms){% endif %} | {{ mirror.priority }} |
+{% for mirror in mirrors_by_category[cat_id] %}| {{ mirror.name }} | [{{ mirror.url }}]({{ mirror.url }}) | {{ status_badge(mirror) }}{% if mirror.response_time_ms is not none %} ({{ mirror.response_time_ms }}ms){% endif %} | {{ mirror.priority }} |
 {% endfor %}
 
 {% endfor %}
@@ -374,6 +376,29 @@ def load_report(report_path: Path) -> dict:
     return {}
 
 
+def status_badge(mirror: dict) -> str:
+    """Render a human-readable status badge for README tables."""
+    live_status = mirror.get('live_status')
+    verify = mirror.get('verify', {})
+    inconclusive = {f"http_{code}" for code in verify.get('inconclusive_statuses', [])}
+
+    if live_status == 'ok':
+        return "✅ 正常"
+    if live_status == 'timeout':
+        return "⏱️ 超时"
+    if live_status in inconclusive:
+        return f"⚠️ {live_status}"
+    if live_status is not None:
+        return f"❌ {live_status}"
+    if mirror.get('status') == 'active':
+        return "✅ 可用"
+    if mirror.get('status') == 'deprecated':
+        return "⚠️ 已废弃"
+    if mirror.get('status') == 'community':
+        return "⚠️ 社区维护"
+    return "🧪 测试中"
+
+
 def generate_readme(mirrors_data: dict, report: dict = None) -> str:
     """Generate README content using Jinja2 template"""
     from jinja2 import Environment
@@ -415,6 +440,7 @@ def generate_readme(mirrors_data: dict, report: dict = None) -> str:
         health_checked_at=health_checked_at,
         report_summary=report_summary,
         has_report=bool(report),
+        status_badge=status_badge,
     )
 
 
