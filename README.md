@@ -63,7 +63,7 @@
 | 🐹 Go | Go modules | ✅ 可用 | Module Proxy |
 | 📱 Flutter | Flutter SDK | ✅ 可用 | SDK Mirror |
 | 🐙 GitHub Releases | GitHub Releases | ✅ 可用 | Release Asset Mirror |
-| 🐙 GitHub Project Mirrors | 部分 GitHub 项目 clone | ⚠️ 部分可用 | Git Repository |
+| 🐙 GitHub Project Mirrors | GitHub 仓库 clone 加速 | ✅ 可用 | Git Repository |
 | ☸️ Kubernetes | K8s registry | ℹ️ 说明 | 说明 |
 | 🏔️ Alpine Linux | alpine | ✅ 可用 | APT Repository |
 
@@ -237,12 +237,14 @@ _健康检查时间: 2026-03-07T04:47:21.351081Z_
 |---------|------|------|--------|
 | Tsinghua TUNA GitHub Release Mirror | [https://mirrors.tuna.tsinghua.edu.cn/github-release/](https://mirrors.tuna.tsinghua.edu.cn/github-release/) | ⚠️ http_404 (856.83ms) | 1 |
 | USTC GitHub Release Mirror | [https://mirrors.ustc.edu.cn/github-release/](https://mirrors.ustc.edu.cn/github-release/) | ⚠️ http_404 (829.3ms) | 2 |
+| ghfast.top GitHub Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 可用 | 3 |
 
 #### 🐙 GitHub Project Mirrors
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
 | Tsinghua TUNA Flutter SDK Git Mirror | [https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git](https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git) | ✅ 正常 (8446.57ms) | 1 |
+| ghfast.top GitHub Clone Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 可用 | 2 |
 
 #### ☸️ Kubernetes
 
