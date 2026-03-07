@@ -52,6 +52,7 @@ skills/bootstrap-china-network/
   SKILL.md                    # 主入口：检测环境 → 调用对应脚本
   scripts/
     common.sh                 # 共享工具库（日志、OS 检测、备份等）
+    diagnose.sh               # 网络环境诊断（纯检测，不修改配置）
     backup_config.sh          # 跨工具备份
     restore_config.sh         # 跨工具还原
     python/setup.sh           # pip/uv/poetry
@@ -66,12 +67,7 @@ skills/bootstrap-china-network/
     github/setup.sh           # GitHub Releases
 ```
 
-其他 Skill：
-
-| Skill | 职责 |
-|-------|------|
-| `diagnose-network-environment` | 网络环境诊断（纯检测，不修改配置） |
-| `resolve-network-issues` | 网络问题排查与修复建议 |
+本项目只有一个 Skill（`bootstrap-china-network`），包含所有配置和诊断功能。
 
 ### Scripts 层（`scripts/`）— 仅 CI 维护脚本
 

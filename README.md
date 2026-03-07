@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="#快速开始">快速开始</a> •
+  <a href="#ai-编程助手使用方式">使用方式</a> •
   <a href="#支持的工具">支持的工具</a> •
   <a href="#镜像源">镜像源</a>
 </p>
@@ -16,10 +16,7 @@
 
 - [为什么需要这个项目？](#为什么需要这个项目)
 - [支持的工具](#支持的工具)
-- [项目结构](#项目结构)
-- [快速开始](#快速开始)
-- [Claude Code 使用方式](#claude-code-使用方式)
-- [独立脚本](#独立脚本)
+- [AI 编程助手使用方式](#ai-编程助手使用方式)
 - [GitHub Actions](#github-actions)
 - [镜像源](#镜像源)
 - [安全与风险](#安全与风险)
@@ -40,7 +37,7 @@
 
 1. **经过验证的镜像配置** - 来自高校官方镜像站（清华 TUNA、中科大 USTC）
 2. **自动化配置脚本** - 支持备份和回滚
-3. **Claude Code skills** - 借助 AI 完成配置
+3. **Claude Code skills** - 借助 AI 完成配置和诊断
 4. **每日健康检查** - 确保镜像源可用性
 5. **幂等操作** - 重复执行安全无副作用
 
@@ -80,89 +77,20 @@
 
 ---
 
-## 项目结构
-
-```
-china-mirror-skills/
-├── README.md              # 本文件（自动生成）
-├── LICENSE                # MIT 协议
-├── data/
-│   └── mirrors.yml        # 镜像源配置数据
-├── scripts/               # 配置和工具脚本
-│   ├── common.sh          # 公共函数
-│   ├── check_mirrors.py   # 镜像健康检查
-│   ├── render_readme.py   # README 生成器
-│   ├── backup_config.sh   # 备份工具
-│   ├── restore_config.sh  # 还原工具
-│   └── setup_*.sh         # 各工具的配置脚本
-├── skills/                # Claude Code skills
-│   ├── bootstrap-china-network/   # 主入口
-│   ├── fix-python-mirror/         # Python 工具
-│   ├── fix-node-mirror/           # Node.js 工具
-│   ├── fix-docker-mirror/         # Docker
-│   ├── fix-apt-mirror/            # Ubuntu/Debian
-│   ├── fix-homebrew-mirror/       # Homebrew
-│   ├── fix-conda-mirror/          # Conda
-│   ├── fix-rust-mirror/           # Rust/Cargo
-│   ├── fix-go-proxy/              # Go
-│   ├── fix-flutter-mirror/        # Flutter
-│   ├── fix-github-mirror/         # GitHub Releases / curated clone mirrors
-│   └── diagnose-network-environment/  # 网络诊断
-├── docs/                  # 文档
-│   ├── architecture.md    # 技术架构
-│   ├── mirrors-policy.md  # 镜像选择标准
-│   ├── troubleshooting.md # 常见问题
-│   └── examples.md        # 使用示例
-└── .github/workflows/     # CI/CD 自动化
-    ├── mirror-health.yml  # 每日健康检查
-    └── readme-refresh.yml # 自动更新 README
-```
-
----
-
-## 快速开始
-
-### 前置要求
-
-- Bash 4.0+
-- Linux（推荐）或 macOS（部分支持）
-
-### 快速配置（直接使用脚本）
-
-```bash
-# 克隆项目
-git clone https://github.com/yourusername/china-mirror-skills.git
-cd china-mirror-skills
-
-# 配置 Python pip 镜像
-./scripts/setup_pip.sh
-
-# 配置 npm 镜像
-./scripts/setup_npm.sh
-
-# 配置 Ubuntu APT 镜像
-./scripts/setup_apt.sh --mirror tuna
-
-# 配置 Docker CE 安装源（非 Docker Hub）
-./scripts/setup_docker.sh
-```
-
----
-
 ## AI 编程助手使用方式
 
-本项目提供的 skills 可在主流 AI 编程助手中使用，让 AI 直接帮你完成镜像配置。
+本项目提供自包含的 `bootstrap-china-network` skill，可在主流 AI 编程助手中使用，让 AI 直接帮你完成镜像配置和网络诊断。
 
 ### Claude Code
 
-将 skills 复制到 Claude Code 全局 skills 目录：
+将 skill 复制到 Claude Code 全局 skills 目录：
 
 ```bash
 # 克隆项目
 git clone https://github.com/yourusername/china-mirror-skills.git
 
-# 将所有 skills 安装到 Claude Code 全局目录
-cp -r china-mirror-skills/skills/* ~/.claude/skills/
+# 安装 skill 到 Claude Code 全局目录
+cp -r china-mirror-skills/skills/bootstrap-china-network ~/.claude/skills/
 ```
 
 然后直接向 Claude Code 提问：
@@ -176,71 +104,21 @@ cp -r china-mirror-skills/skills/* ~/.claude/skills/
 ### OpenCode
 
 将本项目目录加入 OpenCode 的 skills 路径配置（参考 OpenCode 文档），
-或将 `skills/` 中的各目录复制到 OpenCode 对应的 skills 存储路径。
+或将 `skills/bootstrap-china-network` 复制到 OpenCode 对应的 skills 存储路径。
 
 ### Codex / 其他兼容工具
 
-对于支持自定义 skills/instructions 目录的工具，将 `skills/` 下各子目录
-（每个包含一个 `SKILL.md`）放入工具对应的 skills 目录即可。
+对于支持自定义 skills/instructions 目录的工具，将 `skills/bootstrap-china-network`
+（包含 `SKILL.md` 和 `scripts/` 子目录）放入工具对应的 skills 目录即可。
 
-### 可用 Skills
+### Skill 功能
 
-| Skill | 触发场景 |
-|-------|---------|
-| `bootstrap-china-network` | 全部工具一次性配置，新机器初始化 |
-| `diagnose-network-environment` | 诊断网络问题，不做修改 |
-| `fix-python-mirror` | pip / uv / poetry 慢或超时 |
-| `fix-node-mirror` | npm / yarn / pnpm 慢或超时 |
-| `fix-docker-mirror` | Docker CE 安装慢 / docker pull 慢 |
-| `fix-apt-mirror` | apt update / install 慢 |
-| `fix-homebrew-mirror` | brew update / install 慢 |
-| `fix-conda-mirror` | conda install / create 慢 |
-| `fix-rust-mirror` | cargo build 下载依赖慢 |
-| `fix-go-proxy` | go mod download / go get 慢 |
-| `fix-flutter-mirror` | flutter packages get / pub get 慢 |
-| `fix-github-mirror` | GitHub Releases 下载慢 / 少量官方项目 clone 慢 |
-
----
-
-## 独立脚本
-
-### 备份配置
-
-```bash
-# 备份所有支持的配置
-./scripts/backup_config.sh --all
-
-# 备份指定工具的配置
-./scripts/backup_config.sh --tool pip
-```
-
-### 还原配置
-
-```bash
-# 列出可用备份
-./scripts/restore_config.sh --list
-
-# 从指定备份还原
-./scripts/restore_config.sh --tool pip --backup-id 20250306_120000
-
-# 还原最新备份
-./scripts/restore_config.sh --tool pip --latest
-```
-
-### 脚本参数
-
-所有配置脚本支持以下参数：
-
-```bash
-./scripts/setup_<tool>.sh [OPTIONS]
-
-参数说明：
-  -m, --mirror MIRROR    指定镜像源 (tuna|ustc|aliyun|...)
-  -f, --force            强制覆盖已有配置
-  -d, --dry-run          仅显示将要做的修改，不实际执行
-  -y, --yes              跳过确认提示
-  -h, --help             显示帮助信息
-```
+| 功能 | 触发场景 |
+|------|---------|
+| 一键配置 | "配置国内镜像"、新机器初始化、全部工具一次性配置 |
+| 单工具修复 | "pip 太慢"、"npm 超时"、指定某个工具配置镜像 |
+| 网络诊断 | "为什么下载慢"、"诊断网络"、检查已安装工具的镜像状态 |
+| 备份还原 | 备份当前配置、还原到修改前的状态 |
 
 ---
 

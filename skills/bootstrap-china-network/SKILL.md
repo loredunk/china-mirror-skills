@@ -1,21 +1,25 @@
 ---
 name: bootstrap-china-network
 description: |
-  Main entry point for configuring all development tools to work efficiently in China's network
+  Main entry point for configuring and diagnosing all development tools in China's network
   environment. Detects installed tools (pip/uv/poetry, npm/yarn/pnpm, docker, apt, cargo, go,
   conda, flutter, homebrew), checks for proxy conflicts, and applies appropriate mirror
-  configurations for each. This is a self-contained skill — all setup scripts are bundled
-  in the scripts/ subdirectory.
+  configurations for each. Also provides comprehensive network diagnostics — tests connectivity
+  to official and mirror sources, detects current mirror configuration status, and generates
+  actionable recommendations. This is a self-contained skill — all setup and diagnostic scripts
+  are bundled in the scripts/ subdirectory.
   Use this skill when the user wants to configure everything at once, is setting up a new
   development machine in China, or doesn't know which specific tool is slow.
-  Also use when the user says "配置国内镜像", "网络太慢全部配一下", or describes a general
-  "slow downloads in China" problem without specifying which tool.
+  Also use when the user says "配置国内镜像", "网络太慢全部配一下", "为什么下载慢", "诊断网络",
+  "diagnose network", or describes a general "slow downloads in China" problem.
+  Use for diagnostics when the user wants to audit their environment, compare mirror speeds,
+  or troubleshoot network issues before applying mirror configurations.
   For individual tool fixes, still use this skill and run only the relevant script.
 ---
 
 # Bootstrap China Network Environment
 
-One-stop configuration for all development tools in China. Diagnose first, then apply fixes.
+One-stop configuration and diagnostics for all development tools in China. Diagnose first, then apply fixes.
 
 All setup scripts are bundled under this skill's `scripts/` directory as resources — they are not loaded into context but invoked via bash.
 
@@ -29,7 +33,21 @@ SKILL_DIR="<absolute path to skills/bootstrap-china-network>"
 ```
 Use the directory where this SKILL.md resides.
 
-**2. Quick environment scan**
+**2. Diagnose (if user wants diagnostics or troubleshooting)**
+
+If the user wants to diagnose their environment, check what's configured, or understand why things are slow:
+```bash
+bash "$SKILL_DIR/scripts/diagnose.sh"
+```
+This will:
+- Collect system info and detect proxy conflicts
+- Scan installed development tools and their mirror configurations
+- Test connectivity to official sources and Chinese mirrors (with timing)
+- Output structured recommendations (HIGH/MEDIUM/LOW priority)
+
+After diagnostics, review the recommendations and offer to apply fixes for unconfigured tools.
+
+**3. Quick environment scan (for direct configuration)**
 
 ```bash
 # Detect installed tools
@@ -41,12 +59,12 @@ done
 [[ -n "$HTTP_PROXY$HTTPS_PROXY$http_proxy$https_proxy" ]] && echo "⚠️ Proxy detected"
 ```
 
-**3. Check for proxy conflicts**
+**4. Check for proxy conflicts**
 
 If `HTTP_PROXY` or `HTTPS_PROXY` is set, warn the user:
 > Proxy environment variables are set. In China, using a VPN/proxy alongside mirrors can cause conflicts. Consider: `unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY`
 
-**4. Apply mirror configurations**
+**5. Apply mirror configurations**
 
 For each detected tool, run the corresponding script. Ask the user for preferences or use sensible defaults:
 
@@ -78,7 +96,7 @@ bash "$SKILL_DIR/scripts/node/setup.sh" --mirror npmmirror
 sudo bash "$SKILL_DIR/scripts/apt/setup.sh" --mirror tuna
 ```
 
-**5. Verify configurations**
+**6. Verify configurations**
 
 After applying, run a quick verification for each configured tool:
 ```bash
@@ -88,7 +106,7 @@ go env GOPROXY 2>/dev/null
 cat ~/.cargo/config.toml 2>/dev/null | grep index
 ```
 
-**6. Provide summary**
+**7. Provide summary**
 
 Report:
 - What was configured (tool -> mirror URL)
