@@ -8,7 +8,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=/dev/null
-source "${SCRIPT_DIR}/common.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/common.sh"
 
 # ==================== Configuration ====================
 
@@ -98,7 +98,7 @@ setup_docker_apt() {
         if is_root; then
             backup_file /etc/apt/sources.list.d/docker.list "docker"
         else
-            sudo bash -c "source ${SCRIPT_DIR}/common.sh && backup_file /etc/apt/sources.list.d/docker.list docker"
+            sudo bash -c "source ${SCRIPT_DIR}/../common.sh && backup_file /etc/apt/sources.list.d/docker.list docker"
         fi
     fi
 
@@ -183,7 +183,7 @@ setup_docker_yum() {
         if is_root; then
             backup_file "$repo_file" "docker"
         else
-            sudo bash -c "source ${SCRIPT_DIR}/common.sh && backup_file $repo_file docker"
+            sudo bash -c "source ${SCRIPT_DIR}/../common.sh && backup_file $repo_file docker"
         fi
     fi
 

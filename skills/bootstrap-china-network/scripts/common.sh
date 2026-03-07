@@ -15,8 +15,17 @@ readonly NC='\033[0m' # No Color
 
 # Script directory
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly PROJECT_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-readonly BACKUP_DIR="${PROJECT_ROOT}/.backup"
+
+# Find project root by walking up to .git or SKILL.md
+_dir="$SCRIPT_DIR"
+while [[ "$_dir" != "/" ]]; do
+    if [[ -f "$_dir/SKILL.md" ]] || [[ -d "$_dir/.git" ]]; then break; fi
+    _dir="$(dirname "$_dir")"
+done
+readonly PROJECT_ROOT="$_dir"
+
+# Use home directory for backups (works both in-repo and as standalone skill)
+readonly BACKUP_DIR="${HOME}/.china-mirror-backup"
 
 # ==================== Logging Functions ====================
 

@@ -7,7 +7,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=/dev/null
-source "${SCRIPT_DIR}/common.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/common.sh"
 
 # ==================== Configuration ====================
 
@@ -137,7 +137,7 @@ setup_apt_mirror() {
         if is_root; then
             backup_file "$SOURCES_LIST" "apt"
         else
-            sudo bash -c "source ${SCRIPT_DIR}/common.sh && backup_file $SOURCES_LIST apt"
+            sudo bash -c "source ${SCRIPT_DIR}/../common.sh && backup_file $SOURCES_LIST apt"
         fi
     fi
 

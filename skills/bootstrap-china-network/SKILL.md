@@ -4,21 +4,33 @@ description: |
   Main entry point for configuring all development tools to work efficiently in China's network
   environment. Detects installed tools (pip/uv/poetry, npm/yarn/pnpm, docker, apt, cargo, go,
   conda, flutter, homebrew), checks for proxy conflicts, and applies appropriate mirror
-  configurations for each. Use this skill when the user wants to configure everything at once,
-  is setting up a new development machine in China, or doesn't know which specific tool is slow.
+  configurations for each. This is a self-contained skill — all setup scripts are bundled
+  in the scripts/ subdirectory.
+  Use this skill when the user wants to configure everything at once, is setting up a new
+  development machine in China, or doesn't know which specific tool is slow.
   Also use when the user says "配置国内镜像", "网络太慢全部配一下", or describes a general
   "slow downloads in China" problem without specifying which tool.
+  For individual tool fixes, still use this skill and run only the relevant script.
 ---
 
 # Bootstrap China Network Environment
 
 One-stop configuration for all development tools in China. Diagnose first, then apply fixes.
 
+All setup scripts are bundled under this skill's `scripts/` directory as resources — they are not loaded into context but invoked via bash.
+
 ## Steps
 
-**1. Quick environment scan**
+**1. Determine SKILL_DIR**
 
-Run the `diagnose-network-environment` skill OR do a quick scan inline:
+All script paths are relative to this skill's directory:
+```bash
+SKILL_DIR="<absolute path to skills/bootstrap-china-network>"
+```
+Use the directory where this SKILL.md resides.
+
+**2. Quick environment scan**
+
 ```bash
 # Detect installed tools
 for tool in pip uv npm yarn pnpm docker cargo go conda flutter brew; do
@@ -29,30 +41,44 @@ done
 [[ -n "$HTTP_PROXY$HTTPS_PROXY$http_proxy$https_proxy" ]] && echo "⚠️ Proxy detected"
 ```
 
-**2. Check for proxy conflicts**
+**3. Check for proxy conflicts**
 
 If `HTTP_PROXY` or `HTTPS_PROXY` is set, warn the user:
 > Proxy environment variables are set. In China, using a VPN/proxy alongside mirrors can cause conflicts. Consider: `unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY`
 
-**3. Apply mirror configurations**
+**4. Apply mirror configurations**
 
-For each detected tool, run the corresponding skill/script. Ask the user for preferences or use sensible defaults:
+For each detected tool, run the corresponding script. Ask the user for preferences or use sensible defaults:
 
-| Tool | Script | Default Mirror |
-|------|--------|---------------|
-| pip / uv / poetry | `./scripts/setup_pip.sh` | tuna |
-| npm / yarn / pnpm | `./scripts/setup_npm.sh` | npmmirror |
-| Ubuntu/Debian APT | `sudo ./scripts/setup_apt.sh` | tuna |
-| Docker CE repo | `sudo ./scripts/setup_docker.sh` | tuna |
-| Homebrew | `./scripts/setup_homebrew.sh` | tuna |
-| Conda/Anaconda | `./scripts/setup_conda.sh` | tuna |
-| Cargo/Rust | `./scripts/setup_cargo.sh` | ustc |
-| Go modules | `./scripts/setup_go.sh` | goproxy |
-| Flutter/Dart | `./scripts/setup_flutter.sh` | tuna |
+| Tool | Script (relative to SKILL_DIR) | Default Mirror |
+|------|------|----------|
+| pip/uv/poetry | `scripts/python/setup.sh` | tuna |
+| npm/yarn/pnpm | `scripts/node/setup.sh` | npmmirror |
+| APT (Ubuntu/Debian) | `sudo scripts/apt/setup.sh` | tuna |
+| Docker CE + Hub | `sudo scripts/docker/setup.sh` | tuna |
+| Homebrew | `scripts/homebrew/setup.sh` | tuna |
+| Conda/Anaconda | `scripts/conda/setup.sh` | tuna |
+| Cargo/Rust | `scripts/rust/setup.sh` | ustc |
+| Go modules | `scripts/go/setup.sh` | goproxy |
+| Flutter/Dart | `scripts/flutter/setup.sh` | tuna |
+| GitHub Releases | `scripts/github/setup.sh` | tuna |
+
+All scripts support these flags:
+- `-m / --mirror <name>` — choose mirror source
+- `-f / --force` — force overwrite
+- `-d / --dry-run` — preview changes without applying
+- `-y / --yes` — skip confirmation prompts
 
 Run scripts for detected tools. Each script is idempotent — safe to run multiple times.
 
-**4. Verify configurations**
+Example:
+```bash
+bash "$SKILL_DIR/scripts/python/setup.sh" --mirror tuna
+bash "$SKILL_DIR/scripts/node/setup.sh" --mirror npmmirror
+sudo bash "$SKILL_DIR/scripts/apt/setup.sh" --mirror tuna
+```
+
+**5. Verify configurations**
 
 After applying, run a quick verification for each configured tool:
 ```bash
@@ -62,31 +88,35 @@ go env GOPROXY 2>/dev/null
 cat ~/.cargo/config.toml 2>/dev/null | grep index
 ```
 
-**5. Provide summary**
+**6. Provide summary**
 
 Report:
-- ✅ What was configured (tool → mirror URL)
-- ⚠️ Any warnings (proxy conflicts, permission issues, tool not found)
-- 📋 How to restore: `./scripts/restore_config.sh --tool <name> --latest`
+- What was configured (tool -> mirror URL)
+- Any warnings (proxy conflicts, permission issues, tool not found)
+- How to restore: `bash "$SKILL_DIR/scripts/restore_config.sh" --tool <name> --latest`
 
 ## Dry Run
 
 If the user wants to preview changes first, add `--dry-run` to each script:
 ```bash
-./scripts/setup_pip.sh --dry-run
-./scripts/setup_npm.sh --dry-run
+bash "$SKILL_DIR/scripts/python/setup.sh" --dry-run
+bash "$SKILL_DIR/scripts/node/setup.sh" --dry-run
 ```
 
-## Related Skills
+## Backup & Restore
 
-For individual tool configuration, use the specific skill instead:
-- `fix-python-mirror` — pip/uv/poetry only
-- `fix-node-mirror` — npm/yarn/pnpm only
-- `fix-docker-mirror` — Docker CE + Docker Hub
-- `fix-apt-mirror` — Ubuntu/Debian APT
-- `fix-homebrew-mirror` — Homebrew
-- `fix-conda-mirror` — Conda/Anaconda
-- `fix-rust-mirror` — Cargo/rustup
-- `fix-go-proxy` — Go modules
-- `fix-flutter-mirror` — Flutter/Dart
-- `diagnose-network-environment` — diagnosis only, no changes
+Backups are stored in `~/.china-mirror-backup/`.
+
+```bash
+# Backup all tool configs
+bash "$SKILL_DIR/scripts/backup_config.sh" --all
+
+# Backup specific tool
+bash "$SKILL_DIR/scripts/backup_config.sh" --tool pip
+
+# Restore latest backup for a tool
+bash "$SKILL_DIR/scripts/restore_config.sh" --tool pip --latest
+
+# List all backups
+bash "$SKILL_DIR/scripts/restore_config.sh" --list
+```
