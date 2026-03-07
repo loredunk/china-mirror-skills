@@ -92,6 +92,12 @@ def check_mirror(mirror: dict, timeout: int = DEFAULT_TIMEOUT,
         f"http_{code}" for code in verify_config.get('inconclusive_statuses', [])
     }
 
+    # github_proxy: probe URL is prefix + test_url
+    if verify_type == 'github_proxy':
+        prefix = verify_config.get('prefix', mirror['url'])
+        test_url = verify_config.get('test_url', '')
+        check_url = prefix + test_url
+
     result = MirrorCheckResult(
         id=mirror['id'],
         name=mirror['name'],

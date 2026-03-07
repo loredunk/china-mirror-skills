@@ -426,6 +426,22 @@ mirrors:
       inconclusive_statuses: [403, 404]
     notes: "USTC 提供 GitHub Releases 资源镜像，适合下载 release 资产，不是通用 git clone 代理"
 
+  - id: github-release-ghfast
+    name: "ghfast.top GitHub Proxy"
+    category: github-release
+    url: "https://ghfast.top/"
+    homepage: "https://ghproxy.link/"
+    status: active
+    priority: 3
+    verify:
+      type: github_proxy
+      method: head
+      prefix: "https://ghfast.top/"
+      test_url: "https://github.com/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt"
+      expect_status: 200
+      inconclusive_statuses: [403, 404, 503]
+    notes: "公益 GitHub 加速代理，支持 release/clone/archive/raw，域名可能变动，参见 ghproxy.link"
+
   # ==================== GitHub Project Mirrors ====================
   - id: github-repo-flutter-sdk-tuna
     name: "Tsinghua TUNA Flutter SDK Git Mirror"
@@ -441,6 +457,22 @@ mirrors:
       expect_status: 200
       inconclusive_statuses: [403]
     notes: "官方项目级 git 镜像，仅覆盖 flutter/flutter；不代表存在通用 GitHub 仓库镜像"
+
+  - id: github-repo-ghfast
+    name: "ghfast.top GitHub Clone Proxy"
+    category: github-repo
+    url: "https://ghfast.top/"
+    homepage: "https://ghproxy.link/"
+    status: active
+    priority: 2
+    verify:
+      type: github_proxy
+      method: head
+      prefix: "https://ghfast.top/"
+      test_url: "https://github.com/cli/cli/archive/refs/heads/trunk.zip"
+      expect_status: 200
+      inconclusive_statuses: [403, 404, 503]
+    notes: "公益 GitHub 加速代理，通过 git config url.insteadOf 配置全局加速 clone"
 
   # ==================== Kubernetes Notes ====================
   # Note: k8s.gcr.io has been deprecated and migrated to registry.k8s.io

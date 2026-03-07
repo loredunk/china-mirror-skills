@@ -79,7 +79,7 @@ For each detected tool, run the corresponding script. Ask the user for preferenc
 | Cargo/Rust | `scripts/rust/setup.sh` | ustc |
 | Go modules | `scripts/go/setup.sh` | goproxy |
 | Flutter/Dart | `scripts/flutter/setup.sh` | tuna |
-| GitHub Releases | `scripts/github/setup.sh` | tuna |
+| GitHub Releases/Clone | `scripts/github/setup.sh` | tuna (支持 `--proxy-clone` 全局加速 clone) |
 
 All scripts support these flags:
 - `-m / --mirror <name>` — choose mirror source
