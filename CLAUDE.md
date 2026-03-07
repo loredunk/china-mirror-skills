@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-China Mirror Skills 是专为中国网络环境优化的 Claude Code Skill，同时提供独立的 Bash 配置脚本。目标用户是中国国内开发者，帮助他们将 pip、npm、Docker、apt 等工具切换到国内镜像源。
+China Mirror Skills 是专为中国网络环境优化的 Claude Code Plugin，包含自包含的 Skill 和配置脚本。目标用户是中国国内开发者，帮助他们将 pip、npm、Docker、apt 等工具切换到国内镜像源。
+
+本项目同时是一个 **Plugin Marketplace**，用户可通过 `/plugin marketplace add` 添加并安装。
 
 ## Common Commands
 
@@ -33,6 +35,19 @@ bash skills/bootstrap-china-network/scripts/restore_config.sh --list
 ```
 
 ## Architecture
+
+### Plugin 结构
+
+本 repo 根目录既是一个 Plugin 也是一个 Marketplace：
+
+- `.claude-plugin/marketplace.json` — Marketplace 清单，列出本 repo 提供的 plugin
+- `skills/bootstrap-china-network/` — Plugin 包含的唯一 Skill
+
+用户安装方式：
+```bash
+/plugin marketplace add https://github.com/loredunk/china-mirror-skills
+/plugin install china-mirror-skills@china-mirror-market
+```
 
 ### 核心数据源
 

@@ -22,7 +22,7 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 </p>
 
 <p align="center">
-  <a href="#ai-编程助手使用方式">使用方式</a> •
+  <a href="#安装">安装</a> •
   <a href="#支持的工具">支持的工具</a> •
   <a href="#镜像源">镜像源</a>
 </p>
@@ -33,7 +33,7 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 - [为什么需要这个项目？](#为什么需要这个项目)
 - [支持的工具](#支持的工具)
-- [AI 编程助手使用方式](#ai-编程助手使用方式)
+- [安装](#安装)
 - [GitHub Actions](#github-actions)
 - [镜像源](#镜像源)
 - [安全与风险](#安全与风险)
@@ -82,23 +82,35 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 ---
 
-## AI 编程助手使用方式
+## 安装
 
-本项目提供自包含的 `bootstrap-china-network` skill，可在主流 AI 编程助手中使用，让 AI 直接帮你完成镜像配置和网络诊断。
+本项目是一个 Claude Code Plugin，包含自包含的 `bootstrap-china-network` skill，提供镜像配置和网络诊断功能。
 
-### Claude Code
+### 方式一：Plugin 安装（推荐）
 
-将 skill 复制到 Claude Code 全局 skills 目录：
+在 Claude Code 中执行：
+
+```bash
+# 添加 marketplace
+/plugin marketplace add https://github.com/loredunk/china-mirror-skills
+
+# 安装插件
+/plugin install china-mirror-skills@china-mirror-market
+```
+
+### 方式二：手动安装
 
 ```bash
 # 克隆项目
-git clone https://github.com/yourusername/china-mirror-skills.git
+git clone https://github.com/loredunk/china-mirror-skills.git
 
 # 安装 skill 到 Claude Code 全局目录
 cp -r china-mirror-skills/skills/bootstrap-china-network ~/.claude/skills/
 ```
 
-然后直接向 Claude Code 提问：
+### 安装后使用
+
+直接向 Claude Code 提问即可：
 
 ```
 "帮我配置适合中国网络的开发环境"
@@ -106,15 +118,10 @@ cp -r china-mirror-skills/skills/bootstrap-china-network ~/.claude/skills/
 "诊断我的开发环境网络问题"
 ```
 
-### OpenCode
+### 其他 AI 编程助手
 
-将本项目目录加入 OpenCode 的 skills 路径配置（参考 OpenCode 文档），
-或将 `skills/bootstrap-china-network` 复制到 OpenCode 对应的 skills 存储路径。
-
-### Codex / 其他兼容工具
-
-对于支持自定义 skills/instructions 目录的工具，将 `skills/bootstrap-china-network`
-（包含 `SKILL.md` 和 `scripts/` 子目录）放入工具对应的 skills 目录即可。
+- **OpenCode** — 将 `skills/bootstrap-china-network` 复制到 OpenCode 的 skills 存储路径
+- **Codex / 其他兼容工具** — 将 `skills/bootstrap-china-network`（包含 `SKILL.md` 和 `scripts/`）放入工具对应的 skills 目录
 
 ### Skill 功能
 
