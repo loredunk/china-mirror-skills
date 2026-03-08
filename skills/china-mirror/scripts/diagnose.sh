@@ -144,7 +144,7 @@ generate_recommendations() {
         fi
 
         if [[ "$has_mirror" == false && "$config" != "N/A" ]]; then
-            recommendations+=("🔴 HIGH: $tool 未配置国内镜像 — 运行 bootstrap-china-network 的对应脚本配置")
+            recommendations+=("🔴 HIGH: $tool 未配置国内镜像 — 运行 china-mirror 的对应脚本配置")
         else
             recommendations+=("✅ OK: $tool 已配置镜像")
         fi

@@ -22,16 +22,16 @@ python scripts/check_mirrors.py --output /tmp/report.json
 python scripts/render_readme.py
 
 # 配置各工具镜像（所有脚本支持 -m/--mirror, -f/--force, -d/--dry-run, -y/--yes）
-bash skills/bootstrap-china-network/scripts/python/setup.sh
-bash skills/bootstrap-china-network/scripts/node/setup.sh
-sudo bash skills/bootstrap-china-network/scripts/apt/setup.sh --mirror tuna
-sudo bash skills/bootstrap-china-network/scripts/docker/setup.sh
+bash skills/china-mirror/scripts/python/setup.sh
+bash skills/china-mirror/scripts/node/setup.sh
+sudo bash skills/china-mirror/scripts/apt/setup.sh --mirror tuna
+sudo bash skills/china-mirror/scripts/docker/setup.sh
 
 # 备份和还原配置
-bash skills/bootstrap-china-network/scripts/backup_config.sh --all
-bash skills/bootstrap-china-network/scripts/backup_config.sh --tool pip
-bash skills/bootstrap-china-network/scripts/restore_config.sh --tool pip --latest
-bash skills/bootstrap-china-network/scripts/restore_config.sh --list
+bash skills/china-mirror/scripts/backup_config.sh --all
+bash skills/china-mirror/scripts/backup_config.sh --tool pip
+bash skills/china-mirror/scripts/restore_config.sh --tool pip --latest
+bash skills/china-mirror/scripts/restore_config.sh --list
 ```
 
 ## Architecture
@@ -41,7 +41,7 @@ bash skills/bootstrap-china-network/scripts/restore_config.sh --list
 本 repo 根目录既是一个 Plugin 也是一个 Marketplace：
 
 - `.claude-plugin/marketplace.json` — Marketplace 清单，列出本 repo 提供的 plugin
-- `skills/bootstrap-china-network/` — Plugin 包含的唯一 Skill
+- `skills/china-mirror/` — Plugin 包含的唯一 Skill
 
 用户安装方式：
 ```bash
@@ -58,12 +58,12 @@ bash skills/bootstrap-china-network/scripts/restore_config.sh --list
 
 **修改镜像数据只需编辑此文件**，README 会由 `render_readme.py` 自动重新生成。
 
-### Skill（`skills/bootstrap-china-network/`）
+### Skill（`skills/china-mirror/`）
 
 自包含的主 Skill，包含 `SKILL.md`（YAML frontmatter + Markdown 工作流说明）和所有配置脚本：
 
 ```
-skills/bootstrap-china-network/
+skills/china-mirror/
   SKILL.md                    # 主入口：检测环境 → 调用对应脚本
   scripts/
     common.sh                 # 共享工具库（日志、OS 检测、备份等）
@@ -82,7 +82,7 @@ skills/bootstrap-china-network/
     github/setup.sh           # GitHub Releases
 ```
 
-本项目只有一个 Skill（`bootstrap-china-network`），包含所有配置和诊断功能。
+本项目只有一个 Skill（`china-mirror`），包含所有配置和诊断功能。
 
 ### Scripts 层（`scripts/`）— 仅 CI 维护脚本
 

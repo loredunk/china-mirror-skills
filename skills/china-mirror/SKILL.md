@@ -1,5 +1,5 @@
 ---
-name: bootstrap-china-network
+name: china-mirror
 description: |
   Main entry point for configuring and diagnosing all development tools in China's network
   environment. Detects installed tools (pip/uv/poetry, npm/yarn/pnpm, docker, apt, cargo, go,
@@ -17,7 +17,7 @@ description: |
   For individual tool fixes, still use this skill and run only the relevant script.
 ---
 
-# Bootstrap China Network Environment
+# China Mirror
 
 One-stop configuration and diagnostics for all development tools in China. Diagnose first, then apply fixes.
 
@@ -29,7 +29,7 @@ All setup scripts are bundled under this skill's `scripts/` directory as resourc
 
 All script paths are relative to this skill's directory:
 ```bash
-SKILL_DIR="<absolute path to skills/bootstrap-china-network>"
+SKILL_DIR="<absolute path to skills/china-mirror>"
 ```
 Use the directory where this SKILL.md resides.
 

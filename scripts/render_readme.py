@@ -84,7 +84,7 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 ## 安装
 
-本项目是一个 Claude Code Plugin，包含自包含的 `bootstrap-china-network` skill，提供镜像配置和网络诊断功能。
+本项目是一个 Claude Code Plugin，包含自包含的 `china-mirror` skill，提供镜像配置和网络诊断功能。
 
 ### 方式一：Plugin 安装（推荐）
 
@@ -105,7 +105,7 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 git clone https://github.com/loredunk/china-mirror-skills.git
 
 # 安装 skill 到 Claude Code 全局目录
-cp -r china-mirror-skills/skills/bootstrap-china-network ~/.claude/skills/
+cp -r china-mirror-skills/skills/china-mirror ~/.claude/skills/
 ```
 
 ### 安装后使用
@@ -120,8 +120,8 @@ cp -r china-mirror-skills/skills/bootstrap-china-network ~/.claude/skills/
 
 ### 其他 AI 编程助手
 
-- **OpenCode** — 将 `skills/bootstrap-china-network` 复制到 OpenCode 的 skills 存储路径
-- **Codex / 其他兼容工具** — 将 `skills/bootstrap-china-network`（包含 `SKILL.md` 和 `scripts/`）放入工具对应的 skills 目录
+- **OpenCode** — 将 `skills/china-mirror` 复制到 OpenCode 的 skills 存储路径
+- **Codex / 其他兼容工具** — 将 `skills/china-mirror`（包含 `SKILL.md` 和 `scripts/`）放入工具对应的 skills 目录
 
 ### Skill 功能
 
