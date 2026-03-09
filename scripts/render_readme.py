@@ -105,7 +105,7 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 git clone https://github.com/loredunk/china-mirror-skills.git
 
 # 安装 skill 到 Claude Code 全局目录
-cp -r china-mirror-skills/china-mirror ~/.claude/skills/
+cp -r china-mirror-skills/china-mirror ~/.claude/plugins/
 ```
 
 ### 安装后使用
@@ -120,8 +120,8 @@ cp -r china-mirror-skills/china-mirror ~/.claude/skills/
 
 ### 其他 AI 编程助手
 
-- **OpenCode** — 将 `china-mirror` 复制到 OpenCode 的 skills 存储路径
-- **Codex / 其他兼容工具** — 将 `china-mirror`（包含 `SKILL.md` 和 `scripts/`）放入工具对应的 skills 目录
+- **OpenCode** — 将 `china-mirror/skills/china-mirror` 复制到 OpenCode 的 skills 存储路径
+- **Codex / 其他兼容工具** — 将 `china-mirror/skills/china-mirror`（包含 `SKILL.md` 和 `scripts/`）放入工具对应的 skills 目录
 
 ### Skill 功能
 

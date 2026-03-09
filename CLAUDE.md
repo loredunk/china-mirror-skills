@@ -22,16 +22,16 @@ python scripts/check_mirrors.py --output /tmp/report.json
 python scripts/render_readme.py
 
 # 配置各工具镜像（所有脚本支持 -m/--mirror, -f/--force, -d/--dry-run, -y/--yes）
-bash china-mirror/scripts/python/setup.sh
-bash china-mirror/scripts/node/setup.sh
-sudo bash china-mirror/scripts/apt/setup.sh --mirror tuna
-sudo bash china-mirror/scripts/docker/setup.sh
+bash china-mirror/skills/china-mirror/scripts/python/setup.sh
+bash china-mirror/skills/china-mirror/scripts/node/setup.sh
+sudo bash china-mirror/skills/china-mirror/scripts/apt/setup.sh --mirror tuna
+sudo bash china-mirror/skills/china-mirror/scripts/docker/setup.sh
 
 # 备份和还原配置
-bash china-mirror/scripts/backup_config.sh --all
-bash china-mirror/scripts/backup_config.sh --tool pip
-bash china-mirror/scripts/restore_config.sh --tool pip --latest
-bash china-mirror/scripts/restore_config.sh --list
+bash china-mirror/skills/china-mirror/scripts/backup_config.sh --all
+bash china-mirror/skills/china-mirror/scripts/backup_config.sh --tool pip
+bash china-mirror/skills/china-mirror/scripts/restore_config.sh --tool pip --latest
+bash china-mirror/skills/china-mirror/scripts/restore_config.sh --list
 ```
 
 ## Architecture
@@ -41,7 +41,7 @@ bash china-mirror/scripts/restore_config.sh --list
 本 repo 根目录既是一个 Plugin 也是一个 Marketplace：
 
 - `.claude-plugin/marketplace.json` — Marketplace 清单，列出本 repo 提供的 plugin
-- `china-mirror/` — Plugin 包含的唯一 Skill
+- `china-mirror/` — Plugin 根目录，包含 `skills/china-mirror/` skill
 
 用户安装方式：
 ```bash
@@ -58,28 +58,32 @@ bash china-mirror/scripts/restore_config.sh --list
 
 **修改镜像数据只需编辑此文件**，README 会由 `render_readme.py` 自动重新生成。
 
-### Skill（`china-mirror/`）
+### Skill（`china-mirror/skills/china-mirror/`）
 
 自包含的主 Skill，包含 `SKILL.md`（YAML frontmatter + Markdown 工作流说明）和所有配置脚本：
 
 ```
-china-mirror/
-  SKILL.md                    # 主入口：检测环境 → 调用对应脚本
-  scripts/
-    common.sh                 # 共享工具库（日志、OS 检测、备份等）
-    diagnose.sh               # 网络环境诊断（纯检测，不修改配置）
-    backup_config.sh          # 跨工具备份
-    restore_config.sh         # 跨工具还原
-    python/setup.sh           # pip/uv/poetry
-    node/setup.sh             # npm/yarn/pnpm
-    docker/setup.sh           # Docker CE + Hub
-    apt/setup.sh              # Ubuntu/Debian APT
-    homebrew/setup.sh         # Homebrew
-    conda/setup.sh            # Conda/Anaconda
-    rust/setup.sh             # Cargo/rustup
-    go/setup.sh               # Go modules
-    flutter/setup.sh          # Flutter/Dart
-    github/setup.sh           # GitHub Releases
+china-mirror/                           # plugin 根目录
+  .claude-plugin/
+    plugin.json                         # plugin 清单
+  skills/
+    china-mirror/                       # 具名 skill
+      SKILL.md                          # 主入口：检测环境 → 调用对应脚本
+      scripts/
+        common.sh                       # 共享工具库（日志、OS 检测、备份等）
+        diagnose.sh                     # 网络环境诊断（纯检测，不修改配置）
+        backup_config.sh                # 跨工具备份
+        restore_config.sh               # 跨工具还原
+        python/setup.sh                 # pip/uv/poetry
+        node/setup.sh                   # npm/yarn/pnpm
+        docker/setup.sh                 # Docker CE + Hub
+        apt/setup.sh                    # Ubuntu/Debian APT
+        homebrew/setup.sh               # Homebrew
+        conda/setup.sh                  # Conda/Anaconda
+        rust/setup.sh                   # Cargo/rustup
+        go/setup.sh                     # Go modules
+        flutter/setup.sh                # Flutter/Dart
+        github/setup.sh                 # GitHub Releases
 ```
 
 本项目只有一个 Skill（`china-mirror`），包含所有配置和诊断功能。
