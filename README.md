@@ -155,7 +155,7 @@ cp -r china-mirror-skills/china-mirror ~/.claude/skills/
 ### 当前镜像状态
 
 _镜像数据最后更新: 2026-03-07_
-_健康检查时间: 2026-03-09T03:15:07.972708Z_
+_健康检查时间: 2026-03-09T03:22:56.469891Z_
 
 **汇总**: 23/30 个镜像可用（76.67%）
 
@@ -163,101 +163,101 @@ _健康检查时间: 2026-03-09T03:15:07.972708Z_
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA PyPI Mirror | [https://pypi.tuna.tsinghua.edu.cn/simple](https://pypi.tuna.tsinghua.edu.cn/simple) | ✅ 正常 (2871.08ms) | 1 |
-| USTC PyPI Mirror | [https://pypi.mirrors.ustc.edu.cn/simple](https://pypi.mirrors.ustc.edu.cn/simple) | ✅ 正常 (3807.38ms) | 2 |
-| Alibaba Cloud PyPI Mirror | [https://mirrors.aliyun.com/pypi/simple](https://mirrors.aliyun.com/pypi/simple) | ✅ 正常 (265.41ms) | 3 |
+| Tsinghua TUNA PyPI Mirror | [https://pypi.tuna.tsinghua.edu.cn/simple](https://pypi.tuna.tsinghua.edu.cn/simple) | ✅ 正常 (2063.59ms) | 1 |
+| USTC PyPI Mirror | [https://pypi.mirrors.ustc.edu.cn/simple](https://pypi.mirrors.ustc.edu.cn/simple) | ✅ 正常 (2853.1ms) | 2 |
+| Alibaba Cloud PyPI Mirror | [https://mirrors.aliyun.com/pypi/simple](https://mirrors.aliyun.com/pypi/simple) | ✅ 正常 (322.83ms) | 3 |
 
 #### 📦 Node.js (npm)
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| npmmirror (Taobao) | [https://registry.npmmirror.com](https://registry.npmmirror.com) | ✅ 正常 (1992.53ms) | 1 |
-| Tencent Cloud NPM Mirror | [https://mirrors.cloud.tencent.com/npm/](https://mirrors.cloud.tencent.com/npm/) | ✅ 正常 (2822.33ms) | 2 |
+| npmmirror (Taobao) | [https://registry.npmmirror.com](https://registry.npmmirror.com) | ✅ 正常 (1608.3ms) | 1 |
+| Tencent Cloud NPM Mirror | [https://mirrors.cloud.tencent.com/npm/](https://mirrors.cloud.tencent.com/npm/) | ✅ 正常 (2154.97ms) | 2 |
 
 #### 🐧 Ubuntu (apt)
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Ubuntu Mirror | [https://mirrors.tuna.tsinghua.edu.cn/ubuntu/](https://mirrors.tuna.tsinghua.edu.cn/ubuntu/) | ✅ 正常 (2780.07ms) | 1 |
-| USTC Ubuntu Mirror | [https://mirrors.ustc.edu.cn/ubuntu/](https://mirrors.ustc.edu.cn/ubuntu/) | ✅ 正常 (3419.06ms) | 2 |
+| Tsinghua TUNA Ubuntu Mirror | [https://mirrors.tuna.tsinghua.edu.cn/ubuntu/](https://mirrors.tuna.tsinghua.edu.cn/ubuntu/) | ✅ 正常 (1713.59ms) | 1 |
+| USTC Ubuntu Mirror | [https://mirrors.ustc.edu.cn/ubuntu/](https://mirrors.ustc.edu.cn/ubuntu/) | ✅ 正常 (1980.05ms) | 2 |
 
 #### 🐳 Docker CE
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Docker CE Mirror | [https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/](https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/) | ✅ 正常 (2764.73ms) | 1 |
-| USTC Docker CE Mirror | [https://mirrors.ustc.edu.cn/docker-ce/linux/](https://mirrors.ustc.edu.cn/docker-ce/linux/) | ✅ 正常 (2409.76ms) | 2 |
+| Tsinghua TUNA Docker CE Mirror | [https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/](https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/) | ✅ 正常 (1710.19ms) | 1 |
+| USTC Docker CE Mirror | [https://mirrors.ustc.edu.cn/docker-ce/linux/](https://mirrors.ustc.edu.cn/docker-ce/linux/) | ✅ 正常 (1469.88ms) | 2 |
 
 #### 🐳 Docker Hub
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| HLMirror Docker Hub Mirror | [https://docker.hlmirror.com](https://docker.hlmirror.com) | ✅ 正常 (196.89ms) | 1 |
+| HLMirror Docker Hub Mirror | [https://docker.hlmirror.com](https://docker.hlmirror.com) | ✅ 正常 (134.35ms) | 1 |
 
 #### 🦀 Rust (Cargo)
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| USTC Rust Crates Mirror | [https://mirrors.ustc.edu.cn/crates.io-index/](https://mirrors.ustc.edu.cn/crates.io-index/) | ✅ 正常 (3036.52ms) | 1 |
-| Tsinghua TUNA Rust Crates Mirror | [https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/](https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/) | ✅ 正常 (2884.84ms) | 2 |
-| Rust China Community Mirror | [https://rsproxy.cn/crates.io-index/](https://rsproxy.cn/crates.io-index/) | ❌ http_404 (1465.95ms) | 3 |
+| USTC Rust Crates Mirror | [https://mirrors.ustc.edu.cn/crates.io-index/](https://mirrors.ustc.edu.cn/crates.io-index/) | ✅ 正常 (2665.02ms) | 1 |
+| Tsinghua TUNA Rust Crates Mirror | [https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/](https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/) | ✅ 正常 (1781.02ms) | 2 |
+| Rust China Community Mirror | [https://rsproxy.cn/crates.io-index/](https://rsproxy.cn/crates.io-index/) | ❌ http_404 (2185.1ms) | 3 |
 
 #### 🍺 Homebrew
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Homebrew Mirror | [https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/](https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/) | ❌ http_404 (2660.55ms) | 1 |
-| USTC Homebrew Mirror | [https://mirrors.ustc.edu.cn/brew.git](https://mirrors.ustc.edu.cn/brew.git) | ✅ 正常 (1145.89ms) | 2 |
+| Tsinghua TUNA Homebrew Mirror | [https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/](https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/) | ❌ http_404 (1646.41ms) | 1 |
+| USTC Homebrew Mirror | [https://mirrors.ustc.edu.cn/brew.git](https://mirrors.ustc.edu.cn/brew.git) | ✅ 正常 (1260.46ms) | 2 |
 
 #### 🐍 Conda/Anaconda
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Anaconda Mirror | [https://mirrors.tuna.tsinghua.edu.cn/anaconda/](https://mirrors.tuna.tsinghua.edu.cn/anaconda/) | ✅ 正常 (1088.12ms) | 1 |
-| USTC Anaconda Mirror | [https://mirrors.ustc.edu.cn/anaconda/](https://mirrors.ustc.edu.cn/anaconda/) | ✅ 正常 (1595.82ms) | 2 |
+| Tsinghua TUNA Anaconda Mirror | [https://mirrors.tuna.tsinghua.edu.cn/anaconda/](https://mirrors.tuna.tsinghua.edu.cn/anaconda/) | ✅ 正常 (1116.46ms) | 1 |
+| USTC Anaconda Mirror | [https://mirrors.ustc.edu.cn/anaconda/](https://mirrors.ustc.edu.cn/anaconda/) | ✅ 正常 (1491.28ms) | 2 |
 
 #### 🐹 Go
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| China Go Module Proxy | [https://goproxy.cn](https://goproxy.cn) | ✅ 正常 (807.77ms) | 1 |
+| China Go Module Proxy | [https://goproxy.cn](https://goproxy.cn) | ✅ 正常 (1085.76ms) | 1 |
 | USTC Go Module Proxy | [https://goproxy.ustc.edu.cn](https://goproxy.ustc.edu.cn) | ❌ dns_error | 2 |
-| Alibaba Cloud Go Module Proxy | [https://mirrors.aliyun.com/goproxy/](https://mirrors.aliyun.com/goproxy/) | ✅ 正常 (725.14ms) | 3 |
+| Alibaba Cloud Go Module Proxy | [https://mirrors.aliyun.com/goproxy/](https://mirrors.aliyun.com/goproxy/) | ✅ 正常 (456.56ms) | 3 |
 
 #### 📱 Flutter
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Flutter Mirror | [https://mirrors.tuna.tsinghua.edu.cn/flutter/](https://mirrors.tuna.tsinghua.edu.cn/flutter/) | ❌ http_404 (1101.32ms) | 1 |
-| USTC Flutter Mirror | [https://mirrors.ustc.edu.cn/flutter/](https://mirrors.ustc.edu.cn/flutter/) | ⚠️ http_404 (816.15ms) | 2 |
+| Tsinghua TUNA Flutter Mirror | [https://mirrors.tuna.tsinghua.edu.cn/flutter/](https://mirrors.tuna.tsinghua.edu.cn/flutter/) | ❌ http_404 (1136.66ms) | 1 |
+| USTC Flutter Mirror | [https://mirrors.ustc.edu.cn/flutter/](https://mirrors.ustc.edu.cn/flutter/) | ⚠️ http_404 (903.17ms) | 2 |
 
 #### 🐙 GitHub Releases
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA GitHub Release Mirror | [https://mirrors.tuna.tsinghua.edu.cn/github-release/](https://mirrors.tuna.tsinghua.edu.cn/github-release/) | ⚠️ http_404 (1114.15ms) | 1 |
-| USTC GitHub Release Mirror | [https://mirrors.ustc.edu.cn/github-release/](https://mirrors.ustc.edu.cn/github-release/) | ⚠️ http_404 (799.13ms) | 2 |
-| ghfast.top GitHub Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 正常 (874.98ms) | 3 |
+| Tsinghua TUNA GitHub Release Mirror | [https://mirrors.tuna.tsinghua.edu.cn/github-release/](https://mirrors.tuna.tsinghua.edu.cn/github-release/) | ⚠️ http_404 (1160.84ms) | 1 |
+| USTC GitHub Release Mirror | [https://mirrors.ustc.edu.cn/github-release/](https://mirrors.ustc.edu.cn/github-release/) | ⚠️ http_404 (1011.18ms) | 2 |
+| ghfast.top GitHub Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 正常 (997.51ms) | 3 |
 
 #### 🐙 GitHub Project Mirrors
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Flutter SDK Git Mirror | [https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git](https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git) | ✅ 正常 (19957.53ms) | 1 |
-| ghfast.top GitHub Clone Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 正常 (863.05ms) | 2 |
+| Tsinghua TUNA Flutter SDK Git Mirror | [https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git](https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git) | ✅ 正常 (29551.53ms) | 1 |
+| ghfast.top GitHub Clone Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 正常 (1016.56ms) | 2 |
 
 #### ☸️ Kubernetes
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Official Kubernetes Registry | [https://registry.k8s.io](https://registry.k8s.io) | ✅ 正常 (154.71ms) | 1 |
+| Official Kubernetes Registry | [https://registry.k8s.io](https://registry.k8s.io) | ✅ 正常 (93.35ms) | 1 |
 
 #### 🏔️ Alpine Linux
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Alpine Mirror | [https://mirrors.tuna.tsinghua.edu.cn/alpine/](https://mirrors.tuna.tsinghua.edu.cn/alpine/) | ✅ 正常 (1105.6ms) | 1 |
-| USTC Alpine Mirror | [https://mirrors.ustc.edu.cn/alpine/](https://mirrors.ustc.edu.cn/alpine/) | ✅ 正常 (936.26ms) | 2 |
+| Tsinghua TUNA Alpine Mirror | [https://mirrors.tuna.tsinghua.edu.cn/alpine/](https://mirrors.tuna.tsinghua.edu.cn/alpine/) | ✅ 正常 (1190.27ms) | 1 |
+| USTC Alpine Mirror | [https://mirrors.ustc.edu.cn/alpine/](https://mirrors.ustc.edu.cn/alpine/) | ✅ 正常 (955.5ms) | 2 |
 
 
 ### 镜像选择标准
