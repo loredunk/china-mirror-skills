@@ -29,7 +29,7 @@ All setup scripts are bundled under this skill's `scripts/` directory as resourc
 
 All script paths are relative to this skill's directory:
 ```bash
-SKILL_DIR="<absolute path to skills/china-mirror>"
+SKILL_DIR="<absolute path to china-mirror>"
 ```
 Use the directory where this SKILL.md resides.
 
