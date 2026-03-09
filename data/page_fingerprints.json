@@ -1,0 +1,72 @@
+{
+  "tuna-pypi": {
+    "name": "TUNA PyPI Help Page",
+    "url": "https://mirrors.tuna.tsinghua.edu.cn/help/pypi/",
+    "fingerprint": "d8678ada0cc942527d328687a1d18ad8ff46185474d2d8a57c3c40fea7dba790",
+    "last_checked": "2026-03-09T09:59:10.175575Z",
+    "last_changed": "2026-03-09T09:59:10.175589Z"
+  },
+  "ustc-pypi": {
+    "name": "USTC PyPI Help Page",
+    "url": "https://mirrors.ustc.edu.cn/help/pypi.html",
+    "fingerprint": "d9b91da96c11d1b96693d29f79317a81c35aaadfc60645877320986055136385",
+    "last_checked": "2026-03-09T09:59:11.290987Z",
+    "last_changed": "2026-03-09T09:59:11.290997Z"
+  },
+  "npmmirror-home": {
+    "name": "npmmirror Homepage",
+    "url": "https://npmmirror.com",
+    "fingerprint": "bc4511f83c878bd200126b09e791516316df5a5c7557ab42731cb44f43bbb0b5",
+    "last_checked": "2026-03-09T09:59:12.176611Z",
+    "last_changed": "2026-03-09T09:59:12.176621Z"
+  },
+  "k8s-gcr-announcement": {
+    "name": "Kubernetes Registry Migration Announcement",
+    "url": "https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/",
+    "fingerprint": "f80c3c708cb6c1824f132c697dfd41526d6e1def15ff89d093a4758d64b15bcd",
+    "last_checked": "2026-03-09T09:59:13.488275Z",
+    "last_changed": "2026-03-09T09:59:13.488286Z"
+  },
+  "tuna-docker-ce": {
+    "name": "TUNA Docker CE Help Page",
+    "url": "https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/",
+    "fingerprint": "76d55ad098fb202dcc6518cdc64c9c3aebfef951a2dd35e18544968e4970242c",
+    "last_checked": "2026-03-09T09:59:14.998785Z",
+    "last_changed": "2026-03-09T09:59:14.998797Z"
+  },
+  "ustc-cargo": {
+    "name": "USTC Cargo Mirror Help",
+    "url": "https://mirrors.ustc.edu.cn/help/crates.io-index.html",
+    "fingerprint": "c5bd952288985752e4a5cf46d5124402e371a7f8e7c42fdea0b4fef31c42b2df",
+    "last_checked": "2026-03-09T09:59:15.888535Z",
+    "last_changed": "2026-03-09T09:59:15.888545Z"
+  },
+  "goproxy-cn": {
+    "name": "goproxy.cn Homepage",
+    "url": "https://goproxy.cn",
+    "fingerprint": "2c69cbce5d5ec8e5ebb462805673768b560e0c9ddda8ca0c57165bcad913e2b0",
+    "last_checked": "2026-03-09T09:59:17.654819Z",
+    "last_changed": "2026-03-09T09:59:17.654829Z"
+  },
+  "tuna-github-release": {
+    "name": "TUNA GitHub Release Help",
+    "url": "https://mirrors.tuna.tsinghua.edu.cn/help/github-release/",
+    "fingerprint": "cb92eec8206d963a0e1783f65d47865dd178d50c2bbd1e4e2e31a1fa50c3321c",
+    "last_checked": "2026-03-09T09:59:18.939778Z",
+    "last_changed": "2026-03-09T09:59:18.939786Z"
+  },
+  "ustc-github-release": {
+    "name": "USTC GitHub Release Help",
+    "url": "https://mirrors.ustc.edu.cn/help/github-release.html",
+    "fingerprint": "e9e3ad7bca8f3b18ce9283bb69264af2ebad63b65b9a6a82d089f6c89563f3b2",
+    "last_checked": "2026-03-09T09:59:19.810714Z",
+    "last_changed": "2026-03-09T09:59:19.810722Z"
+  },
+  "tuna-flutter-sdk-git": {
+    "name": "TUNA Flutter SDK Git Mirror Help",
+    "url": "https://mirrors.tuna.tsinghua.edu.cn/help/flutter-sdk.git/",
+    "fingerprint": "03f0429678a5cdc95b511a0f4bb0b6b246213483894c6dc6b2c345d579df1168",
+    "last_checked": "2026-03-09T09:59:20.957755Z",
+    "last_changed": "2026-03-09T09:59:20.957763Z"
+  }
+}
