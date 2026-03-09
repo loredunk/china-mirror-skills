@@ -4,5 +4,8 @@
   "version": "0.1.0",
   "author": {
     "name": "loredunk"
-  }
+  },
+  "skills": [
+    "./skills/china-mirror"
+  ]
 }
