@@ -1,7 +1,7 @@
 # 🇨🇳 China Mirror Skills
 
 <p align="center">
-  <strong>专为中国网络环境优化的 Claude Code 开发工具镜像配置集合</strong>
+  <strong>开发工具中国镜像配置集合,让agent不走弯路</strong>
 </p>
 
 <p align="center">

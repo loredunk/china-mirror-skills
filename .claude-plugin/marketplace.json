@@ -11,11 +11,8 @@
     {
       "name": "china-mirror-skills",
       "description": "Bootstrap China network and mirror setup skills for development tools (pip, npm, docker, apt, cargo, go, conda, flutter, homebrew). Includes network diagnostics, one-click mirror configuration, backup and restore.",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/china-mirror"
-      ]
+      "source": "./skills/china-mirror",
+      "category": "development"
     }
   ]
 }
