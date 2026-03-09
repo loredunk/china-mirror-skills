@@ -100,7 +100,7 @@
 git clone https://github.com/loredunk/china-mirror-skills.git
 
 # 安装 skill 到 Claude Code 全局目录
-cp -r china-mirror-skills/china-mirror ~/.claude/plugins/
+cp -r china-mirror-skills/china-mirror ~/.claude/skills/
 ```
 
 ### 安装后使用
