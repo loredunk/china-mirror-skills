@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generated_at": "2026-03-08T02:57:16.960679Z",
+    "generated_at": "2026-03-09T01:10:46.987264Z",
     "version": "0.1.0",
     "mirror_data_updated": "2026-03-07"
   },
@@ -20,7 +20,7 @@
         "ok": 3,
         "non_ok": 0
       },
-      "ubuntu": {
+      "npm": {
         "total": 2,
         "ok": 2,
         "non_ok": 0
@@ -30,7 +30,17 @@
         "ok": 2,
         "non_ok": 0
       },
+      "ubuntu": {
+        "total": 2,
+        "ok": 2,
+        "non_ok": 0
+      },
       "cargo": {
+        "total": 3,
+        "ok": 2,
+        "non_ok": 1
+      },
+      "go": {
         "total": 3,
         "ok": 2,
         "non_ok": 1
@@ -40,20 +50,15 @@
         "ok": 1,
         "non_ok": 1
       },
-      "npm": {
-        "total": 2,
-        "ok": 2,
-        "non_ok": 0
-      },
       "conda": {
         "total": 2,
         "ok": 2,
         "non_ok": 0
       },
-      "go": {
-        "total": 3,
-        "ok": 2,
-        "non_ok": 1
+      "kubernetes-notes": {
+        "total": 1,
+        "ok": 1,
+        "non_ok": 0
       },
       "flutter": {
         "total": 2,
@@ -64,11 +69,6 @@
         "total": 3,
         "ok": 1,
         "non_ok": 2
-      },
-      "kubernetes-notes": {
-        "total": 1,
-        "ok": 1,
-        "non_ok": 0
       },
       "github-repo": {
         "total": 2,
@@ -95,12 +95,12 @@
       "url": "https://docker.hlmirror.com",
       "status": "ok",
       "http_status": 403,
-      "response_time_ms": 122.92,
+      "response_time_ms": 96.86,
       "error_message": null,
       "checked_url": "https://docker.hlmirror.com/v2/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.984018Z"
+      "timestamp": "2026-03-09T01:10:34.070787Z"
     },
     {
       "id": "pip-aliyun",
@@ -109,82 +109,12 @@
       "url": "https://mirrors.aliyun.com/pypi/simple",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 304.31,
+      "response_time_ms": 478.94,
       "error_message": null,
       "checked_url": "https://mirrors.aliyun.com/pypi/simple/pip/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.974594Z"
-    },
-    {
-      "id": "ubuntu-tuna",
-      "name": "Tsinghua TUNA Ubuntu Mirror",
-      "category": "ubuntu",
-      "url": "https://mirrors.tuna.tsinghua.edu.cn/ubuntu/",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 1116.62,
-      "error_message": null,
-      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/ubuntu/dists/",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.980003Z"
-    },
-    {
-      "id": "docker-ce-tuna",
-      "name": "Tsinghua TUNA Docker CE Mirror",
-      "category": "docker-ce",
-      "url": "https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 1125.76,
-      "error_message": null,
-      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.982040Z"
-    },
-    {
-      "id": "cargo-tuna",
-      "name": "Tsinghua TUNA Rust Crates Mirror",
-      "category": "cargo",
-      "url": "https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 1058.7,
-      "error_message": null,
-      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:05.279580Z"
-    },
-    {
-      "id": "brew-tuna",
-      "name": "Tsinghua TUNA Homebrew Mirror",
-      "category": "homebrew",
-      "url": "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/",
-      "status": "http_404",
-      "http_status": 404,
-      "response_time_ms": 684.63,
-      "error_message": "Expected 200, got 404",
-      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.sh",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:06.108495Z"
-    },
-    {
-      "id": "docker-ce-ustc",
-      "name": "USTC Docker CE Mirror",
-      "category": "docker-ce",
-      "url": "https://mirrors.ustc.edu.cn/docker-ce/linux/",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 2153.65,
-      "error_message": null,
-      "checked_url": "https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.983185Z"
+      "timestamp": "2026-03-09T01:10:34.057947Z"
     },
     {
       "id": "npm-npmmirror",
@@ -193,68 +123,40 @@
       "url": "https://registry.npmmirror.com",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 2267.39,
+      "response_time_ms": 580.96,
       "error_message": null,
       "checked_url": "https://registry.npmmirror.com/npm",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.975815Z"
+      "timestamp": "2026-03-09T01:10:34.058477Z"
     },
     {
-      "id": "conda-tuna",
-      "name": "Tsinghua TUNA Anaconda Mirror",
-      "category": "conda",
-      "url": "https://mirrors.tuna.tsinghua.edu.cn/anaconda/",
+      "id": "docker-ce-tuna",
+      "name": "Tsinghua TUNA Docker CE Mirror",
+      "category": "docker-ce",
+      "url": "https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 752.75,
+      "response_time_ms": 1425.27,
       "error_message": null,
-      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/anaconda/",
+      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:06.793868Z"
+      "timestamp": "2026-03-09T01:10:34.067974Z"
     },
     {
-      "id": "pip-tuna",
-      "name": "Tsinghua TUNA PyPI Mirror",
-      "category": "pip",
-      "url": "https://pypi.tuna.tsinghua.edu.cn/simple",
+      "id": "ubuntu-tuna",
+      "name": "Tsinghua TUNA Ubuntu Mirror",
+      "category": "ubuntu",
+      "url": "https://mirrors.tuna.tsinghua.edu.cn/ubuntu/",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 2751.01,
+      "response_time_ms": 1442.9,
       "error_message": null,
-      "checked_url": "https://pypi.tuna.tsinghua.edu.cn/simple/pip/",
+      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/ubuntu/dists/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.973710Z"
-    },
-    {
-      "id": "cargo-rsproxy",
-      "name": "Rust China Community Mirror",
-      "category": "cargo",
-      "url": "https://rsproxy.cn/crates.io-index/",
-      "status": "http_404",
-      "http_status": 404,
-      "response_time_ms": 1650.29,
-      "error_message": "Expected 200, got 404",
-      "checked_url": "https://rsproxy.cn/crates.io-index/",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:06.097418Z"
-    },
-    {
-      "id": "go-proxy-aliyun",
-      "name": "Alibaba Cloud Go Module Proxy",
-      "category": "go",
-      "url": "https://mirrors.aliyun.com/goproxy/",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 144.88,
-      "error_message": null,
-      "checked_url": "https://mirrors.aliyun.com/goproxy/github.com/pkg/errors/@v/v0.9.1.info",
-      "verify_type": "go_proxy",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:07.725555Z"
+      "timestamp": "2026-03-09T01:10:34.060429Z"
     },
     {
       "id": "cargo-ustc",
@@ -263,26 +165,12 @@
       "url": "https://mirrors.ustc.edu.cn/crates.io-index/",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 2804.39,
+      "response_time_ms": 1368.34,
       "error_message": null,
       "checked_url": "https://mirrors.ustc.edu.cn/crates.io-index/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:05.107561Z"
-    },
-    {
-      "id": "pip-ustc",
-      "name": "USTC PyPI Mirror",
-      "category": "pip",
-      "url": "https://pypi.mirrors.ustc.edu.cn/simple",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 2942.39,
-      "error_message": null,
-      "checked_url": "https://pypi.mirrors.ustc.edu.cn/simple/pip/",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.974169Z"
+      "timestamp": "2026-03-09T01:10:34.168354Z"
     },
     {
       "id": "ubuntu-ustc",
@@ -291,68 +179,110 @@
       "url": "https://mirrors.ustc.edu.cn/ubuntu/",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 3157.49,
+      "response_time_ms": 1646.13,
       "error_message": null,
       "checked_url": "https://mirrors.ustc.edu.cn/ubuntu/dists/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.980961Z"
+      "timestamp": "2026-03-09T01:10:34.062693Z"
     },
     {
-      "id": "go-proxy-cn",
-      "name": "China Go Module Proxy",
-      "category": "go",
-      "url": "https://goproxy.cn",
+      "id": "cargo-tuna",
+      "name": "Tsinghua TUNA Rust Crates Mirror",
+      "category": "cargo",
+      "url": "https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 1021.61,
+      "response_time_ms": 1309.58,
       "error_message": null,
-      "checked_url": "https://goproxy.cn/github.com/pkg/errors/@v/v0.9.1.info",
+      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/",
+      "verify_type": "http",
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:34.537490Z"
+    },
+    {
+      "id": "pip-tuna",
+      "name": "Tsinghua TUNA PyPI Mirror",
+      "category": "pip",
+      "url": "https://pypi.tuna.tsinghua.edu.cn/simple",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 1875.23,
+      "error_message": null,
+      "checked_url": "https://pypi.tuna.tsinghua.edu.cn/simple/pip/",
+      "verify_type": "http",
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:34.057161Z"
+    },
+    {
+      "id": "docker-ce-ustc",
+      "name": "USTC Docker CE Mirror",
+      "category": "docker-ce",
+      "url": "https://mirrors.ustc.edu.cn/docker-ce/linux/",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 2137.68,
+      "error_message": null,
+      "checked_url": "https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/",
+      "verify_type": "http",
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:34.069225Z"
+    },
+    {
+      "id": "go-proxy-aliyun",
+      "name": "Alibaba Cloud Go Module Proxy",
+      "category": "go",
+      "url": "https://mirrors.aliyun.com/goproxy/",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 54.12,
+      "error_message": null,
+      "checked_url": "https://mirrors.aliyun.com/goproxy/github.com/pkg/errors/@v/v0.9.1.info",
       "verify_type": "go_proxy",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:07.243992Z"
+      "timestamp": "2026-03-09T01:10:36.207738Z"
     },
     {
-      "id": "flutter-tuna",
-      "name": "Tsinghua TUNA Flutter Mirror",
-      "category": "flutter",
-      "url": "https://mirrors.tuna.tsinghua.edu.cn/flutter/",
+      "id": "brew-tuna",
+      "name": "Tsinghua TUNA Homebrew Mirror",
+      "category": "homebrew",
+      "url": "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/",
       "status": "http_404",
       "http_status": 404,
-      "response_time_ms": 745.87,
+      "response_time_ms": 938.4,
       "error_message": "Expected 200, got 404",
-      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra_release/releases/releases_linux.json",
+      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.sh",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:07.748516Z"
+      "timestamp": "2026-03-09T01:10:35.494064Z"
     },
     {
-      "id": "github-release-tuna",
-      "name": "Tsinghua TUNA GitHub Release Mirror",
-      "category": "github-release",
-      "url": "https://mirrors.tuna.tsinghua.edu.cn/github-release/",
-      "status": "http_404",
-      "http_status": 404,
-      "response_time_ms": 688.27,
-      "error_message": "Expected 200, got 404",
-      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/github-release/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt",
+      "id": "conda-tuna",
+      "name": "Tsinghua TUNA Anaconda Mirror",
+      "category": "conda",
+      "url": "https://mirrors.tuna.tsinghua.edu.cn/anaconda/",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 925.67,
+      "error_message": null,
+      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/anaconda/",
       "verify_type": "http",
-      "is_inconclusive": true,
-      "timestamp": "2026-03-08T02:57:07.912737Z"
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:35.537601Z"
     },
     {
-      "id": "flutter-ustc",
-      "name": "USTC Flutter Mirror",
-      "category": "flutter",
-      "url": "https://mirrors.ustc.edu.cn/flutter/",
+      "id": "cargo-rsproxy",
+      "name": "Rust China Community Mirror",
+      "category": "cargo",
+      "url": "https://rsproxy.cn/crates.io-index/",
       "status": "http_404",
       "http_status": 404,
-      "response_time_ms": 746.28,
+      "response_time_ms": 1954.66,
       "error_message": "Expected 200, got 404",
-      "checked_url": "https://mirrors.ustc.edu.cn/flutter/flutter_infra_release/releases/releases_linux.json",
+      "checked_url": "https://rsproxy.cn/crates.io-index/",
       "verify_type": "http",
-      "is_inconclusive": true,
-      "timestamp": "2026-03-08T02:57:07.871187Z"
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:34.640868Z"
     },
     {
       "id": "brew-ustc",
@@ -361,12 +291,54 @@
       "url": "https://mirrors.ustc.edu.cn/brew.git",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 2299.63,
+      "response_time_ms": 1204.49,
       "error_message": null,
       "checked_url": "https://mirrors.ustc.edu.cn/brew.git/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:06.339127Z"
+      "timestamp": "2026-03-09T01:10:35.504113Z"
+    },
+    {
+      "id": "pip-ustc",
+      "name": "USTC PyPI Mirror",
+      "category": "pip",
+      "url": "https://pypi.mirrors.ustc.edu.cn/simple",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 2815.7,
+      "error_message": null,
+      "checked_url": "https://pypi.mirrors.ustc.edu.cn/simple/pip/",
+      "verify_type": "http",
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:34.057644Z"
+    },
+    {
+      "id": "npm-tencent",
+      "name": "Tencent Cloud NPM Mirror",
+      "category": "npm",
+      "url": "https://mirrors.cloud.tencent.com/npm/",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 2857.93,
+      "error_message": null,
+      "checked_url": "https://mirrors.cloud.tencent.com/npm/npm",
+      "verify_type": "http",
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:34.058725Z"
+    },
+    {
+      "id": "go-proxy-cn",
+      "name": "China Go Module Proxy",
+      "category": "go",
+      "url": "https://goproxy.cn",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 1126.04,
+      "error_message": null,
+      "checked_url": "https://goproxy.cn/github.com/pkg/errors/@v/v0.9.1.info",
+      "verify_type": "go_proxy",
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:35.847905Z"
     },
     {
       "id": "k8s-registry",
@@ -375,40 +347,26 @@
       "url": "https://registry.k8s.io",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 57.88,
+      "response_time_ms": 92.94,
       "error_message": null,
       "checked_url": "https://registry.k8s.io/v2/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:08.601837Z"
+      "timestamp": "2026-03-09T01:10:36.974624Z"
     },
     {
-      "id": "github-release-ghfast",
-      "name": "ghfast.top GitHub Proxy",
-      "category": "github-release",
-      "url": "https://ghfast.top/",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 589.6,
-      "error_message": null,
-      "checked_url": "https://ghfast.top/https://github.com/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt",
-      "verify_type": "github_proxy",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:08.139196Z"
-    },
-    {
-      "id": "github-release-ustc",
-      "name": "USTC GitHub Release Mirror",
-      "category": "github-release",
-      "url": "https://mirrors.ustc.edu.cn/github-release/",
+      "id": "flutter-tuna",
+      "name": "Tsinghua TUNA Flutter Mirror",
+      "category": "flutter",
+      "url": "https://mirrors.tuna.tsinghua.edu.cn/flutter/",
       "status": "http_404",
       "http_status": 404,
-      "response_time_ms": 832.98,
+      "response_time_ms": 927.03,
       "error_message": "Expected 200, got 404",
-      "checked_url": "https://mirrors.ustc.edu.cn/github-release/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt",
+      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra_release/releases/releases_linux.json",
       "verify_type": "http",
-      "is_inconclusive": true,
-      "timestamp": "2026-03-08T02:57:07.917816Z"
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:36.262693Z"
     },
     {
       "id": "conda-ustc",
@@ -417,12 +375,68 @@
       "url": "https://mirrors.ustc.edu.cn/anaconda/",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 1998.76,
+      "response_time_ms": 1496.43,
       "error_message": null,
       "checked_url": "https://mirrors.ustc.edu.cn/anaconda/",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:07.138012Z"
+      "timestamp": "2026-03-09T01:10:35.709691Z"
+    },
+    {
+      "id": "flutter-ustc",
+      "name": "USTC Flutter Mirror",
+      "category": "flutter",
+      "url": "https://mirrors.ustc.edu.cn/flutter/",
+      "status": "http_404",
+      "http_status": 404,
+      "response_time_ms": 869.95,
+      "error_message": "Expected 200, got 404",
+      "checked_url": "https://mirrors.ustc.edu.cn/flutter/flutter_infra_release/releases/releases_linux.json",
+      "verify_type": "http",
+      "is_inconclusive": true,
+      "timestamp": "2026-03-09T01:10:36.433304Z"
+    },
+    {
+      "id": "github-release-tuna",
+      "name": "Tsinghua TUNA GitHub Release Mirror",
+      "category": "github-release",
+      "url": "https://mirrors.tuna.tsinghua.edu.cn/github-release/",
+      "status": "http_404",
+      "http_status": 404,
+      "response_time_ms": 915.28,
+      "error_message": "Expected 200, got 404",
+      "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/github-release/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt",
+      "verify_type": "http",
+      "is_inconclusive": true,
+      "timestamp": "2026-03-09T01:10:36.464052Z"
+    },
+    {
+      "id": "github-release-ustc",
+      "name": "USTC GitHub Release Mirror",
+      "category": "github-release",
+      "url": "https://mirrors.ustc.edu.cn/github-release/",
+      "status": "http_404",
+      "http_status": 404,
+      "response_time_ms": 872.64,
+      "error_message": "Expected 200, got 404",
+      "checked_url": "https://mirrors.ustc.edu.cn/github-release/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt",
+      "verify_type": "http",
+      "is_inconclusive": true,
+      "timestamp": "2026-03-09T01:10:36.596461Z"
+    },
+    {
+      "id": "github-release-ghfast",
+      "name": "ghfast.top GitHub Proxy",
+      "category": "github-release",
+      "url": "https://ghfast.top/",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 980.98,
+      "error_message": null,
+      "checked_url": "https://ghfast.top/https://github.com/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt",
+      "verify_type": "github_proxy",
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:36.709472Z"
     },
     {
       "id": "github-repo-ghfast",
@@ -431,26 +445,12 @@
       "url": "https://ghfast.top/",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 744.6,
+      "response_time_ms": 911.35,
       "error_message": null,
       "checked_url": "https://ghfast.top/https://github.com/cli/cli/archive/refs/heads/trunk.zip",
       "verify_type": "github_proxy",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:08.495508Z"
-    },
-    {
-      "id": "alpine-ustc",
-      "name": "USTC Alpine Mirror",
-      "category": "alpine",
-      "url": "https://mirrors.ustc.edu.cn/alpine/",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 777.23,
-      "error_message": null,
-      "checked_url": "https://mirrors.ustc.edu.cn/alpine/MIRRORS.txt",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:08.639572Z"
+      "timestamp": "2026-03-09T01:10:36.917571Z"
     },
     {
       "id": "alpine-tuna",
@@ -459,12 +459,26 @@
       "url": "https://mirrors.tuna.tsinghua.edu.cn/alpine/",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 914.17,
+      "response_time_ms": 931.17,
       "error_message": null,
       "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/alpine/MIRRORS.txt",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:08.618156Z"
+      "timestamp": "2026-03-09T01:10:37.068174Z"
+    },
+    {
+      "id": "alpine-ustc",
+      "name": "USTC Alpine Mirror",
+      "category": "alpine",
+      "url": "https://mirrors.ustc.edu.cn/alpine/",
+      "status": "ok",
+      "http_status": 200,
+      "response_time_ms": 883.28,
+      "error_message": null,
+      "checked_url": "https://mirrors.ustc.edu.cn/alpine/MIRRORS.txt",
+      "verify_type": "http",
+      "is_inconclusive": false,
+      "timestamp": "2026-03-09T01:10:37.190631Z"
     },
     {
       "id": "go-proxy-ustc",
@@ -478,21 +492,7 @@
       "checked_url": "https://goproxy.ustc.edu.cn/github.com/pkg/errors/@v/v0.9.1.info",
       "verify_type": "go_proxy",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:07.547359Z"
-    },
-    {
-      "id": "npm-tencent",
-      "name": "Tencent Cloud NPM Mirror",
-      "category": "npm",
-      "url": "https://mirrors.cloud.tencent.com/npm/",
-      "status": "ok",
-      "http_status": 200,
-      "response_time_ms": 11508.05,
-      "error_message": null,
-      "checked_url": "https://mirrors.cloud.tencent.com/npm/npm",
-      "verify_type": "http",
-      "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:04.978907Z"
+      "timestamp": "2026-03-09T01:10:35.933581Z"
     },
     {
       "id": "github-repo-flutter-sdk-tuna",
@@ -501,12 +501,12 @@
       "url": "https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git",
       "status": "ok",
       "http_status": 200,
-      "response_time_ms": 8691.44,
+      "response_time_ms": 10110.43,
       "error_message": null,
       "checked_url": "https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git/info/refs?service=git-upload-pack",
       "verify_type": "http",
       "is_inconclusive": false,
-      "timestamp": "2026-03-08T02:57:08.266397Z"
+      "timestamp": "2026-03-09T01:10:36.874819Z"
     }
   ],
   "recommendations": [
@@ -517,16 +517,16 @@
       "action": "Recommended mirror: Tsinghua TUNA Rust Crates Mirror (https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/)"
     },
     {
-      "category": "homebrew",
-      "severity": "warning",
-      "message": "1 mirror(s) failed for homebrew.",
-      "action": "Recommended mirror: USTC Homebrew Mirror (https://mirrors.ustc.edu.cn/brew.git)"
-    },
-    {
       "category": "go",
       "severity": "warning",
       "message": "1 mirror(s) failed for go.",
       "action": "Recommended mirror: Alibaba Cloud Go Module Proxy (https://mirrors.aliyun.com/goproxy/)"
+    },
+    {
+      "category": "homebrew",
+      "severity": "warning",
+      "message": "1 mirror(s) failed for homebrew.",
+      "action": "Recommended mirror: USTC Homebrew Mirror (https://mirrors.ustc.edu.cn/brew.git)"
     },
     {
       "category": "flutter",
