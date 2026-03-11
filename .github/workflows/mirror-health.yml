@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
 
     steps:
       - name: Checkout
@@ -32,6 +33,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload report artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: mirror-health-report
@@ -39,6 +41,7 @@ jobs:
           retention-days: 30
 
       - name: Commit report to repository
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -49,3 +52,32 @@ jobs:
             git commit -m "chore: update mirror health report [skip ci]"
             git push
           fi
+
+      - name: Sync critical outage alert issue
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/mirror_alert.py
+
+      - name: Fail workflow on critical outage
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          report_path = Path("reports/report.json")
+          if not report_path.exists():
+              print("reports/report.json is missing")
+              sys.exit(1)
+
+          report = json.loads(report_path.read_text(encoding="utf-8"))
+          critical = report.get("summary", {}).get("critical_categories", [])
+          if critical:
+              print(f"Critical categories: {', '.join(critical)}")
+              sys.exit(1)
+
+          print("No critical category outages")
+          PY

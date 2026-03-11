@@ -223,28 +223,91 @@ def check_all_mirrors(mirrors_data: dict, max_workers: int = MAX_WORKERS) -> lis
     return results
 
 
+def _result_sort_key(result: MirrorCheckResult, mirror_meta: dict) -> tuple:
+    """Sort working mirrors first, then by latency, then static priority."""
+    if result.status == 'ok':
+        status_rank = 0
+    elif result.is_inconclusive:
+        status_rank = 1
+    else:
+        status_rank = 2
+
+    return (
+        status_rank,
+        result.response_time_ms if result.response_time_ms is not None else float('inf'),
+        mirror_meta.get('priority', 99),
+        result.name.lower(),
+    )
+
+
+def build_category_rankings(
+    results: list[MirrorCheckResult], mirrors_data: dict
+) -> dict[str, dict]:
+    """Build per-category rankings and the recommended mirror."""
+    mirrors_by_id = {
+        mirror['id']: mirror for mirror in mirrors_data.get('mirrors', [])
+    }
+    category_results: dict[str, list[MirrorCheckResult]] = {}
+    for result in results:
+        category_results.setdefault(result.category, []).append(result)
+
+    rankings: dict[str, dict] = {}
+    for category, cat_results in category_results.items():
+        sorted_results = sorted(
+            cat_results,
+            key=lambda r: _result_sort_key(r, mirrors_by_id.get(r.id, {})),
+        )
+        ranked_results = []
+        for index, result in enumerate(sorted_results, start=1):
+            payload = asdict(result)
+            payload['rank'] = index
+            payload['priority'] = mirrors_by_id.get(result.id, {}).get('priority')
+            ranked_results.append(payload)
+
+        recommended = next((item for item in ranked_results if item['status'] == 'ok'), None)
+        critical = recommended is None and any(
+            not item['is_inconclusive'] for item in ranked_results
+        )
+        rankings[category] = {
+            'recommended_mirror': recommended,
+            'recommended_mirror_id': recommended['id'] if recommended else None,
+            'ranked_results': ranked_results,
+            'all_failed': recommended is None,
+            'critical': critical,
+        }
+
+    return rankings
+
+
 def generate_report(results: list[MirrorCheckResult], mirrors_data: dict) -> dict:
     """Generate a comprehensive health report"""
     total = len(results)
     ok_count = sum(1 for r in results if r.status == 'ok')
     non_ok_count = total - ok_count
+    category_rankings = build_category_rankings(results, mirrors_data)
 
     # Per-category statistics
     category_stats = {}
     for result in results:
         cat = result.category
         if cat not in category_stats:
-            category_stats[cat] = {'total': 0, 'ok': 0, 'non_ok': 0}
+            category_stats[cat] = {'total': 0, 'ok': 0, 'non_ok': 0, 'failed': 0}
         category_stats[cat]['total'] += 1
         if result.status == 'ok':
             category_stats[cat]['ok'] += 1
         else:
             category_stats[cat]['non_ok'] += 1
+            category_stats[cat]['failed'] += 1
 
     # Status breakdown across all mirrors
     status_breakdown: dict[str, int] = {}
     for result in results:
         status_breakdown[result.status] = status_breakdown.get(result.status, 0) + 1
+    critical_categories = sorted(
+        category
+        for category, ranking in category_rankings.items()
+        if ranking.get('critical')
+    )
 
     report = {
         'metadata': {
@@ -259,8 +322,10 @@ def generate_report(results: list[MirrorCheckResult], mirrors_data: dict) -> dic
             'health_rate': round(ok_count / total * 100, 2) if total > 0 else 0,
             'category_stats': category_stats,
             'status_breakdown': status_breakdown,
+            'critical_categories': critical_categories,
         },
         'results': [asdict(r) for r in results],
+        'category_rankings': category_rankings,
         'recommendations': generate_recommendations(results, mirrors_data),
     }
 
@@ -269,16 +334,14 @@ def generate_report(results: list[MirrorCheckResult], mirrors_data: dict) -> dic
 
 def generate_recommendations(results: list[MirrorCheckResult], mirrors_data: dict) -> list[dict]:
     """Generate per-category recommendations based on check results"""
-    category_results: dict[str, list[MirrorCheckResult]] = {}
-    for result in results:
-        category_results.setdefault(result.category, []).append(result)
-
+    category_rankings = build_category_rankings(results, mirrors_data)
     recommendations = []
-    for category, cat_results in category_results.items():
-        working = [r for r in cat_results if r.status == 'ok']
-        failed = [r for r in cat_results if r.status != 'ok']
-        definitive_failures = [r for r in failed if not r.is_inconclusive]
-        inconclusive_failures = [r for r in failed if r.is_inconclusive]
+    for category, ranking in category_rankings.items():
+        ranked_results = ranking['ranked_results']
+        working = [r for r in ranked_results if r['status'] == 'ok']
+        failed = [r for r in ranked_results if r['status'] != 'ok']
+        definitive_failures = [r for r in failed if not r['is_inconclusive']]
+        inconclusive_failures = [r for r in failed if r['is_inconclusive']]
 
         if not working and definitive_failures:
             recommendations.append({
@@ -298,12 +361,12 @@ def generate_recommendations(results: list[MirrorCheckResult], mirrors_data: dic
                 'action': 'Check the official help page or validate manually from a real client.',
             })
         elif failed:
-            best = min(working, key=lambda r: r.response_time_ms or float('inf'))
+            best = working[0]
             recommendations.append({
                 'category': category,
                 'severity': 'warning',
                 'message': f'{len(failed)} mirror(s) failed for {category}.',
-                'action': f'Recommended mirror: {best.name} ({best.url})',
+                'action': f"Recommended mirror: {best['name']} ({best['url']})",
             })
 
     return recommendations

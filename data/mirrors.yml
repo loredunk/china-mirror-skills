@@ -14,7 +14,7 @@
 # - community: Community maintained, use with caution
 
 version: "0.1.0"
-updated_at: "2026-03-07"
+updated_at: "2026-03-11"
 
 mirrors:
   # ==================== Python (pip) ====================
@@ -474,6 +474,24 @@ mirrors:
       inconclusive_statuses: [403, 404, 503]
     notes: "公益 GitHub 加速代理，通过 git config url.insteadOf 配置全局加速 clone"
 
+  # ==================== Hugging Face ====================
+  - id: huggingface-hf-mirror
+    name: "hf-mirror Hugging Face Mirror"
+    category: huggingface
+    url: "https://hf-mirror.com"
+    homepage: "https://hf-mirror.com/"
+    status: active
+    priority: 1
+    official_help: "https://hf-mirror.com/"
+    verify:
+      type: http
+      url: "https://hf-mirror.com/api/models/gpt2"
+      expect_status: 200
+    notes: |
+      Hugging Face 模型与数据集镜像。推荐只在当前下载命令临时设置：
+      HF_ENDPOINT=https://hf-mirror.com
+      不要写入 shell profile，下载结束后自动失效更安全。
+
   # ==================== Kubernetes Notes ====================
   # Note: k8s.gcr.io has been deprecated and migrated to registry.k8s.io
   - id: k8s-registry
@@ -573,6 +591,10 @@ categories:
     name: "GitHub Project Mirrors"
     description: "Curated project-level git mirrors"
     icon: "🐙"
+  huggingface:
+    name: "Hugging Face"
+    description: "Hugging Face model and dataset mirrors"
+    icon: "🤗"
   kubernetes-notes:
     name: "Kubernetes"
     description: "Kubernetes registry migration notes"

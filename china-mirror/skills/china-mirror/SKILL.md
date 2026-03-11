@@ -3,7 +3,7 @@ name: china-mirror
 description: |
   Main entry point for configuring and diagnosing all development tools in China's network
   environment. Detects installed tools (pip/uv/poetry, npm/yarn/pnpm, docker, apt, cargo, go,
-  conda, flutter, homebrew), checks for proxy conflicts, and applies appropriate mirror
+  conda, flutter, homebrew, Hugging Face downloads), checks for proxy conflicts, and applies appropriate mirror
   configurations for each. Also provides comprehensive network diagnostics — tests connectivity
   to official and mirror sources, detects current mirror configuration status, and generates
   actionable recommendations. This is a self-contained skill — all setup and diagnostic scripts
@@ -80,6 +80,7 @@ For each detected tool, run the corresponding script. Ask the user for preferenc
 | Go modules | `scripts/go/setup.sh` | goproxy |
 | Flutter/Dart | `scripts/flutter/setup.sh` | tuna |
 | GitHub Releases/Clone | `scripts/github/setup.sh` | tuna (支持 `--proxy-clone` 全局加速 clone) |
+| Hugging Face 下载 | `scripts/huggingface/download.sh` | hf-mirror（临时 `HF_ENDPOINT`） |
 
 All scripts support these flags:
 - `-m / --mirror <name>` — choose mirror source
@@ -95,6 +96,17 @@ bash "$SKILL_DIR/scripts/python/setup.sh" --mirror tuna
 bash "$SKILL_DIR/scripts/node/setup.sh" --mirror npmmirror
 sudo bash "$SKILL_DIR/scripts/apt/setup.sh" --mirror tuna
 ```
+
+**Hugging Face simple usage**
+
+Bundle `scripts/huggingface/hfd.sh` as a local resource and prefer the wrapper for safety:
+
+```bash
+bash "$SKILL_DIR/scripts/huggingface/download.sh" gpt2 --tool hfd
+bash "$SKILL_DIR/scripts/huggingface/download.sh" wget2 --dataset --tool cli --local-dir ./wget2
+```
+
+The wrapper only injects `HF_ENDPOINT=https://hf-mirror.com` for that one command and does not write to shell profile files.
 
 **6. Verify configurations**
 
