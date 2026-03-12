@@ -464,64 +464,305 @@ mirrors:
       expect_status: 200
     notes: "USTC Alpine Linux package mirror"
 
+  # ==================== Python Install (下载/安装 Python 本体) ====================
+  # NOTE: These mirrors are for downloading Python itself, NOT for pip packages.
+  # Use these with pyenv (PYTHON_BUILD_MIRROR_URL) to install Python versions.
+  - id: python-install-huawei
+    name: "Huawei Cloud Python Releases Mirror"
+    category: python-install
+    url: "https://mirrors.huaweicloud.com/python/"
+    homepage: "https://mirrors.huaweicloud.com/home"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.huaweicloud.com/home"
+    verify:
+      type: http
+      url: "https://mirrors.huaweicloud.com/python/"
+      expect_status: 200
+    notes: |
+      用于 pyenv 安装 Python：
+      export PYTHON_BUILD_MIRROR_URL=https://mirrors.huaweicloud.com/python/
+      pyenv install 3.12.0
+
+  - id: python-install-tuna
+    name: "Tsinghua TUNA Python Releases Mirror"
+    category: python-install
+    url: "https://mirrors.tuna.tsinghua.edu.cn/python-release/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/python-release/"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/python-release/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/python-release/"
+      expect_status: 200
+    notes: |
+      用于 pyenv 安装 Python：
+      export PYTHON_BUILD_MIRROR_URL=https://mirrors.tuna.tsinghua.edu.cn/python-release/
+      pyenv install 3.12.0
+
+  # ==================== Node.js Install (下载/安装 Node.js 本体) ====================
+  # NOTE: These mirrors are for downloading Node.js itself, NOT for npm packages.
+  # Use with nvm (NVM_NODEJS_ORG_MIRROR) to install Node.js versions.
+  - id: node-install-npmmirror
+    name: "npmmirror Node.js Binary Mirror"
+    category: node-install
+    url: "https://npmmirror.com/mirrors/node/"
+    homepage: "https://npmmirror.com"
+    status: active
+    priority: 1
+    official_help: "https://npmmirror.com"
+    verify:
+      type: http
+      url: "https://npmmirror.com/mirrors/node/"
+      expect_status: 200
+    notes: |
+      用于 nvm 安装 Node.js：
+      export NVM_NODEJS_ORG_MIRROR=https://npmmirror.com/mirrors/node/
+      nvm install 20
+
+  - id: node-install-tuna
+    name: "Tsinghua TUNA Node.js Mirror"
+    category: node-install
+    url: "https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/nodejs-release/"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/nodejs-release/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
+      expect_status: 200
+    notes: |
+      用于 nvm 安装 Node.js：
+      export NVM_NODEJS_ORG_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
+      nvm install 20
+
+  # ==================== Conda/Miniconda Install (下载 Miniconda 安装包) ====================
+  # NOTE: These mirrors host the Miniconda/Anaconda installer, NOT conda packages.
+  # For conda package mirrors (channels), see the 'conda' category above.
+  - id: conda-install-tuna
+    name: "Tsinghua TUNA Miniconda Installer Mirror"
+    category: conda-install
+    url: "https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/"
+      expect_status: 200
+    notes: |
+      下载 Miniconda 安装包：
+      wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh
+      bash Miniconda3-latest-Linux-x86_64.sh
+
+  - id: conda-install-ustc
+    name: "USTC Miniconda Installer Mirror"
+    category: conda-install
+    url: "https://mirrors.ustc.edu.cn/anaconda/miniconda/"
+    homepage: "https://mirrors.ustc.edu.cn/help/anaconda.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/anaconda.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/anaconda/miniconda/"
+      expect_status: 200
+    notes: |
+      下载 Miniconda 安装包：
+      wget https://mirrors.ustc.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh
+      bash Miniconda3-latest-Linux-x86_64.sh
+
+  # ==================== Rust/rustup Install (下载/安装 Rust 工具链) ====================
+  # NOTE: These mirrors provide Rust toolchains via rustup, NOT crates.io packages.
+  # For crates.io mirrors, see the 'cargo' category above.
+  - id: rust-install-tuna
+    name: "Tsinghua TUNA Rustup Mirror"
+    category: rust-install
+    url: "https://mirrors.tuna.tsinghua.edu.cn/rustup"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/rustup/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/rustup/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup/release-stable.toml"
+      expect_status: 200
+    notes: |
+      安装 Rust：
+      export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+      export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+  - id: rust-install-ustc
+    name: "USTC Rust Static Mirror"
+    category: rust-install
+    url: "https://mirrors.ustc.edu.cn/rust-static"
+    homepage: "https://mirrors.ustc.edu.cn/help/rust-static.html"
+    status: active
+    priority: 2
+    official_help: "https://mirrors.ustc.edu.cn/help/rust-static.html"
+    verify:
+      type: http
+      url: "https://mirrors.ustc.edu.cn/rust-static/rustup/release-stable.toml"
+      expect_status: 200
+    notes: |
+      安装 Rust：
+      export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+      export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+  # ==================== Go Install (下载/安装 Go 二进制包) ====================
+  # NOTE: These mirrors host Go language binaries for installation.
+  # For Go module proxy, see the 'go' category above.
+  - id: go-install-tuna
+    name: "Tsinghua TUNA Go Binary Mirror"
+    category: go-install
+    url: "https://mirrors.tuna.tsinghua.edu.cn/golang/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/golang/"
+    status: active
+    priority: 1
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/golang/"
+    verify:
+      type: http
+      url: "https://mirrors.tuna.tsinghua.edu.cn/golang/"
+      expect_status: 200
+    notes: |
+      下载并安装 Go：
+      # 下载
+      wget https://mirrors.tuna.tsinghua.edu.cn/golang/go1.22.0.linux-amd64.tar.gz
+      # 安装
+      sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
+
+  - id: go-install-aliyun
+    name: "Alibaba Cloud Go Binary Mirror"
+    category: go-install
+    url: "https://mirrors.aliyun.com/golang/"
+    homepage: "https://developer.aliyun.com/mirror/golang"
+    status: active
+    priority: 2
+    official_help: "https://developer.aliyun.com/mirror/golang"
+    verify:
+      type: http
+      url: "https://mirrors.aliyun.com/golang/"
+      expect_status: 200
+    notes: |
+      下载并安装 Go：
+      wget https://mirrors.aliyun.com/golang/go1.22.0.linux-amd64.tar.gz
+
 # ==================== Categories Metadata ====================
+#
+# mirror_type 说明：
+#   registry  - 包管理器注册源（配置工具下载包的地址，工具必须已安装）
+#   install   - 工具安装源（下载工具本体的镜像，用于首次安装工具）
+#   download  - 内容下载镜像（下载文件/模型/Release 资产等）
+#   system    - 系统包管理器源（apt/apk 等）
+#
 categories:
+  # --- registry: 配置包管理器注册源 ---
   pip:
     name: "Python (pip)"
-    description: "PyPI package mirrors for pip"
+    description: "PyPI 包注册源镜像，配置 pip/uv/poetry 下载 Python 包的地址"
     icon: "🐍"
+    mirror_type: registry
   npm:
     name: "Node.js (npm)"
-    description: "npm registry mirrors"
+    description: "npm 注册源镜像，配置 npm/yarn/pnpm 下载 JS 包的地址"
     icon: "📦"
-  ubuntu:
-    name: "Ubuntu (apt)"
-    description: "Ubuntu APT package mirrors"
-    icon: "🐧"
-  docker-ce:
-    name: "Docker CE"
-    description: "Docker CE installation package mirrors"
-    icon: "🐳"
+    mirror_type: registry
   docker-hub:
     name: "Docker Hub"
-    description: "Docker Hub 镜像加速（配置 daemon.json）"
+    description: "Docker Hub 镜像加速（配置 daemon.json registry-mirrors）"
     icon: "🐳"
+    mirror_type: registry
   cargo:
     name: "Rust (Cargo)"
-    description: "Crates.io registry mirrors"
+    description: "Crates.io 注册源镜像，配置 cargo 下载 Rust 包的地址"
     icon: "🦀"
+    mirror_type: registry
   homebrew:
     name: "Homebrew"
-    description: "Homebrew tap and formula mirrors"
+    description: "Homebrew tap 和 formula 镜像，配置 Homebrew 的 git 仓库地址"
     icon: "🍺"
+    mirror_type: registry
   conda:
     name: "Conda/Anaconda"
-    description: "Anaconda package mirrors"
+    description: "Anaconda 包仓库镜像，配置 conda 频道地址（.condarc）"
     icon: "🐍"
+    mirror_type: registry
   go:
     name: "Go"
-    description: "Go module proxy mirrors"
+    description: "Go 模块代理镜像，配置 GOPROXY 环境变量"
     icon: "🐹"
+    mirror_type: registry
   flutter:
     name: "Flutter"
-    description: "Flutter 官方中国网络文档推荐的镜像配置"
+    description: "Flutter/Dart 包镜像，配置 PUB_HOSTED_URL 和 FLUTTER_STORAGE_BASE_URL"
     icon: "📱"
+    mirror_type: registry
+
+  # --- install: 工具本体安装源 ---
+  docker-ce:
+    name: "Docker CE"
+    description: "Docker CE 安装包镜像（apt repo），用于安装 Docker 引擎本体"
+    icon: "🐳"
+    mirror_type: install
+  python-install:
+    name: "Python（安装本体）"
+    description: "Python 发行版下载镜像，与 pyenv 配合安装 Python 本体（PYTHON_BUILD_MIRROR_URL）"
+    icon: "🐍"
+    mirror_type: install
+  node-install:
+    name: "Node.js（安装本体）"
+    description: "Node.js 二进制包下载镜像，与 nvm 配合安装 Node.js 本体（NVM_NODEJS_ORG_MIRROR）"
+    icon: "📦"
+    mirror_type: install
+  conda-install:
+    name: "Conda/Miniconda（安装本体）"
+    description: "Miniconda/Anaconda 安装包下载镜像，用于下载 conda 工具本体的 .sh 安装包"
+    icon: "🐍"
+    mirror_type: install
+  rust-install:
+    name: "Rust/rustup（安装本体）"
+    description: "Rust 工具链安装镜像，配置 RUSTUP_DIST_SERVER 安装 rustup 和 Rust 本体"
+    icon: "🦀"
+    mirror_type: install
+  go-install:
+    name: "Go（安装本体）"
+    description: "Go 语言二进制包下载镜像，用于下载并安装 Go 语言本体"
+    icon: "🐹"
+    mirror_type: install
+
+  # --- download: 内容/资产下载镜像 ---
   github-release:
     name: "GitHub Releases"
-    description: "GitHub release asset mirrors"
+    description: "GitHub release 资产下载镜像，加速下载工具的发布包"
     icon: "🐙"
+    mirror_type: download
   github-repo:
     name: "GitHub Clone Acceleration"
-    description: "GitHub 仓库 clone 加速"
+    description: "GitHub 仓库 clone 加速代理"
     icon: "🐙"
+    mirror_type: download
   huggingface:
     name: "Hugging Face"
-    description: "Hugging Face model and dataset mirrors"
+    description: "Hugging Face 模型和数据集下载镜像"
     icon: "🤗"
+    mirror_type: download
+
+  # --- system: 系统包管理器源 ---
+  ubuntu:
+    name: "Ubuntu (apt)"
+    description: "Ubuntu APT 软件源，配置 /etc/apt/sources.list"
+    icon: "🐧"
+    mirror_type: system
   alpine:
     name: "Alpine Linux"
-    description: "Alpine Linux package mirrors"
+    description: "Alpine Linux apk 包源，配置 /etc/apk/repositories"
     icon: "🏔️"
+    mirror_type: system
 
 # ==================== Health Check Settings ====================
 health_check:
