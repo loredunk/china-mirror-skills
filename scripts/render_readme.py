@@ -59,7 +59,6 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 > ⚠️ **重要区分**
 > - Docker **CE 安装**源 ≠ Docker **Hub** 镜像加速
-> - Kubernetes **k8s.gcr.io** 已**废弃**（已迁移至 registry.k8s.io）
 > - 优先采用**官方帮助页面**中的配置，而非第三方博客
 
 ---
@@ -68,7 +67,7 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 | 分类 | 工具 | 状态 | 镜像类型 |
 |------|------|------|----------|
-{% for cat_id, cat_info in categories.items() %}| {{ cat_info.icon }} {{ cat_info.name }} | {% if cat_id == 'pip' %}pip, uv, poetry{% elif cat_id == 'npm' %}npm, pnpm, yarn{% elif cat_id == 'docker-ce' %}Docker CE install{% elif cat_id == 'docker-hub' %}Docker Hub（镜像加速）{% elif cat_id == 'cargo' %}Cargo{% elif cat_id == 'homebrew' %}Homebrew{% elif cat_id == 'conda' %}Conda/Anaconda{% elif cat_id == 'go' %}Go modules{% elif cat_id == 'flutter' %}Flutter SDK{% elif cat_id == 'github-release' %}GitHub Releases{% elif cat_id == 'github-repo' %}GitHub 仓库 clone 加速{% elif cat_id == 'huggingface' %}Hugging Face models / datasets{% elif cat_id == 'kubernetes-notes' %}K8s registry{% else %}{{ cat_id }}{% endif %} | {% if cat_id == 'kubernetes-notes' %}ℹ️ 说明{% else %}✅ 可用{% endif %} | {% if cat_id in ['pip', 'npm', 'cargo', 'conda'] %}Package Index{% elif cat_id in ['ubuntu', 'alpine'] %}APT Repository{% elif cat_id == 'docker-ce' %}安装源{% elif cat_id == 'docker-hub' %}Registry Mirror{% elif cat_id in ['homebrew', 'github-repo'] %}Git Repository{% elif cat_id == 'go' %}Module Proxy{% elif cat_id == 'flutter' %}SDK Mirror{% elif cat_id == 'github-release' %}Release Asset Mirror{% elif cat_id == 'huggingface' %}Model / Dataset Mirror{% else %}说明{% endif %} |
+{% for cat_id, cat_info in categories.items() %}| {{ cat_info.icon }} {{ cat_info.name }} | {% if cat_id == 'pip' %}pip, uv, poetry{% elif cat_id == 'npm' %}npm, pnpm, yarn{% elif cat_id == 'docker-ce' %}Docker CE install{% elif cat_id == 'docker-hub' %}Docker Hub（镜像加速）{% elif cat_id == 'cargo' %}Cargo{% elif cat_id == 'homebrew' %}Homebrew{% elif cat_id == 'conda' %}Conda/Anaconda{% elif cat_id == 'go' %}Go modules{% elif cat_id == 'flutter' %}Flutter SDK{% elif cat_id == 'github-release' %}GitHub Releases{% elif cat_id == 'github-repo' %}GitHub 仓库 clone 加速{% elif cat_id == 'huggingface' %}Hugging Face models / datasets{% else %}{{ cat_id }}{% endif %} | ✅ 可用 | {% if cat_id in ['pip', 'npm', 'cargo', 'conda'] %}Package Index{% elif cat_id in ['ubuntu', 'alpine'] %}APT Repository{% elif cat_id == 'docker-ce' %}安装源{% elif cat_id == 'docker-hub' %}Registry Mirror{% elif cat_id in ['homebrew', 'github-repo'] %}Git Repository{% elif cat_id == 'go' %}Module Proxy{% elif cat_id == 'flutter' %}SDK Mirror{% elif cat_id == 'github-release' %}Release Asset Mirror{% elif cat_id == 'huggingface' %}Model / Dataset Mirror{% else %}说明{% endif %} |
 {% endfor %}
 
 ### 核心特性

@@ -20,13 +20,6 @@
     "last_checked": "2026-03-09T09:59:12.176611Z",
     "last_changed": "2026-03-09T09:59:12.176621Z"
   },
-  "k8s-gcr-announcement": {
-    "name": "Kubernetes Registry Migration Announcement",
-    "url": "https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/",
-    "fingerprint": "f80c3c708cb6c1824f132c697dfd41526d6e1def15ff89d093a4758d64b15bcd",
-    "last_checked": "2026-03-09T09:59:13.488275Z",
-    "last_changed": "2026-03-09T09:59:13.488286Z"
-  },
   "tuna-docker-ce": {
     "name": "TUNA Docker CE Help Page",
     "url": "https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/",

@@ -85,7 +85,3 @@ Mirrors should be **deprecated, not removed** when they go offline. This documen
 ### Docker Hub Mirrors
 
 As of 2023-2024, most public Docker Hub mirrors in China have become unavailable or restricted due to Docker's policy changes. We document these as `deprecated` with warnings. Users should use alternative solutions (VPN, paid proxy, registry mirrors on private infrastructure).
-
-### k8s.gcr.io
-
-The `k8s.gcr.io` registry was frozen on March 20, 2023. All Kubernetes images have migrated to `registry.k8s.io`. Any references to `k8s.gcr.io` in configuration files should be updated.

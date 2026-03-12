@@ -463,26 +463,6 @@ mirrors:
       HF_ENDPOINT=https://hf-mirror.com
       不要写入 shell profile，下载结束后自动失效更安全。
 
-  # ==================== Kubernetes Notes ====================
-  # Note: k8s.gcr.io has been deprecated and migrated to registry.k8s.io
-  - id: k8s-registry
-    name: "Official Kubernetes Registry"
-    category: kubernetes-notes
-    url: "https://registry.k8s.io"
-    homepage: "https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/"
-    status: active
-    priority: 1
-    official_help: "https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/"
-    verify:
-      type: http
-      url: "https://registry.k8s.io/v2/"
-      expect_status_in: [200, 401]  # 不同网关实现可能返回 200 或 401，均视为健康
-    notes: |
-      IMPORTANT: k8s.gcr.io was frozen on March 20, 2023 and fully deprecated.
-      New registry is registry.k8s.io.
-      See: https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/
-      If you still have k8s.gcr.io references, update them immediately.
-
   # ==================== Alpine Linux ====================
   - id: alpine-tuna
     name: "Tsinghua TUNA Alpine Mirror"
@@ -566,10 +546,6 @@ categories:
     name: "Hugging Face"
     description: "Hugging Face model and dataset mirrors"
     icon: "🤗"
-  kubernetes-notes:
-    name: "Kubernetes"
-    description: "Kubernetes registry migration notes"
-    icon: "☸️"
   alpine:
     name: "Alpine Linux"
     description: "Alpine Linux package mirrors"

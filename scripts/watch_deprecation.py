@@ -39,11 +39,6 @@ WATCH_PAGES = [
         "url": "https://mirrors.tuna.tsinghua.edu.cn/help/docker-registry/",
     },
     {
-        "id": "k8s-gcr-announcement",
-        "name": "Kubernetes Registry Migration Announcement",
-        "url": "https://kubernetes.io/blog/2023/02/06/k8s-gcr-io-freeze-announcement/",
-    },
-    {
         "id": "tuna-docker-ce",
         "name": "TUNA Docker CE Help Page",
         "url": "https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/",
