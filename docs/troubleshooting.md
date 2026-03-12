@@ -161,8 +161,8 @@ go env -w GONOSUMDB="*"
 **Solution:**
 ```bash
 # Ensure these are exported (not just set)
-export FLUTTER_STORAGE_BASE_URL=https://mirrors.tuna.tsinghua.edu.cn/flutter
-export PUB_HOSTED_URL=https://mirrors.tuna.tsinghua.edu.cn/dart-pub
+export PUB_HOSTED_URL=https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 
 # Verify Flutter sees them
 flutter doctor -v | grep -i mirror
@@ -190,7 +190,7 @@ Use the printed mirror URL for `curl`, `wget`, or the browser.
 
 ---
 
-### Git clone from GitHub is slow, but only for Flutter SDK
+### Git clone from GitHub is slow
 
 **Symptom:**
 ```bash
@@ -200,11 +200,9 @@ hangs or times out repeatedly in China.
 
 **Solution:**
 ```bash
-./scripts/setup_github.sh --project flutter-sdk
+./scripts/setup_github.sh --proxy-clone --mirror ghfast
 git config --global --get-regexp '^url\..*insteadOf$'
 ```
-
-This installs a curated rewrite rule for the official TUNA Flutter SDK mirror.
 
 ---
 

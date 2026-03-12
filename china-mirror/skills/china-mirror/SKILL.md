@@ -78,7 +78,7 @@ For each detected tool, run the corresponding script. Ask the user for preferenc
 | Conda/Anaconda | `scripts/conda/setup.sh` | tuna |
 | Cargo/Rust | `scripts/rust/setup.sh` | ustc |
 | Go modules | `scripts/go/setup.sh` | goproxy |
-| Flutter/Dart | `scripts/flutter/setup.sh` | tuna |
+| Flutter/Dart | `scripts/flutter/setup.sh` | cfug |
 | GitHub Releases/Clone | `scripts/github/setup.sh` | tuna (支持 `--proxy-clone` 全局加速 clone) |
 | Hugging Face 下载 | `scripts/huggingface/download.sh` | hf-mirror（临时 `HF_ENDPOINT`） |
 

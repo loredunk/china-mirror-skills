@@ -196,8 +196,7 @@ go get github.com/gin-gonic/gin
 
 ```bash
 ./scripts/setup_flutter.sh
-./scripts/setup_flutter.sh --mirror tuna
-./scripts/setup_flutter.sh --mirror ustc
+./scripts/setup_flutter.sh --mirror cfug
 ```
 
 **Verify:**
@@ -208,7 +207,7 @@ flutter doctor
 
 ---
 
-## GitHub Releases / Curated Mirrors
+## GitHub Releases / Clone Acceleration
 
 ```bash
 # Convert a GitHub Releases asset URL to a mirror URL
@@ -219,11 +218,11 @@ flutter doctor
 ./scripts/setup_github.sh --mirror ustc --release-url \
   https://github.com/sharkdp/bat/releases/download/v0.25.0/bat-v0.25.0-x86_64-unknown-linux-gnu.tar.gz
 
-# Configure the curated flutter/flutter git mirror rewrite
-./scripts/setup_github.sh --project flutter-sdk
+# Configure global GitHub clone acceleration
+./scripts/setup_github.sh --proxy-clone --mirror ghfast
 
 # Preview the git config change without applying it
-./scripts/setup_github.sh --project flutter-sdk --dry-run
+./scripts/setup_github.sh --proxy-clone --mirror ghfast --dry-run
 ```
 
 **Verify:**

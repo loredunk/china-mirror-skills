@@ -139,7 +139,7 @@ generate_recommendations() {
 
         # Determine if mirror is configured (heuristic: check for Chinese mirror domains)
         local has_mirror=false
-        if echo "$config" | grep -qiE 'tuna|ustc|aliyun|npmmirror|goproxy\.cn|huaweicloud|tencent'; then
+        if echo "$config" | grep -qiE 'tuna|ustc|aliyun|npmmirror|goproxy\.cn|huaweicloud|tencent|flutter-io\.cn|mirror\.sjtu\.edu\.cn'; then
             has_mirror=true
         fi
 

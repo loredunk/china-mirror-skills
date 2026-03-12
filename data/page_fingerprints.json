@@ -61,12 +61,5 @@
     "fingerprint": "e9e3ad7bca8f3b18ce9283bb69264af2ebad63b65b9a6a82d089f6c89563f3b2",
     "last_checked": "2026-03-09T09:59:19.810714Z",
     "last_changed": "2026-03-09T09:59:19.810722Z"
-  },
-  "tuna-flutter-sdk-git": {
-    "name": "TUNA Flutter SDK Git Mirror Help",
-    "url": "https://mirrors.tuna.tsinghua.edu.cn/help/flutter-sdk.git/",
-    "fingerprint": "03f0429678a5cdc95b511a0f4bb0b6b246213483894c6dc6b2c345d579df1168",
-    "last_checked": "2026-03-09T09:59:20.957755Z",
-    "last_changed": "2026-03-09T09:59:20.957763Z"
   }
 }

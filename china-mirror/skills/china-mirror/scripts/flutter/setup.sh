@@ -11,12 +11,15 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/common.sh"
 
 # ==================== Configuration ====================
 
-declare -A FLUTTER_MIRRORS=(
-    ["tuna"]="https://mirrors.tuna.tsinghua.edu.cn/flutter"
-    ["ustc"]="https://mirrors.ustc.edu.cn/flutter"
+declare -A FLUTTER_STORAGE_MIRRORS=(
+    ["cfug"]="https://storage.flutter-io.cn"
 )
 
-DEFAULT_MIRROR="tuna"
+declare -A PUB_HOSTED_MIRRORS=(
+    ["cfug"]="https://pub.flutter-io.cn"
+)
+
+DEFAULT_MIRROR="cfug"
 
 # ==================== Functions ====================
 
@@ -27,8 +30,8 @@ Setup Flutter mirror for China network environment
 Usage: $(basename "$0") [OPTIONS]
 
 Options:
-  -m, --mirror MIRROR    Choose mirror (tuna|ustc)
-                         Default: tuna
+  -m, --mirror MIRROR    Choose mirror (cfug)
+                         Default: cfug
   -d, --dry-run          Show what would be changed without applying
   -y, --yes              Skip confirmation prompts
   -h, --help             Show this help message
@@ -38,23 +41,25 @@ This configures:
   - PUB_HOSTED_URL (Dart packages)
 
 Examples:
-  $(basename "$0")                    # Use Tsinghua mirror
-  $(basename "$0") -m ustc            # Use USTC mirror
+  $(basename "$0")                    # Use Flutter 官方文档默认示例（CFUG）
+  $(basename "$0") -m cfug
 
 After setup, restart your shell or run:
   source ~/.bashrc (or ~/.zshrc)
 
 For Flutter installation, use:
-  git clone https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git flutter
+  https://docs.flutter.cn/community/china/
 EOF
 }
 
 setup_flutter_mirror() {
     local mirror_name="$1"
-    local mirror_url="${FLUTTER_MIRRORS[$mirror_name]}"
+    local storage_url="${FLUTTER_STORAGE_MIRRORS[$mirror_name]}"
+    local pub_url="${PUB_HOSTED_MIRRORS[$mirror_name]}"
 
     log_info "Setting up Flutter mirror: $mirror_name"
-    log_info "Mirror URL: $mirror_url"
+    log_info "PUB_HOSTED_URL: $pub_url"
+    log_info "FLUTTER_STORAGE_BASE_URL: $storage_url"
 
     # Check for proxy conflicts
     warn_proxy_conflict
@@ -89,16 +94,16 @@ setup_flutter_mirror() {
     cat >> "$shell_profile" << EOF
 
 # Flutter mirror configuration - added by china-mirror-skills
-export FLUTTER_STORAGE_BASE_URL=${mirror_url}
-export PUB_HOSTED_URL=${mirror_url}/dart-pub
+export FLUTTER_STORAGE_BASE_URL=${storage_url}
+export PUB_HOSTED_URL=${pub_url}
 EOF
 
     log_success "Flutter environment configured in: $shell_profile"
     log_info "Run 'source $shell_profile' or restart your shell to apply"
 
     # Also set for current session
-    export FLUTTER_STORAGE_BASE_URL="$mirror_url"
-    export PUB_HOSTED_URL="${mirror_url}/dart-pub"
+    export FLUTTER_STORAGE_BASE_URL="$storage_url"
+    export PUB_HOSTED_URL="$pub_url"
 
     # Check if Flutter is installed
     if command_exists flutter; then
@@ -143,9 +148,9 @@ main() {
     done
 
     # Validate mirror
-    if [[ -z "${FLUTTER_MIRRORS[$mirror]:-}" ]]; then
+    if [[ -z "${FLUTTER_STORAGE_MIRRORS[$mirror]:-}" ]]; then
         log_error "Unknown mirror: $mirror"
-        log_info "Available mirrors: ${!FLUTTER_MIRRORS[*]}"
+        log_info "Available mirrors: ${!FLUTTER_STORAGE_MIRRORS[*]}"
         exit 1
     fi
 
@@ -153,7 +158,9 @@ main() {
     if [[ "$yes" == false && "$dry_run" == false ]]; then
         echo ""
         echo "This will configure Flutter to use:"
-        echo "  Mirror: $mirror (${FLUTTER_MIRRORS[$mirror]})"
+        echo "  Mirror: $mirror"
+        echo "  PUB_HOSTED_URL=${PUB_HOSTED_MIRRORS[$mirror]}"
+        echo "  FLUTTER_STORAGE_BASE_URL=${FLUTTER_STORAGE_MIRRORS[$mirror]}"
         echo ""
         if ! confirm "Continue?" "y"; then
             exit 0
@@ -170,8 +177,8 @@ main() {
 
     echo ""
     log_success "Setup complete!"
-    log_info "To install Flutter with this mirror:"
-    log_info "  git clone ${FLUTTER_MIRRORS[$mirror]}/flutter.git -b stable"
+    log_info "To install Flutter, follow the official guide:"
+    log_info "  https://docs.flutter.cn/community/china/"
 }
 
 main "$@"

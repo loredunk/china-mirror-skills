@@ -28,28 +28,6 @@ get_release_mirror() {
     esac
 }
 
-get_project_upstream() {
-    case "$1" in
-        flutter-sdk)
-            echo "https://github.com/flutter/flutter.git"
-            ;;
-        *)
-            return 1
-            ;;
-    esac
-}
-
-get_project_mirror() {
-    case "$1:$2" in
-        flutter-sdk:tuna)
-            echo "https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git"
-            ;;
-        *)
-            return 1
-            ;;
-    esac
-}
-
 show_help() {
     cat << EOF
 Setup curated GitHub mirrors for China network environment
@@ -58,10 +36,9 @@ Usage: $(basename "$0") [OPTIONS]
 
 Options:
   -m, --mirror MIRROR      Choose mirror (tuna|ustc|ghfast)
-  -p, --project PROJECT    Configure git rewrite for a curated mirrored project
       --release-url URL    Convert a GitHub release URL to a mirror URL
       --proxy-clone        Configure global git clone acceleration via prefix proxy
-      --list               Show supported mirrors and curated projects
+      --list               Show supported mirrors
   -d, --dry-run            Show what would be changed without applying
   -y, --yes                Skip confirmation prompts
   -h, --help               Show this help message
@@ -70,13 +47,11 @@ Notes:
   - TUNA/USTC release mirrors work for GitHub Releases assets only (path rewrite).
   - ghfast proxy works for releases, clone, archive, and raw files (URL prefix).
   - --proxy-clone configures git config url.insteadOf for global clone acceleration.
-  - Project mirror rewrites are available only for curated official mirrors.
 
 Examples:
   $(basename "$0") --release-url https://github.com/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt
   $(basename "$0") --mirror ustc --release-url https://github.com/owner/repo/releases/download/v1.0.0/app.tar.gz
   $(basename "$0") --mirror ghfast --release-url https://github.com/owner/repo/releases/download/v1.0.0/app.tar.gz
-  $(basename "$0") --project flutter-sdk
   $(basename "$0") --proxy-clone --mirror ghfast
 EOF
 }
@@ -86,11 +61,6 @@ show_catalog() {
     echo "  - tuna: $(get_release_mirror tuna)  (path rewrite, releases only)"
     echo "  - ustc: $(get_release_mirror ustc)  (path rewrite, releases only)"
     echo "  - ghfast: $(get_release_mirror ghfast)  (URL prefix proxy, releases/clone/archive/raw)"
-    echo ""
-    echo "Curated project mirrors:"
-    echo "  - flutter-sdk"
-    echo "      upstream: $(get_project_upstream flutter-sdk)"
-    echo "      tuna: $(get_project_mirror flutter-sdk tuna)"
     echo ""
     echo "Global clone acceleration (--proxy-clone):"
     echo "  - ghfast: git config --global url.\"https://ghfast.top/https://github.com/\".insteadOf \"https://github.com/\""
@@ -182,57 +152,8 @@ configure_proxy_clone() {
     log_info "To remove: git config --global --unset-all \"${git_config_key}\""
 }
 
-configure_project_mirror() {
-    local project="$1"
-    local mirror_name="$2"
-    local dry_run="$3"
-    local git_config_key=""
-    local upstream_url=""
-    local mirror_url=""
-
-    if ! upstream_url="$(get_project_upstream "$project")"; then
-        log_error "Unknown project: $project"
-        return 1
-    fi
-
-    if ! mirror_url="$(get_project_mirror "$project" "$mirror_name")"; then
-        log_error "Mirror '$mirror_name' is not available for project '$project'"
-        return 1
-    fi
-
-    if ! command_exists git; then
-        log_error "git is required to configure project mirrors"
-        return 1
-    fi
-
-    if [[ "$dry_run" == true ]]; then
-        log_info "[DRY RUN] Would back up ~/.gitconfig if it exists"
-        log_info "[DRY RUN] Would run:"
-        echo "  git config --global url.${mirror_url}.insteadOf ${upstream_url}"
-        echo "  git config --global --add url.${mirror_url}.insteadOf git@github.com:flutter/flutter.git"
-        echo "  git config --global --add url.${mirror_url}.insteadOf ssh://git@github.com/flutter/flutter.git"
-        return 0
-    fi
-
-    if [[ -f "${HOME}/.gitconfig" ]]; then
-        backup_file "${HOME}/.gitconfig" "github" >/dev/null
-    fi
-
-    git_config_key="url.${mirror_url}.insteadOf"
-    git config --global --unset-all "${git_config_key}" >/dev/null 2>&1 || true
-    git config --global --add "${git_config_key}" "${upstream_url}"
-    git config --global --add "${git_config_key}" "git@github.com:flutter/flutter.git"
-    git config --global --add "${git_config_key}" "ssh://git@github.com/flutter/flutter.git"
-
-    log_success "Configured git rewrite for ${project}"
-    log_info "GitHub upstream: ${upstream_url}"
-    log_info "Mirror target: ${mirror_url}"
-    log_info "Verify with: git config --global --get-all ${git_config_key}"
-}
-
 main() {
     local mirror="$DEFAULT_MIRROR"
-    local project=""
     local release_url=""
     local proxy_clone=false
     local dry_run=false
@@ -243,10 +164,6 @@ main() {
         case $1 in
             -m|--mirror)
                 mirror="$2"
-                shift 2
-                ;;
-            -p|--project)
-                project="$2"
                 shift 2
                 ;;
             --release-url)
@@ -286,18 +203,8 @@ main() {
         exit 0
     fi
 
-    if [[ -n "$release_url" && -n "$project" ]]; then
-        log_error "Use either --release-url or --project, not both"
-        exit 1
-    fi
-
-    if [[ "$proxy_clone" == true && -n "$project" ]]; then
-        log_error "Use either --proxy-clone or --project, not both"
-        exit 1
-    fi
-
-    if [[ -z "$release_url" && -z "$project" && "$proxy_clone" == false ]]; then
-        log_error "You must provide --release-url, --project, or --proxy-clone"
+    if [[ -z "$release_url" && "$proxy_clone" == false ]]; then
+        log_error "You must provide --release-url or --proxy-clone"
         show_help
         exit 1
     fi
@@ -323,19 +230,6 @@ main() {
         configure_proxy_clone "$mirror" "$dry_run"
         exit 0
     fi
-
-    if [[ "$yes" == false && "$dry_run" == false ]]; then
-        echo ""
-        echo "This will configure a curated GitHub project mirror:"
-        echo "  Project: $project"
-        echo "  Mirror:  $mirror"
-        echo ""
-        if ! confirm "Continue?" "y"; then
-            exit 0
-        fi
-    fi
-
-    configure_project_mirror "$project" "$mirror" "$dry_run"
 }
 
 main "$@"

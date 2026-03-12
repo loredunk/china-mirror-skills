@@ -14,7 +14,7 @@
 # - community: Community maintained, use with caution
 
 version: "0.1.0"
-updated_at: "2026-03-11"
+updated_at: "2026-03-12"
 
 mirrors:
   # ==================== Python (pip) ====================
@@ -362,36 +362,22 @@ mirrors:
     notes: "Alibaba Cloud Go module proxy"
 
   # ==================== Flutter ====================
-  - id: flutter-tuna
-    name: "Tsinghua TUNA Flutter Mirror"
+  - id: flutter-cfug
+    name: "CFUG Flutter Mirror"
     category: flutter
-    url: "https://mirrors.tuna.tsinghua.edu.cn/flutter/"
-    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/flutter/"
+    url: "https://storage.flutter-io.cn"
+    homepage: "https://docs.flutter.cn/community/china/"
     status: active
     priority: 1
-    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/flutter/"
+    official_help: "https://docs.flutter.cn/community/china/"
     verify:
       type: http
-      # 测稳定文件而不是目录页，避免目录 listing 策略影响探测结果
-      url: "https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra_release/releases/releases_linux.json"
+      url: "https://storage.flutter-io.cn/flutter_infra_release/releases/releases_linux.json"
       expect_status: 200
-      inconclusive_statuses: [403]
-    notes: "TUNA Flutter SDK and dependencies mirror"
-
-  - id: flutter-ustc
-    name: "USTC Flutter Mirror"
-    category: flutter
-    url: "https://mirrors.ustc.edu.cn/flutter/"
-    homepage: "https://mirrors.ustc.edu.cn/help/flutter.html"
-    status: active
-    priority: 2
-    official_help: "https://mirrors.ustc.edu.cn/help/flutter.html"
-    verify:
-      type: http
-      url: "https://mirrors.ustc.edu.cn/flutter/flutter_infra_release/releases/releases_linux.json"
-      expect_status: 200
-      inconclusive_statuses: [404]
-    notes: "USTC Flutter SDK and dependencies mirror"
+    notes: "Follow Flutter 官方中国网络文档：PUB_HOSTED_URL=https://pub.flutter-io.cn, FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn"
+    config:
+      pub_hosted_url: "https://pub.flutter-io.cn"
+      flutter_storage_base_url: "https://storage.flutter-io.cn"
 
   # ==================== GitHub Releases ====================
   - id: github-release-tuna
@@ -443,28 +429,13 @@ mirrors:
     notes: "公益 GitHub 加速代理，支持 release/clone/archive/raw，域名可能变动，参见 ghproxy.link"
 
   # ==================== GitHub Project Mirrors ====================
-  - id: github-repo-flutter-sdk-tuna
-    name: "Tsinghua TUNA Flutter SDK Git Mirror"
-    category: github-repo
-    url: "https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git"
-    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/flutter-sdk.git/"
-    status: active
-    priority: 1
-    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/flutter-sdk.git/"
-    verify:
-      type: http
-      url: "https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git/info/refs?service=git-upload-pack"
-      expect_status: 200
-      inconclusive_statuses: [403]
-    notes: "官方项目级 git 镜像，仅覆盖 flutter/flutter；不代表存在通用 GitHub 仓库镜像"
-
   - id: github-repo-ghfast
     name: "ghfast.top GitHub Clone Proxy"
     category: github-repo
     url: "https://ghfast.top/"
     homepage: "https://ghproxy.link/"
     status: active
-    priority: 2
+    priority: 1
     verify:
       type: github_proxy
       method: head
@@ -581,15 +552,15 @@ categories:
     icon: "🐹"
   flutter:
     name: "Flutter"
-    description: "Flutter SDK and dependency mirrors"
+    description: "Flutter 官方中国网络文档推荐的镜像配置"
     icon: "📱"
   github-release:
     name: "GitHub Releases"
     description: "GitHub release asset mirrors"
     icon: "🐙"
   github-repo:
-    name: "GitHub Project Mirrors"
-    description: "Curated project-level git mirrors"
+    name: "GitHub Clone Acceleration"
+    description: "GitHub 仓库 clone 加速"
     icon: "🐙"
   huggingface:
     name: "Hugging Face"
