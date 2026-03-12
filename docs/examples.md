@@ -176,7 +176,6 @@ conda search numpy
 ```bash
 ./scripts/setup_go.sh
 ./scripts/setup_go.sh --mirror goproxy-cn
-./scripts/setup_go.sh --mirror ustc
 ```
 
 **Manual:**

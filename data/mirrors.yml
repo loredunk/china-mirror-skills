@@ -222,20 +222,6 @@ mirrors:
     config:
       sparse_index: "https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
 
-  - id: cargo-rsproxy
-    name: "Rust China Community Mirror"
-    category: cargo
-    url: "https://rsproxy.cn/crates.io-index/"
-    homepage: "https://rsproxy.cn/"
-    status: testing
-    priority: 3
-    official_help: "https://rsproxy.cn/"
-    verify:
-      type: http
-      url: "https://rsproxy.cn/crates.io-index/"
-      expect_status: 200
-    notes: "Community maintained Rust mirror, rsproxy also provides rustup mirror"
-
   # ==================== Homebrew ====================
   - id: brew-tuna
     name: "Tsinghua TUNA Homebrew Mirror"
@@ -333,27 +319,13 @@ mirrors:
       expect_status_in: [200, 404]
     notes: "Official China Go module proxy by Qiniu Cloud, highly reliable"
 
-  - id: go-proxy-ustc
-    name: "USTC Go Module Proxy"
-    category: go
-    url: "https://goproxy.ustc.edu.cn"
-    homepage: "https://mirrors.ustc.edu.cn/help/goproxy.html"
-    status: active
-    priority: 2
-    official_help: "https://mirrors.ustc.edu.cn/help/goproxy.html"
-    verify:
-      type: go_proxy
-      url: "https://goproxy.ustc.edu.cn/github.com/pkg/errors/@v/v0.9.1.info"
-      expect_status_in: [200, 404]
-    notes: "USTC Go module proxy"
-
   - id: go-proxy-aliyun
     name: "Alibaba Cloud Go Module Proxy"
     category: go
     url: "https://mirrors.aliyun.com/goproxy/"
     homepage: "https://developer.aliyun.com/mirror/goproxy"
     status: active
-    priority: 3
+    priority: 2
     official_help: "https://developer.aliyun.com/mirror/goproxy"
     verify:
       type: go_proxy

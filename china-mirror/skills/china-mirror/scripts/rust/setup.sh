@@ -14,13 +14,11 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/common.sh"
 declare -A CARGO_MIRRORS=(
     ["ustc"]="https://mirrors.ustc.edu.cn/crates.io-index"
     ["tuna"]="https://mirrors.tuna.tsinghua.edu.cn/crates.io-index"
-    ["rsproxy"]="https://rsproxy.cn/crates.io-index"
 )
 
 # rustup mirrors (for installing Rust itself)
 declare -A RUSTUP_MIRRORS=(
     ["ustc"]="https://mirrors.ustc.edu.cn/rust-static"
-    ["rsproxy"]="https://rsproxy.cn"
 )
 
 DEFAULT_MIRROR="ustc"
@@ -37,7 +35,7 @@ Setup Rust/Cargo mirror for China network environment
 Usage: $(basename "$0") [OPTIONS]
 
 Options:
-  -m, --mirror MIRROR    Choose mirror (ustc|tuna|rsproxy)
+  -m, --mirror MIRROR    Choose mirror (ustc|tuna)
                          Default: ustc
   -d, --dry-run          Show what would be changed without applying
   -y, --yes              Skip confirmation prompts
@@ -50,7 +48,6 @@ This configures:
 Examples:
   $(basename "$0")                    # Use USTC mirror
   $(basename "$0") -m tuna            # Use TUNA mirror
-  $(basename "$0") -m rsproxy         # Use rsproxy mirror (includes rustup)
 
 Note: This requires Cargo 1.68+ for sparse index support.
 EOF

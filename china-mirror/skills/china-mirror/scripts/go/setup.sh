@@ -13,7 +13,6 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/common.sh"
 
 declare -A GO_PROXIES=(
     ["goproxy"]="https://goproxy.cn"
-    ["ustc"]="https://goproxy.ustc.edu.cn"
     ["aliyun"]="https://mirrors.aliyun.com/goproxy/"
 )
 
@@ -28,7 +27,7 @@ Setup Go module proxy for China network environment
 Usage: $(basename "$0") [OPTIONS]
 
 Options:
-  -m, --mirror MIRROR    Choose proxy (goproxy|ustc|aliyun)
+  -m, --mirror MIRROR    Choose proxy (goproxy|aliyun)
                          Default: goproxy
   -d, --dry-run          Show what would be changed without applying
   -y, --yes              Skip confirmation prompts
@@ -39,7 +38,7 @@ The change is applied to your shell profile.
 
 Examples:
   $(basename "$0")                    # Use goproxy.cn
-  $(basename "$0") -m ustc            # Use USTC proxy
+  $(basename "$0") -m aliyun          # Use Alibaba Cloud proxy
 
 After setup, restart your shell or run:
   source ~/.bashrc (or ~/.zshrc)
