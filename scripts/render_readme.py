@@ -18,7 +18,7 @@ import yaml
 README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 <p align="center">
-  <strong>专为中国网络环境优化的 Claude Code 开发工具镜像配置集合</strong>
+  <strong>强烈推荐用agent来干安装环境的脏活, 用本skills让agent少走弯路。</strong>
 </p>
 
 <p align="center">
@@ -31,35 +31,12 @@ README_TEMPLATE = '''# 🇨🇳 China Mirror Skills
 
 ## 目录
 
-- [为什么需要这个项目？](#为什么需要这个项目)
 - [支持的工具](#支持的工具)
 - [安装](#安装)
 - [镜像源](#镜像源)
 - [安全与风险](#安全与风险)
 
 ---
-
-## 为什么需要这个项目？
-
-国内开发者访问官方软件包仓库和开发工具时，常常遇到速度慢或无法访问的问题：
-
-- **PyPI** 下载超时或速度低至 10KB/s
-- **npm** 安装包需要等待很长时间
-- **Docker Hub** 镜像拉取失败或极慢
-- **Rust crates** 下载缓慢
-- **GitHub Releases** 下载经常卡住
-
-本项目提供：
-
-1. **经过验证的镜像配置** - 来自高校官方镜像站（清华 TUNA、中科大 USTC）
-2. **自动化配置脚本** - 支持备份和回滚
-3. **Claude Code skills** - 借助 AI 完成配置和诊断
-4. **每日健康检查** - 确保镜像源可用性
-5. **幂等操作** - 重复执行安全无副作用
-
-> ⚠️ **重要区分**
-> - Docker **CE 安装**源 ≠ Docker **Hub** 镜像加速
-> - 优先采用**官方帮助页面**中的配置，而非第三方博客
 
 ---
 
@@ -117,9 +94,10 @@ cp -r china-mirror-skills/china-mirror ~/.claude/skills/
 "诊断我的开发环境网络问题"
 ```
 
-### 其他 AI 编程助手
+### 对于其他agent
 
 - **OpenCode** — 将 `china-mirror/skills/china-mirror` 复制到 OpenCode 的 skills 存储路径
+- **OpenClaw** — 将 `china-mirror/skills/china-mirror` 复制到 `~/.openclaw/skills/china-mirror`（全局）或当前工作区的 `skills/china-mirror`（项目级）
 - **Codex / 其他兼容工具** — 将 `china-mirror/skills/china-mirror`（包含 `SKILL.md` 和 `scripts/`）放入工具对应的 skills 目录
 
 ### Skill 功能
