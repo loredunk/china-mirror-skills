@@ -2,57 +2,57 @@
   "tuna-pypi": {
     "name": "TUNA PyPI Help Page",
     "url": "https://mirrors.tuna.tsinghua.edu.cn/help/pypi/",
-    "fingerprint": "e6e63a63cc4e05401b85ae1bc7b10118dea23b777fa5c5a7aa476842d5478a19",
-    "last_checked": "2026-03-16T10:10:08.209650Z",
-    "last_changed": "2026-03-16T10:10:08.209662Z"
+    "fingerprint": "f695f9663d03a6815bf85fc7e7558d05bef0f40b411944a408906e18d4d67ba9",
+    "last_checked": "2026-03-23T10:07:29.589542Z",
+    "last_changed": "2026-03-23T10:07:29.589552Z"
   },
   "ustc-pypi": {
     "name": "USTC PyPI Help Page",
     "url": "https://mirrors.ustc.edu.cn/help/pypi.html",
     "fingerprint": "c56f73d3fee9d737c5ee4b5475f40cc6474f5590245193d8ede16580efd493f8",
-    "last_checked": "2026-03-16T10:10:09.419126Z",
+    "last_checked": "2026-03-23T10:07:31.413243Z",
     "last_changed": "2026-03-16T10:10:09.419135Z"
   },
   "npmmirror-home": {
     "name": "npmmirror Homepage",
     "url": "https://npmmirror.com",
     "fingerprint": "bc4511f83c878bd200126b09e791516316df5a5c7557ab42731cb44f43bbb0b5",
-    "last_checked": "2026-03-16T10:10:10.339935Z",
+    "last_checked": "2026-03-23T10:07:32.743936Z",
     "last_changed": "2026-03-09T09:59:12.176621Z"
   },
   "tuna-docker-ce": {
     "name": "TUNA Docker CE Help Page",
     "url": "https://mirrors.tuna.tsinghua.edu.cn/help/docker-ce/",
-    "fingerprint": "b3a35bb0e9df936a8f866c56b4a6031313b980e4b71d495dd602dd5baa1f0c62",
-    "last_checked": "2026-03-16T10:10:12.468123Z",
-    "last_changed": "2026-03-16T10:10:12.468131Z"
+    "fingerprint": "04bab79aa0491e6b60f3196556e6231f4055cda8a79e7447805fca1b5d9b1780",
+    "last_checked": "2026-03-23T10:07:34.825066Z",
+    "last_changed": "2026-03-23T10:07:34.825074Z"
   },
   "ustc-cargo": {
     "name": "USTC Cargo Mirror Help",
     "url": "https://mirrors.ustc.edu.cn/help/crates.io-index.html",
     "fingerprint": "8a69bdc4d129e569725be3bea2800b4e7c91b8199634d4eeb6ba6c7f516f0e82",
-    "last_checked": "2026-03-16T10:10:13.243251Z",
+    "last_checked": "2026-03-23T10:07:35.768960Z",
     "last_changed": "2026-03-16T10:10:13.243259Z"
   },
   "goproxy-cn": {
     "name": "goproxy.cn Homepage",
     "url": "https://goproxy.cn",
-    "fingerprint": "58575d50d3fce9b5e56fda2207dc57e208bae2b63af6c30179e0d01be0ca76fb",
-    "last_checked": "2026-03-16T10:10:14.523341Z",
-    "last_changed": "2026-03-16T10:10:14.523349Z"
+    "fingerprint": "43619af8711ac5497ba434274ba37d8a514c6406496b8b19d231b525db0e7f88",
+    "last_checked": "2026-03-23T10:07:37.553328Z",
+    "last_changed": "2026-03-23T10:07:37.553336Z"
   },
   "tuna-github-release": {
     "name": "TUNA GitHub Release Help",
     "url": "https://mirrors.tuna.tsinghua.edu.cn/help/github-release/",
-    "fingerprint": "afaf9db8ac2f8de89a3a7e32cbe1a0e820a4cc3f732b88f725aebb61e4cc702f",
-    "last_checked": "2026-03-16T10:10:15.588054Z",
-    "last_changed": "2026-03-16T10:10:15.588062Z"
+    "fingerprint": "3624e58a9eb1096ddaac51ec8c4217f5b2a172fea6293db092c7c3c0f59e230a",
+    "last_checked": "2026-03-23T10:07:38.663565Z",
+    "last_changed": "2026-03-23T10:07:38.663573Z"
   },
   "ustc-github-release": {
     "name": "USTC GitHub Release Help",
     "url": "https://mirrors.ustc.edu.cn/help/github-release.html",
     "fingerprint": "2b2da6e21d9717577664f08b1ae68b54b0713229ff9b8165987dab049ffe5c03",
-    "last_checked": "2026-03-16T10:10:16.360215Z",
+    "last_checked": "2026-03-23T10:07:39.570038Z",
     "last_changed": "2026-03-16T10:10:16.360223Z"
   }
 }
