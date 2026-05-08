@@ -1,0 +1,56 @@
+name: URL Probe (debug, temporary)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe candidate URLs
+        run: |
+          set +e
+          probe() {
+            local u=$1
+            local code time
+            read -r code time < <(curl -s -o /dev/null -w '%{http_code} %{time_total}\n' --max-time 20 -L -A "Mozilla/5.0" "$u")
+            printf '%-3s %-7s %s\n' "$code" "$time" "$u"
+          }
+          echo '== TUNA homebrew (path candidates) =='
+          probe https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
+          probe https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/
+          probe https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git/HEAD
+          probe https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git/info/refs?service=git-upload-pack
+          probe https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.sh
+          echo
+          echo '== TUNA python releases (path candidates) =='
+          probe https://mirrors.tuna.tsinghua.edu.cn/help/python-release/
+          probe https://mirrors.tuna.tsinghua.edu.cn/python-release/
+          probe https://mirrors.tuna.tsinghua.edu.cn/python-releases/
+          probe https://mirrors.tuna.tsinghua.edu.cn/python/
+          probe https://mirrors.tuna.tsinghua.edu.cn/cpython/
+          echo
+          echo '== TUNA golang (path candidates) =='
+          probe https://mirrors.tuna.tsinghua.edu.cn/help/golang/
+          probe https://mirrors.tuna.tsinghua.edu.cn/golang/
+          probe https://mirrors.tuna.tsinghua.edu.cn/go/
+          probe https://mirrors.tuna.tsinghua.edu.cn/golang-release/
+          echo
+          echo '== TUNA github-release (alt artifacts) =='
+          probe https://mirrors.tuna.tsinghua.edu.cn/help/github-release/
+          probe https://mirrors.tuna.tsinghua.edu.cn/github-release/
+          probe https://mirrors.tuna.tsinghua.edu.cn/github-release/cli/cli/
+          probe https://mirrors.tuna.tsinghua.edu.cn/github-release/git-for-windows/git/
+          echo
+          echo '== USTC github-release =='
+          probe https://mirrors.ustc.edu.cn/help/github-release.html
+          probe https://mirrors.ustc.edu.cn/github-release/
+          probe https://mirrors.ustc.edu.cn/github-release/cli/cli/
+          echo
+          echo '== docker-hub mirror candidates =='
+          probe https://docker.1ms.run/v2/
+          probe https://docker.m.daocloud.io/v2/
+          probe https://docker.xuanyuan.me/v2/
+          probe https://docker.aityp.com/v2/
+          probe https://hub.atomgit.com/v2/
+          probe https://docker.hlmirror.com/v2/
