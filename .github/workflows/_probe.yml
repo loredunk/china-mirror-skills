@@ -7,7 +7,7 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe candidate URLs
+      - name: Probe candidate URLs (round 2)
         run: |
           set +e
           probe() {
@@ -16,41 +16,35 @@ jobs:
             read -r code time < <(curl -s -o /dev/null -w '%{http_code} %{time_total}\n' --max-time 20 -L -A "Mozilla/5.0" "$u")
             printf '%-3s %-7s %s\n' "$code" "$time" "$u"
           }
-          echo '== TUNA homebrew (path candidates) =='
-          probe https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
-          probe https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/
-          probe https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git/HEAD
-          probe https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git/info/refs?service=git-upload-pack
-          probe https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.sh
+          probe_head() {
+            local u=$1
+            local code time
+            read -r code time < <(curl -s -I -o /dev/null -w '%{http_code} %{time_total}\n' --max-time 20 -L -A "Mozilla/5.0" "$u")
+            printf '%-3s %-7s %s\n' "$code" "$time" "$u"
+          }
+          echo '== docker registry pulls (anonymous) =='
+          for r in docker.1ms.run docker.m.daocloud.io docker.aityp.com docker.hlmirror.com; do
+            echo "--- $r ---"
+            # Step 1: /v2/ ping (expect 401 with WWW-Authenticate)
+            curl -s -I --max-time 15 "https://$r/v2/" | grep -iE 'HTTP|www-authenticate|docker-distribution'
+            # Step 2: try to pull alpine manifest with no token
+            code=$(curl -s -o /tmp/m.json -w '%{http_code}' --max-time 15 -H "Accept: application/vnd.oci.image.manifest.v1+json,application/vnd.docker.distribution.manifest.v2+json" "https://$r/v2/library/alpine/manifests/latest")
+            head -c 120 /tmp/m.json | tr -d '\n'; echo
+            echo "  manifest_code=$code"
+          done
           echo
-          echo '== TUNA python releases (path candidates) =='
-          probe https://mirrors.tuna.tsinghua.edu.cn/help/python-release/
-          probe https://mirrors.tuna.tsinghua.edu.cn/python-release/
-          probe https://mirrors.tuna.tsinghua.edu.cn/python-releases/
-          probe https://mirrors.tuna.tsinghua.edu.cn/python/
-          probe https://mirrors.tuna.tsinghua.edu.cn/cpython/
-          echo
-          echo '== TUNA golang (path candidates) =='
-          probe https://mirrors.tuna.tsinghua.edu.cn/help/golang/
-          probe https://mirrors.tuna.tsinghua.edu.cn/golang/
-          probe https://mirrors.tuna.tsinghua.edu.cn/go/
-          probe https://mirrors.tuna.tsinghua.edu.cn/golang-release/
-          echo
-          echo '== TUNA github-release (alt artifacts) =='
-          probe https://mirrors.tuna.tsinghua.edu.cn/help/github-release/
-          probe https://mirrors.tuna.tsinghua.edu.cn/github-release/
-          probe https://mirrors.tuna.tsinghua.edu.cn/github-release/cli/cli/
-          probe https://mirrors.tuna.tsinghua.edu.cn/github-release/git-for-windows/git/
-          echo
-          echo '== USTC github-release =='
-          probe https://mirrors.ustc.edu.cn/help/github-release.html
-          probe https://mirrors.ustc.edu.cn/github-release/
+          echo '== USTC github-release: actual file paths =='
+          probe_head https://mirrors.ustc.edu.cn/github-release/cli/cli/LatestRelease/
           probe https://mirrors.ustc.edu.cn/github-release/cli/cli/
+          probe https://mirrors.ustc.edu.cn/github-release/cli/cli/v2.69.0/
+          probe https://mirrors.ustc.edu.cn/github-release/git-for-windows/git/
+          probe https://mirrors.ustc.edu.cn/github-release/git-for-windows/git/LatestRelease/
           echo
-          echo '== docker-hub mirror candidates =='
-          probe https://docker.1ms.run/v2/
-          probe https://docker.m.daocloud.io/v2/
-          probe https://docker.xuanyuan.me/v2/
-          probe https://docker.aityp.com/v2/
-          probe https://hub.atomgit.com/v2/
-          probe https://docker.hlmirror.com/v2/
+          echo '== TUNA python help =='
+          probe https://mirrors.tuna.tsinghua.edu.cn/help/python/
+          probe https://mirrors.tuna.tsinghua.edu.cn/python/
+          probe https://mirrors.tuna.tsinghua.edu.cn/python/3.12.0/
+          probe https://mirrors.tuna.tsinghua.edu.cn/python/ftp/python/
+          echo
+          echo '== TUNA: list of recently-mirrored github repos =='
+          curl -s --max-time 15 "https://mirrors.tuna.tsinghua.edu.cn/github-release/" | head -100
