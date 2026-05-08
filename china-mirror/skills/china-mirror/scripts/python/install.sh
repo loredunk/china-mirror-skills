@@ -15,7 +15,8 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/common.sh"
 
 declare -A PYTHON_BUILD_MIRRORS=(
     ["huawei"]="https://mirrors.huaweicloud.com/python/"
-    ["tuna"]="https://mirrors.tuna.tsinghua.edu.cn/python-release/"
+    # 2026-05：TUNA 路径已从 /python-release/ 调整为 /python/
+    ["tuna"]="https://mirrors.tuna.tsinghua.edu.cn/python/"
 )
 
 declare -A PYENV_INSTALL_MIRRORS=(

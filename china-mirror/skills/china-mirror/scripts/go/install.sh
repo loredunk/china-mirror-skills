@@ -14,11 +14,11 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/common.sh"
 # ==================== Configuration ====================
 
 declare -A GO_INSTALL_MIRRORS=(
-    ["tuna"]="https://mirrors.tuna.tsinghua.edu.cn/golang"
+    # 2026-05：TUNA 已下线 Go 二进制镜像，现改用阿里云为默认
     ["aliyun"]="https://mirrors.aliyun.com/golang"
 )
 
-DEFAULT_MIRROR="tuna"
+DEFAULT_MIRROR="aliyun"
 DEFAULT_VERSION="1.22.4"
 DEFAULT_INSTALL_DIR="/usr/local"    # Go installs to /usr/local/go
 
@@ -33,8 +33,8 @@ Usage: $(basename "$0") [OPTIONS]
 Options:
   -v, --version VERSION  Go version to install (default: $DEFAULT_VERSION)
                          Use "list" to show recent stable versions
-  -m, --mirror MIRROR    Download mirror (tuna|aliyun)
-                         Default: tuna
+  -m, --mirror MIRROR    Download mirror (aliyun)
+                         Default: aliyun
   -p, --prefix PATH      Install prefix (default: $DEFAULT_INSTALL_DIR)
                          Go will be installed to <prefix>/go
   -d, --dry-run          Show what would be done without executing
@@ -42,7 +42,7 @@ Options:
   -h, --help             Show this help message
 
 Examples:
-  $(basename "$0")                        # Install Go $DEFAULT_VERSION via TUNA
+  $(basename "$0")                        # Install Go $DEFAULT_VERSION via Aliyun
   $(basename "$0") -v 1.21.8             # Install Go 1.21.8
   $(basename "$0") -m aliyun             # Use Aliyun mirror
   $(basename "$0") -p ~/local -y         # Install to ~/local/go (no sudo needed)

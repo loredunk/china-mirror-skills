@@ -14,7 +14,7 @@
 # - community: Community maintained, use with caution
 
 version: "0.1.0"
-updated_at: "2026-03-12"
+updated_at: "2026-05-08"
 
 mirrors:
   # ==================== Python (pip) ====================
@@ -169,25 +169,66 @@ mirrors:
   # ==================== Docker Hub (Registry) ====================
   # IMPORTANT: These are Docker Hub image pull mirrors, NOT Docker CE install repos
   # Configure via /etc/docker/daemon.json registry-mirrors
+  - id: docker-hub-1ms
+    name: "1ms.run Docker Hub Mirror"
+    category: docker-hub
+    url: "https://docker.1ms.run"
+    homepage: "https://docker.1ms.run"
+    status: active
+    priority: 1
+    official_help: "https://docker.1ms.run"
+    verify:
+      type: http
+      url: "https://docker.1ms.run/v2/"
+      # 标准 Docker Registry v2 协议：未带 token 访问 /v2/ 应返回 401（携带 WWW-Authenticate）
+      expect_status: 401
+    notes: |
+      配置方式：写入 /etc/docker/daemon.json
+      {
+        "registry-mirrors": ["https://docker.1ms.run"],
+        "dns": ["1.1.1.1", "8.8.8.8"]
+      }
+      然后执行 sudo systemctl restart docker
+
+  - id: docker-hub-daocloud
+    name: "DaoCloud Docker Hub Mirror"
+    category: docker-hub
+    url: "https://docker.m.daocloud.io"
+    homepage: "https://docker.m.daocloud.io"
+    status: active
+    priority: 2
+    official_help: "https://docker.m.daocloud.io"
+    verify:
+      type: http
+      url: "https://docker.m.daocloud.io/v2/"
+      expect_status: 401
+    notes: |
+      配置方式：写入 /etc/docker/daemon.json
+      {
+        "registry-mirrors": ["https://docker.m.daocloud.io"],
+        "dns": ["1.1.1.1", "8.8.8.8"]
+      }
+      然后执行 sudo systemctl restart docker
+
   - id: docker-hub-hlmirror
     name: "HLMirror Docker Hub Mirror"
     category: docker-hub
     url: "https://docker.hlmirror.com"
     homepage: "https://docker.hlmirror.com"
-    status: active
-    priority: 1
+    # 2026-05：HLMirror 已 302 跳转到商业域名 mirror.houlang.cloud，需付费/认证。
+    status: deprecated
+    priority: 9
     official_help: "https://docker.hlmirror.com"
     verify:
       type: http
       url: "https://docker.hlmirror.com/v2/"
-      expect_status: 403
+      # 跟随跳转后落到 houlang.cloud，返回 401（需付费认证），不再可用作公共镜像
+      expect_status: 401
+      inconclusive_statuses: [302, 401, 403]
     notes: |
-      配置方式：写入 /etc/docker/daemon.json
-      {
-        "registry-mirrors": ["https://docker.hlmirror.com"],
-        "dns": ["1.1.1.1", "8.8.8.8"]
-      }
-      然后执行 sudo systemctl restart docker
+      已弃用：服务于 2026 年迁移到 mirror.houlang.cloud 并改为付费/认证制，
+      不再适合作为公共 Docker Hub 加速镜像。请改用 docker.1ms.run 或
+      docker.m.daocloud.io（见上方两条）。
 
   # ==================== Rust (Cargo) ====================
   - id: cargo-ustc
@@ -233,7 +274,8 @@ mirrors:
     official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/"
     verify:
       type: http
-      url: "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.sh"
+      # 直接探测 brew.git 的 HEAD 文件，git smart HTTP 必返回 200，比 install.sh 更稳定
+      url: "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git/HEAD"
       expect_status: 200
     notes: "TUNA Homebrew git repositories mirror"
     repos:
@@ -363,10 +405,14 @@ mirrors:
     verify:
       type: http
       method: head
-      url: "https://mirrors.tuna.tsinghua.edu.cn/github-release/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt"
+      # TUNA 选择性镜像 GitHub release（不收录 cli/cli），改用一直保留的 git-for-windows/git 探测
+      url: "https://mirrors.tuna.tsinghua.edu.cn/github-release/git-for-windows/git/"
       expect_status: 200
       inconclusive_statuses: [403, 404]
-    notes: "TUNA 提供 GitHub Releases 资源镜像，适合下载 release 资产，不是通用 git clone 代理"
+    notes: |
+      TUNA 选择性镜像 GitHub Releases（仅收录列表内的项目，如 git-for-windows、kubernetes、
+      llvm、microsoft、prometheus、rustdesk 等），不是通用 release 代理。完整列表见
+      https://mirrors.tuna.tsinghua.edu.cn/github-release/
 
   - id: github-release-ustc
     name: "USTC GitHub Release Mirror"
@@ -379,10 +425,14 @@ mirrors:
     verify:
       type: http
       method: head
-      url: "https://mirrors.ustc.edu.cn/github-release/cli/cli/releases/download/v2.69.0/gh_2.69.0_checksums.txt"
+      # USTC 对部分非中国大陆 IP 屏蔽 /github-release/ 内容（CI runner 受影响），但帮助页可达
+      url: "https://mirrors.ustc.edu.cn/help/github-release.html"
       expect_status: 200
       inconclusive_statuses: [403, 404]
-    notes: "USTC 提供 GitHub Releases 资源镜像，适合下载 release 资产，不是通用 git clone 代理"
+    notes: |
+      USTC 提供 GitHub Releases 资源镜像，适合下载 release 资产；
+      非中国大陆出口（如海外 CI）访问 /github-release/ 可能被反代返回 403，
+      在中国大陆网络下使用正常。
 
   - id: github-release-ghfast
     name: "ghfast.top GitHub Proxy"
@@ -487,18 +537,19 @@ mirrors:
   - id: python-install-tuna
     name: "Tsinghua TUNA Python Releases Mirror"
     category: python-install
-    url: "https://mirrors.tuna.tsinghua.edu.cn/python-release/"
-    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/python-release/"
+    # 2026-05：TUNA 将路径从 /python-release/ 调整为 /python/
+    url: "https://mirrors.tuna.tsinghua.edu.cn/python/"
+    homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/python/"
     status: active
     priority: 2
-    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/python-release/"
+    official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/python/"
     verify:
       type: http
-      url: "https://mirrors.tuna.tsinghua.edu.cn/python-release/"
+      url: "https://mirrors.tuna.tsinghua.edu.cn/python/"
       expect_status: 200
     notes: |
       用于 pyenv 安装 Python：
-      export PYTHON_BUILD_MIRROR_URL=https://mirrors.tuna.tsinghua.edu.cn/python-release/
+      export PYTHON_BUILD_MIRROR_URL=https://mirrors.tuna.tsinghua.edu.cn/python/
       pyenv install 3.12.0
 
   # ==================== Node.js Install (下载/安装 Node.js 本体) ====================
@@ -622,19 +673,18 @@ mirrors:
     category: go-install
     url: "https://mirrors.tuna.tsinghua.edu.cn/golang/"
     homepage: "https://mirrors.tuna.tsinghua.edu.cn/help/golang/"
-    status: active
-    priority: 1
+    # 2026-05：TUNA 已下线 Go 二进制镜像，/golang/、/go/、/golang-release/ 均 404
+    status: deprecated
+    priority: 9
     official_help: "https://mirrors.tuna.tsinghua.edu.cn/help/golang/"
     verify:
       type: http
       url: "https://mirrors.tuna.tsinghua.edu.cn/golang/"
       expect_status: 200
+      inconclusive_statuses: [404]
     notes: |
-      下载并安装 Go：
-      # 下载
-      wget https://mirrors.tuna.tsinghua.edu.cn/golang/go1.22.0.linux-amd64.tar.gz
-      # 安装
-      sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
+      已弃用：TUNA 于 2026 年下线 Go 二进制镜像。请改用阿里云镜像
+      （见 go-install-aliyun）下载 Go 工具链。
 
   - id: go-install-aliyun
     name: "Alibaba Cloud Go Binary Mirror"
@@ -642,7 +692,8 @@ mirrors:
     url: "https://mirrors.aliyun.com/golang/"
     homepage: "https://developer.aliyun.com/mirror/golang"
     status: active
-    priority: 2
+    # TUNA 下线后阿里云成为 go-install 类别的首选
+    priority: 1
     official_help: "https://developer.aliyun.com/mirror/golang"
     verify:
       type: http
