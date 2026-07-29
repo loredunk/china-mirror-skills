@@ -143,7 +143,7 @@ bash china-mirror/skills/china-mirror/scripts/huggingface/download.sh meta-llama
 ### 当前镜像状态
 
 _镜像数据最后更新: 2026-05-08_
-_健康检查时间: 2026-07-28T01:27:27.914591Z_
+_健康检查时间: 2026-07-29T01:28:03.973325Z_
 
 **汇总**: 37/38 个镜像可用（97.37%）
 
@@ -157,9 +157,9 @@ _有健康检查报告时，下表按每日健康检查结果动态排序；无�
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Alibaba Cloud PyPI Mirror | [https://mirrors.aliyun.com/pypi/simple](https://mirrors.aliyun.com/pypi/simple) | ✅ 正常 (610.83ms) | 3 |
-| USTC PyPI Mirror | [https://pypi.mirrors.ustc.edu.cn/simple](https://pypi.mirrors.ustc.edu.cn/simple) | ✅ 正常 (2306.3ms) | 2 |
-| Tsinghua TUNA PyPI Mirror | [https://pypi.tuna.tsinghua.edu.cn/simple](https://pypi.tuna.tsinghua.edu.cn/simple) | ✅ 正常 (3348.16ms) | 1 |
+| Alibaba Cloud PyPI Mirror | [https://mirrors.aliyun.com/pypi/simple](https://mirrors.aliyun.com/pypi/simple) | ✅ 正常 (771.43ms) | 3 |
+| Tsinghua TUNA PyPI Mirror | [https://pypi.tuna.tsinghua.edu.cn/simple](https://pypi.tuna.tsinghua.edu.cn/simple) | ✅ 正常 (1902.43ms) | 1 |
+| USTC PyPI Mirror | [https://pypi.mirrors.ustc.edu.cn/simple](https://pypi.mirrors.ustc.edu.cn/simple) | ✅ 正常 (3491.36ms) | 2 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Alibaba Cloud PyPI Mirror</b>）</summary>
@@ -181,8 +181,8 @@ pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| npmmirror (Taobao) | [https://registry.npmmirror.com](https://registry.npmmirror.com) | ✅ 正常 (1056.6ms) | 1 |
-| Tencent Cloud NPM Mirror | [https://mirrors.cloud.tencent.com/npm/](https://mirrors.cloud.tencent.com/npm/) | ✅ 正常 (2147.45ms) | 2 |
+| npmmirror (Taobao) | [https://registry.npmmirror.com](https://registry.npmmirror.com) | ✅ 正常 (1349.94ms) | 1 |
+| Tencent Cloud NPM Mirror | [https://mirrors.cloud.tencent.com/npm/](https://mirrors.cloud.tencent.com/npm/) | ✅ 正常 (2561.34ms) | 2 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>npmmirror (Taobao)</b>）</summary>
@@ -205,9 +205,9 @@ npm config set registry https://registry.npmmirror.com
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| DaoCloud Docker Hub Mirror | [https://docker.m.daocloud.io](https://docker.m.daocloud.io) | ✅ 正常 (801.87ms) | 2 |
-| 1ms.run Docker Hub Mirror | [https://docker.1ms.run](https://docker.1ms.run) | ✅ 正常 (1173.81ms) | 1 |
-| HLMirror Docker Hub Mirror | [https://docker.hlmirror.com](https://docker.hlmirror.com) | ⚠️ 已废弃 (1242.81ms) | 9 |
+| DaoCloud Docker Hub Mirror | [https://docker.m.daocloud.io](https://docker.m.daocloud.io) | ✅ 正常 (685.39ms) | 2 |
+| 1ms.run Docker Hub Mirror | [https://docker.1ms.run](https://docker.1ms.run) | ✅ 正常 (1144.09ms) | 1 |
+| HLMirror Docker Hub Mirror | [https://docker.hlmirror.com](https://docker.hlmirror.com) | ⚠️ 已废弃 (1136.61ms) | 9 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>DaoCloud Docker Hub Mirror</b>）</summary>
@@ -232,8 +232,8 @@ macOS / Windows：在 Docker Desktop → Settings → Docker Engine 里填
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Rust Crates Mirror | [https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/](https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/) | ✅ 正常 (1328.31ms) | 2 |
-| USTC Rust Crates Mirror | [https://mirrors.ustc.edu.cn/crates.io-index/](https://mirrors.ustc.edu.cn/crates.io-index/) | ✅ 正常 (1651.77ms) | 1 |
+| Tsinghua TUNA Rust Crates Mirror | [https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/](https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/) | ✅ 正常 (1118.03ms) | 2 |
+| USTC Rust Crates Mirror | [https://mirrors.ustc.edu.cn/crates.io-index/](https://mirrors.ustc.edu.cn/crates.io-index/) | ✅ 正常 (1353.4ms) | 1 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Rust Crates Mirror</b>）</summary>
@@ -257,8 +257,8 @@ EOF
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Homebrew Mirror | [https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/](https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/) | ✅ 正常 (1029.78ms) | 1 |
-| USTC Homebrew Mirror | [https://mirrors.ustc.edu.cn/brew.git](https://mirrors.ustc.edu.cn/brew.git) | ✅ 正常 (1480.42ms) | 2 |
+| Tsinghua TUNA Homebrew Mirror | [https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/](https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/) | ✅ 正常 (882.19ms) | 1 |
+| USTC Homebrew Mirror | [https://mirrors.ustc.edu.cn/brew.git](https://mirrors.ustc.edu.cn/brew.git) | ✅ 正常 (2052.41ms) | 2 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Homebrew Mirror</b>）</summary>
@@ -278,8 +278,8 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Anaconda Mirror | [https://mirrors.tuna.tsinghua.edu.cn/anaconda/](https://mirrors.tuna.tsinghua.edu.cn/anaconda/) | ✅ 正常 (1020.2ms) | 1 |
-| USTC Anaconda Mirror | [https://mirrors.ustc.edu.cn/anaconda/](https://mirrors.ustc.edu.cn/anaconda/) | ✅ 正常 (1499.34ms) | 2 |
+| Tsinghua TUNA Anaconda Mirror | [https://mirrors.tuna.tsinghua.edu.cn/anaconda/](https://mirrors.tuna.tsinghua.edu.cn/anaconda/) | ✅ 正常 (1208.56ms) | 1 |
+| USTC Anaconda Mirror | [https://mirrors.ustc.edu.cn/anaconda/](https://mirrors.ustc.edu.cn/anaconda/) | ✅ 正常 (2109.37ms) | 2 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Anaconda Mirror</b>）</summary>
@@ -302,8 +302,8 @@ conda config --set show_channel_urls yes
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Alibaba Cloud Go Module Proxy | [https://mirrors.aliyun.com/goproxy/](https://mirrors.aliyun.com/goproxy/) | ✅ 正常 (169.87ms) | 2 |
-| China Go Module Proxy | [https://goproxy.cn](https://goproxy.cn) | ✅ 正常 (909.56ms) | 1 |
+| Alibaba Cloud Go Module Proxy | [https://mirrors.aliyun.com/goproxy/](https://mirrors.aliyun.com/goproxy/) | ✅ 正常 (522.89ms) | 2 |
+| China Go Module Proxy | [https://goproxy.cn](https://goproxy.cn) | ✅ 正常 (996.9ms) | 1 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Alibaba Cloud Go Module Proxy</b>）</summary>
@@ -325,7 +325,7 @@ go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| CFUG Flutter Mirror | [https://storage.flutter-io.cn](https://storage.flutter-io.cn) | ✅ 正常 (421.06ms) | 1 |
+| CFUG Flutter Mirror | [https://storage.flutter-io.cn](https://storage.flutter-io.cn) | ✅ 正常 (341.86ms) | 1 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>CFUG Flutter Mirror</b>）</summary>
@@ -346,8 +346,8 @@ echo 'export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn' >> ~/.zshrc
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Docker CE Mirror | [https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/](https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/) | ✅ 正常 (1532.61ms) | 1 |
-| USTC Docker CE Mirror | [https://mirrors.ustc.edu.cn/docker-ce/linux/](https://mirrors.ustc.edu.cn/docker-ce/linux/) | ✅ 正常 (2006.51ms) | 2 |
+| Tsinghua TUNA Docker CE Mirror | [https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/](https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/) | ✅ 正常 (1839.71ms) | 1 |
+| USTC Docker CE Mirror | [https://mirrors.ustc.edu.cn/docker-ce/linux/](https://mirrors.ustc.edu.cn/docker-ce/linux/) | ✅ 正常 (2894.18ms) | 2 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Docker CE Mirror</b>）</summary>
@@ -367,15 +367,15 @@ sudo apt update
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Huawei Cloud Python Releases Mirror | [https://mirrors.huaweicloud.com/python/](https://mirrors.huaweicloud.com/python/) | ✅ 正常 (1176.76ms) | 1 |
-| Tsinghua TUNA Python Releases Mirror | [https://mirrors.tuna.tsinghua.edu.cn/python/](https://mirrors.tuna.tsinghua.edu.cn/python/) | ✅ 正常 (1422.88ms) | 2 |
+| Tsinghua TUNA Python Releases Mirror | [https://mirrors.tuna.tsinghua.edu.cn/python/](https://mirrors.tuna.tsinghua.edu.cn/python/) | ✅ 正常 (875.8ms) | 2 |
+| Huawei Cloud Python Releases Mirror | [https://mirrors.huaweicloud.com/python/](https://mirrors.huaweicloud.com/python/) | ✅ 正常 (1179.44ms) | 1 |
 
 <details>
-<summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Huawei Cloud Python Releases Mirror</b>）</summary>
+<summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Python Releases Mirror</b>）</summary>
 
 ```bash
 # 当前 shell 生效（让 pyenv 从国内镜像下载 Python 源码包）
-export PYTHON_BUILD_MIRROR_URL=https://mirrors.huaweicloud.com/python/
+export PYTHON_BUILD_MIRROR_URL=https://mirrors.tuna.tsinghua.edu.cn/python/
 pyenv install 3.12.0
 ```
 
@@ -385,8 +385,8 @@ pyenv install 3.12.0
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Node.js Mirror | [https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/](https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/) | ✅ 正常 (1398.64ms) | 2 |
-| npmmirror Node.js Binary Mirror | [https://npmmirror.com/mirrors/node/](https://npmmirror.com/mirrors/node/) | ✅ 正常 (1710.05ms) | 1 |
+| Tsinghua TUNA Node.js Mirror | [https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/](https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/) | ✅ 正常 (1149.7ms) | 2 |
+| npmmirror Node.js Binary Mirror | [https://npmmirror.com/mirrors/node/](https://npmmirror.com/mirrors/node/) | ✅ 正常 (1332.64ms) | 1 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Node.js Mirror</b>）</summary>
@@ -406,15 +406,15 @@ export FNM_NODE_DIST_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| USTC Miniconda Installer Mirror | [https://mirrors.ustc.edu.cn/anaconda/miniconda/](https://mirrors.ustc.edu.cn/anaconda/miniconda/) | ✅ 正常 (1295.33ms) | 2 |
-| Tsinghua TUNA Miniconda Installer Mirror | [https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/) | ✅ 正常 (1482.68ms) | 1 |
+| Tsinghua TUNA Miniconda Installer Mirror | [https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/](https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/) | ✅ 正常 (1203.98ms) | 1 |
+| USTC Miniconda Installer Mirror | [https://mirrors.ustc.edu.cn/anaconda/miniconda/](https://mirrors.ustc.edu.cn/anaconda/miniconda/) | ✅ 正常 (1474.38ms) | 2 |
 
 <details>
-<summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>USTC Miniconda Installer Mirror</b>）</summary>
+<summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Miniconda Installer Mirror</b>）</summary>
 
 ```bash
 # Linux x86_64：直接下载并安装 Miniconda
-wget https://mirrors.ustc.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh
+wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
@@ -424,8 +424,8 @@ bash Miniconda3-latest-Linux-x86_64.sh
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Tsinghua TUNA Rustup Mirror | [https://mirrors.tuna.tsinghua.edu.cn/rustup](https://mirrors.tuna.tsinghua.edu.cn/rustup) | ✅ 正常 (1059.85ms) | 1 |
-| USTC Rust Static Mirror | [https://mirrors.ustc.edu.cn/rust-static](https://mirrors.ustc.edu.cn/rust-static) | ✅ 正常 (1429.14ms) | 2 |
+| Tsinghua TUNA Rustup Mirror | [https://mirrors.tuna.tsinghua.edu.cn/rustup](https://mirrors.tuna.tsinghua.edu.cn/rustup) | ✅ 正常 (1119.1ms) | 1 |
+| USTC Rust Static Mirror | [https://mirrors.ustc.edu.cn/rust-static](https://mirrors.ustc.edu.cn/rust-static) | ✅ 正常 (10864.09ms) | 2 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Rustup Mirror</b>）</summary>
@@ -443,8 +443,8 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| Alibaba Cloud Go Binary Mirror | [https://mirrors.aliyun.com/golang/](https://mirrors.aliyun.com/golang/) | ✅ 正常 (4098.94ms) | 1 |
-| Tsinghua TUNA Go Binary Mirror | [https://mirrors.tuna.tsinghua.edu.cn/golang/](https://mirrors.tuna.tsinghua.edu.cn/golang/) | ⚠️ 已废弃 (1035.26ms) | 9 |
+| Alibaba Cloud Go Binary Mirror | [https://mirrors.aliyun.com/golang/](https://mirrors.aliyun.com/golang/) | ✅ 正常 (7140.92ms) | 1 |
+| Tsinghua TUNA Go Binary Mirror | [https://mirrors.tuna.tsinghua.edu.cn/golang/](https://mirrors.tuna.tsinghua.edu.cn/golang/) | ⚠️ 已废弃 (1035.32ms) | 9 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Alibaba Cloud Go Binary Mirror</b>）</summary>
@@ -461,9 +461,9 @@ sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| ghfast.top GitHub Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 正常 (690.94ms) | 3 |
-| USTC GitHub Release Mirror | [https://mirrors.ustc.edu.cn/github-release/](https://mirrors.ustc.edu.cn/github-release/) | ✅ 正常 (848.28ms) | 2 |
-| Tsinghua TUNA GitHub Release Mirror | [https://mirrors.tuna.tsinghua.edu.cn/github-release/](https://mirrors.tuna.tsinghua.edu.cn/github-release/) | ✅ 正常 (1000.12ms) | 1 |
+| ghfast.top GitHub Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 正常 (660.71ms) | 3 |
+| USTC GitHub Release Mirror | [https://mirrors.ustc.edu.cn/github-release/](https://mirrors.ustc.edu.cn/github-release/) | ✅ 正常 (832.6ms) | 2 |
+| Tsinghua TUNA GitHub Release Mirror | [https://mirrors.tuna.tsinghua.edu.cn/github-release/](https://mirrors.tuna.tsinghua.edu.cn/github-release/) | ✅ 正常 (1156.96ms) | 1 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>ghfast.top GitHub Proxy</b>）</summary>
@@ -482,7 +482,7 @@ curl -L -O https://ghfast.top/https://github.com/<owner>/<repo>/releases/downloa
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| ghfast.top GitHub Clone Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 正常 (736.85ms) | 1 |
+| ghfast.top GitHub Clone Proxy | [https://ghfast.top/](https://ghfast.top/) | ✅ 正常 (684.02ms) | 1 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>ghfast.top GitHub Clone Proxy</b>）</summary>
@@ -501,7 +501,7 @@ git config --global url."https://ghfast.top/https://github.com/".insteadOf "http
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| hf-mirror Hugging Face Mirror | [https://hf-mirror.com](https://hf-mirror.com) | ✅ 正常 (684.98ms) | 1 |
+| hf-mirror Hugging Face Mirror | [https://hf-mirror.com](https://hf-mirror.com) | ✅ 正常 (775.24ms) | 1 |
 
 <details>
 <summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>hf-mirror Hugging Face Mirror</b>）</summary>
@@ -521,19 +521,19 @@ export HF_ENDPOINT=https://hf-mirror.com
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| USTC Ubuntu Mirror | [https://mirrors.ustc.edu.cn/ubuntu/](https://mirrors.ustc.edu.cn/ubuntu/) | ✅ 正常 (1526.28ms) | 2 |
-| Tsinghua TUNA Ubuntu Mirror | [https://mirrors.tuna.tsinghua.edu.cn/ubuntu/](https://mirrors.tuna.tsinghua.edu.cn/ubuntu/) | ✅ 正常 (1567.64ms) | 1 |
+| Tsinghua TUNA Ubuntu Mirror | [https://mirrors.tuna.tsinghua.edu.cn/ubuntu/](https://mirrors.tuna.tsinghua.edu.cn/ubuntu/) | ✅ 正常 (1840.89ms) | 1 |
+| USTC Ubuntu Mirror | [https://mirrors.ustc.edu.cn/ubuntu/](https://mirrors.ustc.edu.cn/ubuntu/) | ✅ 正常 (3401.64ms) | 2 |
 
 <details>
-<summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>USTC Ubuntu Mirror</b>）</summary>
+<summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Ubuntu Mirror</b>）</summary>
 
 ```bash
 # Ubuntu 24.04+（DEB822 格式）
-sudo sed -i.bak 's|http://archive.ubuntu.com|https://mirrors.ustc.edu.cn|g; s|http://security.ubuntu.com|https://mirrors.ustc.edu.cn|g' \
+sudo sed -i.bak 's|http://archive.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g; s|http://security.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g' \
   /etc/apt/sources.list.d/ubuntu.sources
 
 # Ubuntu 22.04 及以前
-sudo sed -i.bak 's|http://archive.ubuntu.com|https://mirrors.ustc.edu.cn|g; s|http://security.ubuntu.com|https://mirrors.ustc.edu.cn|g' \
+sudo sed -i.bak 's|http://archive.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g; s|http://security.ubuntu.com|https://mirrors.tuna.tsinghua.edu.cn|g' \
   /etc/apt/sources.list
 
 sudo apt update
@@ -546,14 +546,14 @@ sudo apt update
 
 | 镜像名称 | 地址 | 状态 | 优先级 |
 |---------|------|------|--------|
-| USTC Alpine Mirror | [https://mirrors.ustc.edu.cn/alpine/](https://mirrors.ustc.edu.cn/alpine/) | ✅ 正常 (873.27ms) | 2 |
-| Tsinghua TUNA Alpine Mirror | [https://mirrors.tuna.tsinghua.edu.cn/alpine/](https://mirrors.tuna.tsinghua.edu.cn/alpine/) | ✅ 正常 (1030.21ms) | 1 |
+| Tsinghua TUNA Alpine Mirror | [https://mirrors.tuna.tsinghua.edu.cn/alpine/](https://mirrors.tuna.tsinghua.edu.cn/alpine/) | ✅ 正常 (867.91ms) | 1 |
+| USTC Alpine Mirror | [https://mirrors.ustc.edu.cn/alpine/](https://mirrors.ustc.edu.cn/alpine/) | ✅ 正常 (881.92ms) | 2 |
 
 <details>
-<summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>USTC Alpine Mirror</b>）</summary>
+<summary>🚀 不安装 Skill 也能用：复制下面这段（推荐镜像：<b>Tsinghua TUNA Alpine Mirror</b>）</summary>
 
 ```bash
-sudo sed -i.bak 's|dl-cdn.alpinelinux.org|mirrors.ustc.edu.cn|g' /etc/apk/repositories
+sudo sed -i.bak 's|dl-cdn.alpinelinux.org|mirrors.tuna.tsinghua.edu.cn|g' /etc/apk/repositories
 sudo apk update
 ```
 
